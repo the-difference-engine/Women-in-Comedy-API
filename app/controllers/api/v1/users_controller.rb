@@ -1,6 +1,6 @@
-class Api::UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
 
-class Api::UsersController < ApplicationController
+
 
 	def index
 		@users = User.all
@@ -12,10 +12,17 @@ class Api::UsersController < ApplicationController
 		render 'show.json.jbuilder'
 	end
 
+	def create
+		@user = User.new(email: params[:email], password: params[:password])
+		if(@user.save)
+			render json: @user.as_json(only: [:id, :email])
+		end
+	end
+
 	def update
 
 		@user = User.find(params[:id])
-		
+
 		@user.update(
 			first_name: params[:first_name],
 			last_name: params[:last_name],
@@ -35,7 +42,7 @@ class Api::UsersController < ApplicationController
 	def destroy
 		user = User.find(params[:id])
 		user.destroy
-	
+
 		# @users = User.all
 		# render 'index.json.jbuilder'
 
@@ -43,6 +50,6 @@ class Api::UsersController < ApplicationController
 		#needs testing
 	end
 
-end
+
 
 end

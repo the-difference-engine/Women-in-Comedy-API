@@ -61,4 +61,3 @@ json.array! @users.each do |user|
 				json.updated_at post.updated_at
 			end
 end
-
