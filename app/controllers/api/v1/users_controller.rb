@@ -13,16 +13,14 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def create
-		@user = User.new(email: params[:email], password: params[:password])
+		@user = User.new(email: params[:email], password: params[:password], first_name: params[:firstName], last_name: params[:lastName])
 		if(@user.save)
 			render json: @user.as_json(only: [:id, :email])
 		end
 	end
 
 	def update
-
 		@user = User.find(params[:id])
-
 		@user.update(
 			first_name: params[:first_name],
 			last_name: params[:last_name],
