@@ -8,14 +8,14 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.find(params[:id])
-		render 'show.json.jbuilder'
+		user = User.find(params[:id])
+		render json: {status: 'SUCCESS', message:'Loaded User', data:user}, status: :ok
 	end
 
 	def create
-		@user = User.new(email: params[:email], password: params[:password], first_name: params[:firstName], last_name: params[:lastName])
-		if(@user.save)
-			render json: @user.as_json(only: [:id, :email])
+		user = User.new(email: params[:email], password: params[:password], first_name: params[:firstName], last_name: params[:lastName])
+		if (user.save)
+			render json: user.as_json(only: [:id, :email, :authentication_token])
 		end
 	end
 

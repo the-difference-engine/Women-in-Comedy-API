@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  acts_as_token_authenticatable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,:confirmable,:omniauthable,:omniauth_providers => [:facebook]
   has_many :posts
   has_many :events, :foreign_key => :host_id
@@ -16,7 +17,7 @@ class User < ActiveRecord::Base
       user.password = Devise.friendly_token[0,20]
       # user.name = auth.info.name   # assuming the user model has a name
       # user.image = auth.info.image # assuming the user model has an image
-      # If you are using confirmable and the provider(s) you use validate emails, 
+      # If you are using confirmable and the provider(s) you use validate emails,
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
     end
@@ -30,5 +31,5 @@ class User < ActiveRecord::Base
     end
   end
 
-  	
+
 end
