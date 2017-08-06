@@ -12,5 +12,8 @@ Rails.application.routes.draw do
       resources :sessions
     end
   end
+
   get '/api/v1/users/info', to: 'users#fetch_user_info'
+
+
 end
