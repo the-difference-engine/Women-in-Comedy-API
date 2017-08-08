@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/api/v1/users/info', to: 'users#fetch_user_info'
+  get '/api/v1/users/feed', to: 'users#fetch_user_feed'
 
 
 end

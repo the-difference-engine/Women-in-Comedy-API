@@ -16,7 +16,7 @@ User.create(first_name: "Halo", last_name: "Top", email:"htop@gmail.com", passwo
 User.create(first_name: "Mochi", last_name: "Balls", email:"mballs@gmail.com", password:"password")
 
 Event.create(
-	host_id:2,
+	user_id:2,
 	title: "A Great Event",
 	photo:"my pix",
 	date:"4-16-98",
@@ -25,7 +25,7 @@ Event.create(
 )
 
 Event.create(
-	host_id:2,
+	user_id:2,
 	title: "A Wicked Event",
 	photo:"my pix",
 	date:"4-16-98",
@@ -36,7 +36,7 @@ Event.create(
 
 5.times do
 	Event.create(
-		host_id:1,
+		user_id:1,
 		title: "A Great Event",
 		photo:"my pix",
 		date:"7-16-2016",
@@ -45,68 +45,66 @@ Event.create(
 	)
 end
 
+
+
+Post.create(
+	postable_id: 1,
+	postable_type: 'Event',
+	title: "comedy is the best",
+	body: "come and have fun",
+	author_id: 2
+)
+
+Post.create(
+	postable_id: 1,
+	postable_type: 'Event',
+	title: "Tonight!!!",
+	body: "see all the women of comedy",
+	author_id: 1
+)
+
+Post.create(
+	postable_id: 1,
+	postable_type: 'User',
+	title: 'Hello',
+	body: 'Where you at?',
+	author_id: 2
+)
+
+Post.create(
+	postable_id: 2,
+	postable_type: 'User',
+	title: 'Hey',
+	body: 'LIT',
+	author_id: 1
+)
+
 Comment.create(
-	commenter_id: 1,
-	commentable_type: "Event",
-	commentable_id: 1,
+	post_id: 1,
+	author_id: 1,
 	body: "who is the best coder"
 )
 
 Comment.create(
-	commenter_id: 1,
-	commentable_type: "Event",
-	commentable_id: 1,
+	post_id: 1,
+	author_id: 2,
 	body: "to my class whats uppppp"
 )
 
-Post.create(
-	user_id: 1,
-	title: "comedy is the best",
-	body: "come and have fun"
-)
-
-Post.create(
-	user_id: 2,
-	title: "Tonight!!!",
-	body: "see all the women of comedy"
-)
-
 ConnectionRequest.create(
 	sender_id:1,
 	receiver_id: 2,
-	status: "pending"
+	status: 'connected'
 )
 
-ConnectionRequest.create(
-	sender_id:2,
-	receiver_id: 1,
-	status: "pending"
-)
-
-ConnectionRequest.create(
-	sender_id:1,
-	receiver_id: 2,
-	status: "pending"
-)
-
-ConnectionRequest.create(
-	sender_id:1,
-	receiver_id: 3,
-	status: "pending"
-)
 ConnectionRequest.create(
 	sender_id:3,
 	receiver_id: 1,
-	status: "pending"
+	status: 'connected'
 )
 
 ConnectionRequest.create(
-	sender_id:2,
+	sender_id: 1,
 	receiver_id: 4,
-	status: "pending"
-)
-ConnectionRequest.create(
-	sender_id:4,
-	receiver_id: 2,
 	status: "pending"
 )

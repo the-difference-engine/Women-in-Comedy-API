@@ -1,5 +1,4 @@
 class Comment < ApplicationRecord
-	belongs_to :commenter, :class_name => :User
-	belongs_to :commentable, polymorphic: true
-	has_many :comments, as: :commentable
+  belongs_to :post
+  belongs_to :author, class_name: 'User', foreign_key: 'author_id'
 end

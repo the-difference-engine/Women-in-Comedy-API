@@ -1,7 +1,5 @@
 class Api::V1::UsersController < ApplicationController
 
-
-
 	def index
 		@users = User.all
 		render 'index.json.jbuilder'
@@ -15,8 +13,12 @@ class Api::V1::UsersController < ApplicationController
 	def create
 		user = User.new(email: params[:email], password: params[:password], first_name: params[:firstName], last_name: params[:lastName])
 		if (user.save)
-			render json: user.as_json(only: [:id, :email, :authentication_token])
+			render json: user.as_json(only: [:id, :email])
 		end
+	end
+
+	def fetch_user_feed
+
 	end
 
 	def update
