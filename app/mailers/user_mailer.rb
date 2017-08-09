@@ -10,6 +10,6 @@ class UserMailer < ApplicationMailer
     @first_name = user.first_name
     @last_name = user.last_name
     @url = 'http://localhost:3000/form'
-    mail (to: user.email, subject: 'Welcome to Women In Comedy!')
+    mail to: user.email, subject: 'Welcome to Women In Comedy!'
   end
 end
