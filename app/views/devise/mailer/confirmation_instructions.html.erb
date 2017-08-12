@@ -2,4 +2,4 @@
 
 <p>You can confirm your account email through the link below:</p>
 
-<a href="http://localhost:3000/feed">Confirm my account</a>
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>

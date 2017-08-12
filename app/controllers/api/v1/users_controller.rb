@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApplicationController
 	def create
 		user = User.new(email: params[:email], password: params[:password], first_name: params[:firstName], last_name: params[:lastName])
 		if (user.save)
-			render json: user.as_json(only: [:id, :email, :first_name, :last_name, :city, :about, :website, :gender, :birthdate, :confirmed_at])
+			render json: user.as_json(only: [:id, :email])
 		end
 	end
 
