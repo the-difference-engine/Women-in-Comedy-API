@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :events
   has_many :posts, as: :postable
   has_and_belongs_to_many :oauth_credentials
-  has_many :connection_requests
+  
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
