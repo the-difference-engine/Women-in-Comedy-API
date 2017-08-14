@@ -1,6 +1,7 @@
 class Api::V1::ConnectionRequestsController < ApplicationController
+
   def get_connections
-    id = params[:id].to_i
+    id = request.headers['id'].to_i
     #query connection request where sender_id or receiver_id is equal to user Id.
     connections = ConnectionRequest.where(sender_id: id).or(ConnectionRequest.where(receiver_id: id))
     #query connection where status is equal to connected
@@ -21,4 +22,7 @@ class Api::V1::ConnectionRequestsController < ApplicationController
     end
     render json: user_array
   end
+
+
+
 end

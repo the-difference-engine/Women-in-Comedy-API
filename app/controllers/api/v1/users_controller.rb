@@ -18,7 +18,16 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def fetch_user_feed
-
+		id = request.headers['id'].to_i
+		user = User.find_by(id: id)
+		# post = user.posts[0]
+		users_feed = []
+		user.posts.each do |post|
+			author = post.author
+			feed = {postId: post[:id], body: post[:body], authorId: author[:id], authorFirstName: author[:first_name]}
+			users_feed.push(feed)
+		end
+		render json: users_feed
 	end
 
 	def update

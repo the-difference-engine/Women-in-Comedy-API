@@ -1,4 +1,4 @@
-class Api::PostsController < ApplicationController
+class Api::V1::PostsController < ApplicationController
 
 	def index
 		@posts = Post.all
@@ -14,7 +14,7 @@ class Api::PostsController < ApplicationController
 
 	def update
 		@post = Post.find(params[:id])
-		
+
 		@post.update(
 			# host_id: params[:host_id],
 			# title: params[:title],
