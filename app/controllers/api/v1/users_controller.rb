@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-
+	# skip_before_action :verify_authenticity_token
 	def index
 		@users = User.all
 		render 'index.json.jbuilder'
@@ -11,7 +11,18 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def create
-		user = User.new(email: params[:email], password: params[:password], first_name: params[:firstName], last_name: params[:lastName])
+		user = User.new(
+			email: params[:email],
+			password: params[:password],
+			first_name: params[:firstName],
+			last_name: params[:lastName],
+			city: params[:city],
+			website: params[:website],
+			video_link: params[:video],
+			gender: params[:gender],
+			training: params[:training],
+			experience: params[:experience]
+		)
 		if (user.save)
 			render json: user.as_json(only: [:id, :email])
 		end

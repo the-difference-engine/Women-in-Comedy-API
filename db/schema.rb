@@ -76,7 +76,11 @@ ActiveRecord::Schema.define(version: 20170807203711) do
     t.string   "city"
     t.text     "about"
     t.string   "website"
+    t.string   "video_link"
     t.string   "gender"
+    t.string   "training"
+    t.string   "experience"
+    t.text     "meeting"
     t.string   "birthdate"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree

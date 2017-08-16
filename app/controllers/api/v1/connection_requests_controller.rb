@@ -12,11 +12,11 @@ class Api::V1::ConnectionRequestsController < ApplicationController
     connections.each do |connection|
       if connection[:sender_id] == id
         user = User.find_by(id: connection[:receiver_id])
-        user = {id: user[:id], first_name: user[:first_name], last_name: user[:last_name]}
+        user = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
         user_array.push(user)
       else
         user = User.find_by(id: connection[:sender_id])
-        user = {id: user[:id], first_name: user[:first_name], last_name: user[:last_name]}
+        user = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
         user_array.push(user)
       end
     end
