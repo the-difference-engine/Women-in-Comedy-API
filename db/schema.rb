@@ -10,45 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170801033540) do
+ActiveRecord::Schema.define(version: 20170807203711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "commenter_id"
-    t.string   "commentable_type"
-    t.integer  "commentable_id"
     t.text     "body"
+    t.integer  "author_id"
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "connection_requests", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
     t.integer  "sender_id"
     t.integer  "receiver_id"
     t.string   "status"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "events", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "host_id"
+    t.integer  "user_id"
     t.string   "title"
     t.string   "photo"
-    t.datetime "date"
-    t.string   "ticket_link"
+    t.string   "date"
+    t.text     "ticket_link"
     t.text     "about"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "posts", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "user_id"
     t.string   "title"
     t.text     "body"
+    t.integer  "postable_id"
+    t.string   "postable_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "author_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -75,6 +76,12 @@ ActiveRecord::Schema.define(version: 20170801033540) do
     t.string   "city"
     t.text     "about"
     t.string   "website"
+    t.string   "video_link"
+    t.string   "gender"
+    t.string   "training"
+    t.string   "experience"
+    t.text     "meeting"
+    t.string   "birthdate"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
