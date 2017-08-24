@@ -39,11 +39,11 @@ def create
 end
 
 def update
+  # current_user = request.headers['current_user'].to_i
   connection_request = ConnectionRequest.find_by(id: params[:id])
-  unless connection_request.receiver_id == current_user.id
+  # unless connection_request.receiver_id == current_user
   connection_request.update(status: params[:status])
   connection_request.save
-  end
   render json: connection_request.as_json
 end
 
