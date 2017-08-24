@@ -10,6 +10,12 @@ Rails.application.routes.draw do
   #for getting users connections
   get '/api/v1/users/connections', to: 'api/v1/connection_requests#get_connections'
 
+  post '/api/v1/users/connections', to: 'api/v1/connection_requests#create'
+  # this is the id of the sender
+  patch '/api/v1/users/connections/:id', to: 'api/v1/connection_requests#update'
+  # this the id of the connection we are trying to update
+  delete '/api/v1/users/connections/:id', to: 'api/v1/connection_requests#destroy'
+
   namespace :api do
     namespace :v1 do
       resources :users
