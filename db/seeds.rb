@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create(first_name: "Anthony", last_name: "Hawkins", email:"s0menarutofan@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male')
+User.create(first_name: "Anthony", last_name: "Hawkins", email:"nad4ne@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male')
 
 User.create(first_name: "DeMarcus", last_name: "Cousins", email:"dcousins@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male')
 
@@ -94,17 +94,17 @@ Comment.create(
 ConnectionRequest.create(
 	sender_id:1,
 	receiver_id: 2,
-	status: 'connected'
+	status: true
 )
 
 ConnectionRequest.create(
 	sender_id:3,
 	receiver_id: 1,
-	status: 'connected'
+	status: true
 )
 
 ConnectionRequest.create(
 	sender_id: 1,
 	receiver_id: 4,
-	status: "pending"
+	status: false
 )
