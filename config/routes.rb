@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   get '/api/v1/users/feed', to: 'api/v1/users#fetch_user_feed'
   #for getting users connections
   get '/api/v1/users/connections', to: 'api/v1/connection_requests#get_connections'
-
+  #for getting connection status with user
+  post '/api/v1/users/connection/status', to: 'api/v1/connection_requests#status'
   post '/api/v1/users/connections', to: 'api/v1/connection_requests#create'
   # this is the id of the sender
   patch '/api/v1/users/connections/:id', to: 'api/v1/connection_requests#update'

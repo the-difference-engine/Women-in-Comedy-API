@@ -23,35 +23,36 @@ class Api::V1::ConnectionRequestsController < ApplicationController
     render json: user_array
   end
 
-def create
-  if ConnectionRequest.exists?(sender_id: params[:sender_id], receiver_id:params[:receiver_id])
+  def create
+    if ConnectionRequest.exists?(sender_id: params[:sender_id], receiver_id:params[:receiver_id])
 
-  elsif ConnectionRequest.exists?(sender_id: params[:receiver_id], receiver_id: params[:sender_id])
+    elsif ConnectionRequest.exists?(sender_id: params[:receiver_id], receiver_id: params[:sender_id])
 
-  else
-    connection_request = ConnectionRequest.create(
-      sender_id: params[:sender_id],
-      receiver_id: params[:receiver_id],
-      status: false)
+    else
+      connection_request = ConnectionRequest.create(
+        sender_id: params[:sender_id],
+        receiver_id: params[:receiver_id],
+        status: false)
+      render json: connection_request.as_json
+    end
+  end
+
+  def update
+    # current_user = request.headers['current_user'].to_i
+    connection_request = ConnectionRequest.find_by(id: params[:id])
+    # unless connection_request.receiver_id == current_user
+    connection_request.update(status: params[:status])
+    connection_request.save
     render json: connection_request.as_json
   end
-  
-end
 
-def update
-  # current_user = request.headers['current_user'].to_i
-  connection_request = ConnectionRequest.find_by(id: params[:id])
-  # unless connection_request.receiver_id == current_user
-  connection_request.update(status: params[:status])
-  connection_request.save
-  render json: connection_request.as_json
-end
+  def destroy
+    connection_request = ConnectionRequest.find_by(id: params[:id])
+    connection_request.destroy
+  end
 
-def destroy
-  connection_request = ConnectionRequest.find_by(id: params[:id])
-  connection_request.destroy
-end
-
-
-
+  def status
+    connection = ConnectionRequest.where(sender_id: params[:sender_id], receiver_id: params[:receiver_id]).or(ConnectionRequest.where(sender_id: params[:receiver_id], receiver: params[:sender_id]))
+    render json: connection[0]
+  end
 end
