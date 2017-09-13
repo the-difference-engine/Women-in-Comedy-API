@@ -23,7 +23,7 @@ class Api::V1::ConnectionRequestsController < ApplicationController
     render json: user_array
   end
 
-    def get_pending_connections
+  def get_pending_connections
     id = request.headers['id'].to_i
     #query connection request where sender_id or receiver_id is equal to user Id.
     connections = ConnectionRequest.where(receiver_id: id)
@@ -34,11 +34,11 @@ class Api::V1::ConnectionRequestsController < ApplicationController
     #each through the users and push to the user_array
     pending_connections.each do |connection|
         user = User.find_by(id: connection[:sender_id])
-        user = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
+        user = {requestId: connection[:id], senderId: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
         user_array.push(user)
     end
     render json: user_array
-    end
+  end
 
   def create
     if ConnectionRequest.exists?(sender_id: params[:sender_id], receiver_id:params[:receiver_id])
@@ -71,5 +71,12 @@ class Api::V1::ConnectionRequestsController < ApplicationController
   def status
     connection = ConnectionRequest.where(sender_id: params[:sender_id], receiver_id: params[:receiver_id]).or(ConnectionRequest.where(sender_id: params[:receiver_id], receiver: params[:sender_id]))
     render json: connection[0]
+  end
+
+  def accept
+    connection = ConnectionRequest.find_by(sender_id: params[:sender_id], receiver_id: params[:receiver_id])
+    connection.update(status: true)
+    connection.save
+    render json: connection.as_json
   end
 end

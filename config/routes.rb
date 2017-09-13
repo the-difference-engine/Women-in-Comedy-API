@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get '/api/v1/users/connections', to: 'api/v1/connection_requests#get_connections'
   #for getting pending user connections
   get '/api/v1/users/pending_connections', to: 'api/v1/connection_requests#get_pending_connections'
+  #for accepting user connections
+  post '/api/v1/users/accept_connections', to: 'api/v1/connection_requests#accept'
   #for getting connection status with user
   post '/api/v1/users/connection/status', to: 'api/v1/connection_requests#status'
   post '/api/v1/users/connections', to: 'api/v1/connection_requests#create'
@@ -19,6 +21,10 @@ Rails.application.routes.draw do
   # this the id of the connection we are trying to update
   delete '/api/v1/users/connections/:id', to: 'api/v1/connection_requests#destroy'
 
+  # for creating an event
+  post '/api/v1/events', to: 'api/v1/events#create'
+  # get event by Id
+  get '/api/v1/events/:id', to: 'api/v1/events#show'
   namespace :api do
     namespace :v1 do
       resources :users

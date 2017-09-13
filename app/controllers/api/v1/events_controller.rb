@@ -5,8 +5,8 @@ class Api::V1::EventsController < ApplicationController
 	end
 
 	def show
-		@event = Event.find(params[:id])
-		render 'show.json.jbuilder'
+		event = Event.find(params[:id])
+		render json: event
 	end
 
 	def update
@@ -20,6 +20,21 @@ class Api::V1::EventsController < ApplicationController
 			about: params[:about]
 		)
 		render 'show.json.jbuilder'
+	end
+
+	def create
+		event = Event.create(
+			user_id: params[:userId],
+			title: params[:title],
+			photo: params[:img],
+			ticket_link: params[:ticketLink],
+			about: params[:description],
+			time: params[:time],
+			date: params[:date],
+			address: params[:address],
+			location: params[:location]
+		)
+		render json: event[:id]
 	end
 
 	def destroy
