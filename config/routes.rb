@@ -3,10 +3,16 @@ Rails.application.routes.draw do
   #devise_for :models
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  #USERS DATA ROUTES
+
   #for getting users info when they login
   get '/api/v1/users/info', to: 'api/v1/users#fetch_user_info'
   #for getting users feed
   get '/api/v1/users/feed', to: 'api/v1/users#fetch_user_feed'
+
+
+  #CONNECTIONS REQUEST ROUTES
+
   #for getting users connections
   get '/api/v1/users/connections', to: 'api/v1/connection_requests#get_connections'
   #for getting pending user connections
@@ -21,10 +27,20 @@ Rails.application.routes.draw do
   # this the id of the connection we are trying to update
   delete '/api/v1/users/connections/:id', to: 'api/v1/connection_requests#destroy'
 
+
+  #EVENTS ROUTES
+
   # for creating an event
   post '/api/v1/events', to: 'api/v1/events#create'
   # get event by Id
   get '/api/v1/events/:id', to: 'api/v1/events#show'
+  # get all upcoming events
+  get '/api/v1/events', to: 'api/v1/events#index'
+  #get all events made by a user
+  get '/api/v1/events/user/:user_id', to: 'api/v1/events#my_events'
+
+
+
   namespace :api do
     namespace :v1 do
       resources :users

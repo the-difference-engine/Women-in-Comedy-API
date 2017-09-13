@@ -1,12 +1,17 @@
 class Api::V1::EventsController < ApplicationController
 	def index
-		@events = Event.all
-		render 'index.json.jbuilder'
+		events = Event.all
+		render json: events
 	end
 
 	def show
-		event = Event.find(params[:id])
+		event = Event.find_by(id: params[:id])
 		render json: event
+	end
+
+	def my_events
+		events = Event.where(user_id: params[:user_id])
+		render json: events
 	end
 
 	def update
