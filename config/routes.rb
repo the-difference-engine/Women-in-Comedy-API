@@ -39,7 +39,10 @@ Rails.application.routes.draw do
   #get all events made by a user
   get '/api/v1/events/user/:user_id', to: 'api/v1/events#my_events'
 
+  #Post ROUTES
 
+  #for creating a post
+  post '/api/v1/posts', to: 'api/v1/posts#create'
 
   namespace :api do
     namespace :v1 do

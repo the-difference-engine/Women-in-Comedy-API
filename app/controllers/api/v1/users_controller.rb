@@ -45,7 +45,7 @@ class Api::V1::UsersController < ApplicationController
 			feed = {postId: post[:id], body: post[:body], authorId: author[:id], authorFirstName: author[:first_name]}
 			users_feed.push(feed)
 		end
-		render json: users_feed
+		render json: users_feed.reverse
 	end
 
 	def update

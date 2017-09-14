@@ -32,4 +32,14 @@ class Api::V1::PostsController < ApplicationController
 		post.destroy
 	end
 
+	def create
+		post = Post.create(
+			body: params[:body],
+			postable_id: params[:userId],
+			postable_type: 'User',
+			author_id: params[:authorId]
+		)
+		render json: post
+	end
+
 end
