@@ -29,7 +29,7 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def fetch_user_info
-		id = request.headers['id'].to_i
+		id = request.headers['id'].to_i	
 		user = User.find_by(id: id)
 		user_info = {firstName: user[:first_name], lastName: user[:last_name], bio: user[:about]}
 		render json: user_info
@@ -64,6 +64,10 @@ class Api::V1::UsersController < ApplicationController
 		)
 
 		render 'show.json.jbuilder'
+	end
+
+	def search
+		render 'search.html.erb'
 	end
 
 	def destroy
