@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   get '/api/v1/users/feed', to: 'api/v1/users#fetch_user_feed'
 
 
+
   #CONNECTIONS REQUEST ROUTES
+=======
+   #search users
+  get '/api/v1/users/search', to: 'api/v1/users#search'
+
 
   #for getting users connections
   get '/api/v1/users/connections', to: 'api/v1/connection_requests#get_connections'
