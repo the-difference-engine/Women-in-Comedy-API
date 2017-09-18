@@ -48,6 +48,7 @@ Rails.application.routes.draw do
 
   #for creating a guest for a event
   post '/api/v1/guests', to: 'api/v1/guests#create'
+  delete '/api/v1/guests/:id', to: 'api/v1/guests#destroy'
 
   namespace :api do
     namespace :v1 do

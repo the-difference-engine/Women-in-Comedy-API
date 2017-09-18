@@ -7,7 +7,12 @@ class Api::V1::GuestsController < ApplicationController
       last_name: params[:lastName]
     )
     if(guest.save)
-      
+
     end
+  end
+
+  def destroy
+    quest = Guest.find_by(id: params[:id])
+    quest.destroy
   end
 end
