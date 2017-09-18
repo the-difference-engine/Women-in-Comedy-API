@@ -44,6 +44,11 @@ Rails.application.routes.draw do
   #for creating a post
   post '/api/v1/posts', to: 'api/v1/posts#create'
 
+  #GUESTS ROUTES
+
+  #for creating a guest for a event
+  post '/api/v1/guests', to: 'api/v1/guests#create'
+
   namespace :api do
     namespace :v1 do
       resources :users

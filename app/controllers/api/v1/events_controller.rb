@@ -6,6 +6,8 @@ class Api::V1::EventsController < ApplicationController
 
 	def show
 		event = Event.find_by(id: params[:id])
+		guests = event.guests
+		event = {info: event, guests: guests}
 		render json: event
 	end
 
