@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
 
   #CONNECTIONS REQUEST ROUTES
-=======
+
    #search users
   get '/api/v1/users/search', to: 'api/v1/users#search'
 
