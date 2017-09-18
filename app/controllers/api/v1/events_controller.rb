@@ -7,7 +7,13 @@ class Api::V1::EventsController < ApplicationController
 	def show
 		event = Event.find_by(id: params[:id])
 		guests = event.guests
-		event = {info: event, guests: guests}
+		posts = []
+		event.posts.each do |post|
+			author = post.author
+			event_post = { postId: post[:id], body: post[:body], authorId: author[:id], authorFirstName: author[:first_name] }
+			posts.push(event_post)
+		end
+		event = {info: event, guests: guests, posts: posts.reverse}
 		render json: event
 	end
 

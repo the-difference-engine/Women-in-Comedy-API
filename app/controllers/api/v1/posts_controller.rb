@@ -42,4 +42,13 @@ class Api::V1::PostsController < ApplicationController
 		render json: post
 	end
 
+	def event_post
+		post = Post.create(
+			body: params[:body],
+			postable_id: params[:eventId],
+			postable_type: 'Event',
+			author_id: params[:authorId]
+		)
+	end
+
 end

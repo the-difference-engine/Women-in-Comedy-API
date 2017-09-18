@@ -43,7 +43,7 @@ Rails.application.routes.draw do
 
   #for creating a post
   post '/api/v1/posts', to: 'api/v1/posts#create'
-
+  post '/api/v1/posts/event', to: 'api/v1/posts#event_post'
   #GUESTS ROUTES
 
   #for creating a guest for a event
