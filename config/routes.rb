@@ -44,16 +44,20 @@ Rails.application.routes.draw do
   #get all events made by a user
   get '/api/v1/events/user/:user_id', to: 'api/v1/events#my_events'
 
+
   #Post ROUTES
 
   #for creating a post
   post '/api/v1/posts', to: 'api/v1/posts#create'
   post '/api/v1/posts/event', to: 'api/v1/posts#event_post'
+
   #GUESTS ROUTES
 
   #for creating a guest for a event
   post '/api/v1/guests', to: 'api/v1/guests#create'
-  delete '/api/v1/guests/:id', to: 'api/v1/guests#destroy'
+
+
+
 
   namespace :api do
     namespace :v1 do
