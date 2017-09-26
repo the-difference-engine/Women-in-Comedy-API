@@ -66,6 +66,11 @@ class Api::V1::UsersController < ApplicationController
 		render 'show.json.jbuilder'
 	end
 
+	def block_connection_requests
+		@user = User.find(params[:id])
+		@user.update(block_connection_requests: !@user.block_connection_requests)
+	end
+
 	def search
 		render 'search.html.erb'
 	end
