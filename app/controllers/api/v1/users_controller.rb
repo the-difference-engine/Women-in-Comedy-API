@@ -1,8 +1,13 @@
 class Api::V1::UsersController < ApplicationController
 	# skip_before_action :verify_authenticity_token
 	def index
-		@users = User.all
-		render 'index.json.jbuilder'
+		all_users = User.all
+		users = []
+		all_users.each do |user|
+			user = {firstName: user[:first_name], lastName: user[:last_name], id: user[:id]}
+			users.push(user)
+		end
+		render json: users
 	end
 
 	def show
@@ -29,7 +34,7 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def fetch_user_info
-		id = request.headers['id'].to_i	
+		id = request.headers['id'].to_i
 		user = User.find_by(id: id)
 		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], bio: user[:about]}
 		render json: user_info
