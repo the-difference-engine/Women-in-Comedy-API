@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   get '/api/v1/users/feed', to: 'api/v1/users#fetch_user_feed'
 
 
+  # config/routes.rb
+  mount ActionCable.server => '/cable'
+
+
 
   #CONNECTIONS REQUEST ROUTES
 
