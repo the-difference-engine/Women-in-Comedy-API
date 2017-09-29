@@ -69,6 +69,7 @@ class Api::V1::UsersController < ApplicationController
 	def block_connection_requests
 		@user = User.find(params[:id])
 		@user.update(block_connection_requests: !@user.block_connection_requests)
+		@user.save
 	end
 
 	def search

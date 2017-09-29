@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   # this the id of the connection we are trying to update
   delete '/api/v1/users/connections/:id', to: 'api/v1/connection_requests#destroy'
   #block incoming connection requests
-  patch '/api/v1/users/:id', to: 'api/v1/users#block_connection_requests'
+  post '/api/v1/users/:id', to: 'api/v1/users#block_connection_requests'
 
 
   #EVENTS ROUTES
