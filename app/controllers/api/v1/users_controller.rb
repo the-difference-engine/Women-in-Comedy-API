@@ -36,7 +36,7 @@ class Api::V1::UsersController < ApplicationController
 	def fetch_user_info
 		id = request.headers['id'].to_i
 		user = User.find_by(id: id)
-		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], bio: user[:about]}
+		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], bio: user[:about], block_connection_requests: user[:block_connection_requests]}
 		render json: user_info
 	end
 
@@ -69,6 +69,12 @@ class Api::V1::UsersController < ApplicationController
 		)
 
 		render 'show.json.jbuilder'
+	end
+
+	def block_connection_requests
+		@user = User.find(params[:id])
+		@user.update(block_connection_requests: !@user.block_connection_requests)
+		@user.save
 	end
 
 	def search
