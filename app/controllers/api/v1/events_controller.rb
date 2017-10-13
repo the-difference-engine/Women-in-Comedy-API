@@ -25,12 +25,14 @@ class Api::V1::EventsController < ApplicationController
 	def update
 		@event = Event.find(params[:id])
 		@event.update(
-			host_id: params[:host_id],
 			title: params[:title],
-			photo: params[:photo],
+			photo: params[:img],
+			ticket_link: params[:ticketLink],
+			about: params[:description],
+			time: params[:time],
 			date: params[:date],
-			ticket_link: params[:ticket_link],
-			about: params[:about]
+			address: params[:address],
+			location: params[:location]
 		)
 		render 'show.json.jbuilder'
 	end
