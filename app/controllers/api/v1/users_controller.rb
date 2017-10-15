@@ -1,7 +1,13 @@
 class Api::V1::UsersController < ApplicationController
-	# skip_before_action :verify_authenticity_token
+	skip_before_action :verify_authenticity_token
 	def index
-		all_users = User.all
+		all_users = User.where(admin: false)
+
+		if current_user
+			puts "Current user is available"
+		else
+			puts "Current user is not available"
+		end
 		users = []
 		all_users.each do |user|
 			user = {firstName: user[:first_name], lastName: user[:last_name], id: user[:id]}
@@ -12,6 +18,7 @@ class Api::V1::UsersController < ApplicationController
 
 	def show
 		user = User.find(params[:id])
+		puts "SHOW USER CONTROLLER SESSION USER ID: " + session[:user_id].to_s
 		render json: {status: 'SUCCESS', message:'Loaded User', data:user}, status: :ok
 	end
 
@@ -29,12 +36,14 @@ class Api::V1::UsersController < ApplicationController
 			experience: params[:experience]
 		)
 		if (user.save)
+			session[:user_id] = user.id
 			render json: user.as_json(only: [:id, :email])
 		end
 	end
 
 	def fetch_user_info
 		id = request.headers['id'].to_i
+		session[:user_id] = id
 		user = User.find_by(id: id)
 		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], bio: user[:about], block_connection_requests: user[:block_connection_requests]}
 		render json: user_info
@@ -88,7 +97,7 @@ class Api::V1::UsersController < ApplicationController
 		# @users = User.all
 		# render 'index.json.jbuilder'
 
-		UsersController.index
+		# UsersController.index
 		#needs testing
 	end
 
