@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   # config/routes.rb
   mount ActionCable.server => '/cable'
-
+  resources :notifications
 
 
   #CONNECTIONS REQUEST ROUTES

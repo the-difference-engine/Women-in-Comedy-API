@@ -46,10 +46,18 @@ class Api::V1::ConnectionRequestsController < ApplicationController
     elsif ConnectionRequest.exists?(sender_id: params[:receiver_id], receiver_id: params[:sender_id])
 
     else
+
       connection_request = ConnectionRequest.create(
         sender_id: params[:sender_id],
         receiver_id: params[:receiver_id],
-        status: false)
+        status: false
+        )
+      notification = Notification.create(
+        user_id: params[:sender_id],
+        recipient_id: params[:receiver_id],
+        action: "connection_request"
+        )
+
       render json: connection_request.as_json
     end
   end
