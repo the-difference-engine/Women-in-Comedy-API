@@ -49,6 +49,8 @@ Rails.application.routes.draw do
   get '/api/v1/events', to: 'api/v1/events#index'
   #get all events made by a user
   get '/api/v1/events/user/:user_id', to: 'api/v1/events#my_events'
+  # edit an existing event
+  post '/api/v1/events/:id', to: 'api/v1/events#update'
 
 
   #Post ROUTES
