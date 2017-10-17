@@ -1,12 +1,16 @@
 class Api::V1::UsersController < ApplicationController
 	skip_before_action :verify_authenticity_token
 	def index
-		all_users = User.where(admin: false)
 
-		if current_user
-			puts "Current user is available"
+		# Get current user logged in
+		current_user  = User.current_user
+
+		# If current user is admin, return all users
+		if current_user.admin
+			all_users = User.all
 		else
-			puts "Current user is not available"
+		# If current user is not admin, return non-admin users only
+			all_users = User.where(admin: false)
 		end
 		users = []
 		all_users.each do |user|
@@ -100,6 +104,7 @@ class Api::V1::UsersController < ApplicationController
 		# UsersController.index
 		#needs testing
 	end
+
 
 
 end

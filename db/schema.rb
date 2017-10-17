@@ -15,12 +15,6 @@ ActiveRecord::Schema.define(version: 20170926023542) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "chat_messages", force: :cascade do |t|
-    t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "author_id"
@@ -113,8 +107,8 @@ ActiveRecord::Schema.define(version: 20170926023542) do
     t.string   "experience"
     t.text     "meeting"
     t.string   "birthdate"
-    t.boolean  "block_connection_requests"
     t.boolean  "admin"
+    t.boolean  "block_connection_requests"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
