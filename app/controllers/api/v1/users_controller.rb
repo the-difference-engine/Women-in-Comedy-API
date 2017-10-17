@@ -1,7 +1,17 @@
 class Api::V1::UsersController < ApplicationController
-	# skip_before_action :verify_authenticity_token
+	skip_before_action :verify_authenticity_token
 	def index
-		all_users = User.all
+
+		# Get current user logged in
+		current_user  = User.current_user
+
+		# If current user is admin, return all users
+		if current_user.admin
+			all_users = User.all
+		else
+		# If current user is not admin, return non-admin users only
+			all_users = User.where(admin: false)
+		end
 		users = []
 		all_users.each do |user|
 			user = {firstName: user[:first_name], lastName: user[:last_name], id: user[:id]}
@@ -35,8 +45,9 @@ class Api::V1::UsersController < ApplicationController
 
 	def fetch_user_info
 		id = request.headers['id'].to_i
+		session[:user_id] = id
 		user = User.find_by(id: id)
-		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], bio: user[:about]}
+		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], bio: user[:about], block_connection_requests: user[:block_connection_requests]}
 		render json: user_info
 	end
 
@@ -71,6 +82,12 @@ class Api::V1::UsersController < ApplicationController
 		render 'show.json.jbuilder'
 	end
 
+	def block_connection_requests
+		@user = User.find(params[:id])
+		@user.update(block_connection_requests: !@user.block_connection_requests)
+		@user.save
+	end
+
 	def search
 		render 'search.html.erb'
 	end
@@ -82,9 +99,10 @@ class Api::V1::UsersController < ApplicationController
 		# @users = User.all
 		# render 'index.json.jbuilder'
 
-		UsersController.index
+		# UsersController.index
 		#needs testing
 	end
+
 
 
 end

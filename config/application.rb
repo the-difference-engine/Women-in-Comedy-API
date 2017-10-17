@@ -7,16 +7,17 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module WomenInComedyApi
-  class Application < Rails::Application
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
+  
+  
+    class Application < Rails::Application
+      config.middleware.insert_before 0, Rack::Cors do
+        allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :delete, :options]
-      end
-    end
+        resource '*', headers: :any, methods: %I[get post options]
+          end
+        end
+    
+   
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
         address: "smtp.gmail.com",
