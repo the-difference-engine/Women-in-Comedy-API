@@ -23,8 +23,8 @@ class Api::V1::EventsController < ApplicationController
 	end
 
 	def update
-		@event = Event.find(params[:id])
-		@event.update(
+		event = Event.find(params[:id])
+		event.update(
 			title: params[:title],
 			photo: params[:img],
 			ticket_link: params[:ticketLink],
@@ -34,7 +34,8 @@ class Api::V1::EventsController < ApplicationController
 			address: params[:address],
 			location: params[:location]
 		)
-		render 'show.json.jbuilder'
+		render json: event[:id]
+
 	end
 
 	def create
