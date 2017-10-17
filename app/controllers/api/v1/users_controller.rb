@@ -22,7 +22,6 @@ class Api::V1::UsersController < ApplicationController
 
 	def show
 		user = User.find(params[:id])
-		puts "SHOW USER CONTROLLER SESSION USER ID: " + session[:user_id].to_s
 		render json: {status: 'SUCCESS', message:'Loaded User', data:user}, status: :ok
 	end
 
@@ -40,7 +39,6 @@ class Api::V1::UsersController < ApplicationController
 			experience: params[:experience]
 		)
 		if (user.save)
-			session[:user_id] = user.id
 			render json: user.as_json(only: [:id, :email])
 		end
 	end
