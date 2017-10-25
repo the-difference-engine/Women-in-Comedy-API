@@ -63,6 +63,9 @@ Rails.application.routes.draw do
   post '/api/v1/guests', to: 'api/v1/guests#create'
   delete '/api/v1/guests/:id', to: 'api/v1/guests#destroy'
 
+  #NOTIFICATION ROUTES
+  # get '/api/v1/notifications', to: 'api/v1/notifications#create_notification'
+
 
 
   namespace :api do

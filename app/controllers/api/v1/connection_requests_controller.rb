@@ -52,11 +52,17 @@ class Api::V1::ConnectionRequestsController < ApplicationController
         receiver_id: params[:receiver_id],
         status: false
         )
-      notification = Notification.create(
-        user_id: params[:sender_id],
-        recipient_id: params[:receiver_id],
+
+      sender = User.find_by(id: params[:sender_id])
+      receiver = User.find_by(id: params[:receiver_id])
+
+      Notification.create(
+        user: sender,
+        recipient: receiver,
+        notifiable: receiver,
         action: "connection_request"
         )
+      # redirect_to action: "create_notification", controller: "v1/notifications", sender_id: params[:sender_id], receiver_id: params[:receiver_id], notifiable_type: "connection request"
 
       render json: connection_request.as_json
     end
@@ -74,6 +80,7 @@ class Api::V1::ConnectionRequestsController < ApplicationController
   def destroy
     connection_request = ConnectionRequest.find_by(id: params[:id])
     connection_request.destroy
+
   end
 
   def status
@@ -85,6 +92,19 @@ class Api::V1::ConnectionRequestsController < ApplicationController
     connection = ConnectionRequest.find_by(sender_id: params[:sender_id], receiver_id: params[:receiver_id])
     connection.update(status: true)
     connection.save
+
+    sender = User.find_by(id: params[:sender_id])
+    receiver = User.find_by(id: params[:receiver_id])
+
+    Notification.create(
+      user: sender,
+      recipient: receiver,
+      notifiable: sender,
+      action: "connection_accepted"
+      )
+
     render json: connection.as_json
   end
+
+  
 end
