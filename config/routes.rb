@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :notifications
 
 
+
   #CONNECTIONS REQUEST ROUTES
 
    #search users
@@ -64,7 +65,10 @@ Rails.application.routes.draw do
   delete '/api/v1/guests/:id', to: 'api/v1/guests#destroy'
 
   #NOTIFICATION ROUTES
-  # get '/api/v1/notifications', to: 'api/v1/notifications#create_notification'
+  # post '/api/v1/notifications', to: 'api/v1/notifications#create_notification'
+  #For getting user notifications
+  get '/api/v1/notifications', to: 'api/v1/notifications#get_notifications'
+
 
 
 

@@ -7,8 +7,15 @@ class Api::V1::NotificationsController < ApplicationController
 
   def mark_as_read
     @notifications = Notification.where(recipient: current_user).unread
-    @notifications.update_all(read_at: Time.zone.now)
+    @notifications.update_all(seen: Time.zone.now)
     render json: {success: true}
+  end
+
+  def get_notifications
+    unseen_notifications = Notification.where(notifiable_id: current_user.id, seen: nil)
+    notifications = Notification.where(notifiable_id: current_user.id)
+    
+    render json: {:notifications => notifications, :unseen_notifications => unseen_notifications}
   end
 
   # def create_notification(sender_id, receiver_id, notifiable_type)
