@@ -14,7 +14,13 @@ class Api::V1::UsersController < ApplicationController
 		end
 		users = []
 		all_users.each do |user|
-			user = {firstName: user[:first_name], lastName: user[:last_name], id: user[:id]}
+			user = {firstName: user[:first_name],
+				lastName: user[:last_name],
+				id: user[:id],
+			  training: user[:training],
+			  experience: user[:experience],
+			  gender: user[:gender]
+			}
 			users.push(user)
 		end
 		render json: users
@@ -36,7 +42,9 @@ class Api::V1::UsersController < ApplicationController
 			video_link: params[:video],
 			gender: params[:gender],
 			training: params[:training],
-			experience: params[:experience]
+			experience: params[:experience],
+			meeting: params[:meeting]
+
 		)
 		if (user.save)
 			render json: user.as_json(only: [:id, :email])
