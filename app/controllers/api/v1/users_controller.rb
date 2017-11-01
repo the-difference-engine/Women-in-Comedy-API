@@ -17,6 +17,7 @@ class Api::V1::UsersController < ApplicationController
 			user = {firstName: user[:first_name],
 				lastName: user[:last_name],
 				id: user[:id],
+				city: user[:city],
 			  training: user[:training],
 			  experience: user[:experience],
 			  gender: user[:gender]
