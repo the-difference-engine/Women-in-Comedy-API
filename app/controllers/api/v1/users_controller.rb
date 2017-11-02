@@ -44,8 +44,8 @@ class Api::V1::UsersController < ApplicationController
 			gender: params[:gender],
 			training: params[:training],
 			experience: params[:experience],
-			meeting: params[:meeting]
-
+			meeting: params[:meeting],
+			photo: "https://image.freepik.com/free-icon/female-student-silhouette_318-62252.jpg"
 		)
 		if (user.save)
 			render json: user.as_json(only: [:id, :email])
@@ -56,7 +56,8 @@ class Api::V1::UsersController < ApplicationController
 		id = request.headers['id'].to_i
 		session[:user_id] = id
 		user = User.find_by(id: id)
-		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], bio: user[:about], block_connection_requests: user[:block_connection_requests]}
+		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests]}
+
 		render json: user_info
 	end
 
@@ -85,7 +86,8 @@ class Api::V1::UsersController < ApplicationController
 			location: params[:location],
 			website: params[:website],
 			training: params[:training],
-			experience: params[:experience]
+			experience: params[:experience],
+			photo: "https://image.freepik.com/free-icon/female-student-silhouette_318-62252.jpg"
 		)
 
 		render 'show.json.jbuilder'
