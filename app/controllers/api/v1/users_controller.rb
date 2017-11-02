@@ -18,10 +18,10 @@ class Api::V1::UsersController < ApplicationController
 				lastName: user[:last_name],
 				id: user[:id],
 				city: user[:city],
-			  training: user[:training],
-			  experience: user[:experience],
-			  gender: user[:gender]
-			}
+			  	training: user[:training],
+			  	experience: user[:experience],
+			  	gender: user[:gender]
+				}
 			users.push(user)
 		end
 		render json: users
