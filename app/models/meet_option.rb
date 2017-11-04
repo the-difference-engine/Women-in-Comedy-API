@@ -1,0 +1,2 @@
+class MeetOption < ApplicationRecord
+end
