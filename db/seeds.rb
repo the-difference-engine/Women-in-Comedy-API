@@ -5,20 +5,25 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.create(first_name: "Anthony", last_name: "Hawkins", email:"s0menarutofan@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: 'less than 1 year', experience: '1-3 years')
 
-User.create(first_name: "Calvin", last_name: "Chan", email:"mrcalvinkc@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male')
+User.create(first_name: "DeMarcus", last_name: "Cousins", email:"dcousins@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: '4-7 years', experience: '11+ years')
 
-User.create(first_name: "Anthony", last_name: "Radogna", email:"anthonyheadcase@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male')
+User.create(first_name: "Jim", last_name: "Sriracha", email:"jsriracha@gmail.com", password:"password", city: "Chicago", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: '7-10 years', experience: '11+ years')
 
-User.create(first_name: "Anthony", last_name: "Hawkins", email:"s0menarutofan@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false)
+User.create(first_name: "Halo", last_name: "Top", email:"htop@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: '1-3 years', experience: '4-7 years')
 
-User.create(first_name: "DeMarcus", last_name: "Cousins", email:"dcousins@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false)
+User.create(first_name: "Mochi", last_name: "Balls", email:"mballs@gmail.com", password:"password", city: "chicago", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: 'less than 1 year', experience: '1-3 years')
 
-User.create(first_name: "Jim", last_name: "Sriracha", email:"jsriracha@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false)
+User.create(first_name: "Christina", last_name: "Durant", email:"cdurant@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'female', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: '4-7 years', experience: '1-3 years')
 
-User.create(first_name: "Halo", last_name: "Top", email:"htop@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false)
+User.create(first_name: "Luna", last_name: "Hassen", email:"luna@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'female', confirmed_at: '2017-10-17 02:26:15.130453', admin: true, training: 'less than 1 year', experience: '1-3 years')
 
-User.create(first_name: "Mochi", last_name: "Balls", email:"mballs@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: true)
+User.create(first_name: "David", last_name: "Taylor", email:"david@gmail.com", password:"password", city: "bay area", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: '7-10 years', experience: '1-3 years')
+
+User.create(first_name: "Marry", last_name: "Hoya", email:"marry@gmail.com", password:"password", city: "oakland", about:"I like apples", gender: 'female', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: 'less than 1 year', experience: '1-3 years')
+
+User.create(first_name: "James", last_name: "Rothschild", email:"jr@gmail.com", password:"password", city: "chicago", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: '11+ years', experience: '11+ years')
 
 Event.create(
 	user_id:2,
