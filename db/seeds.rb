@@ -25,6 +25,13 @@ User.create(first_name: "Marry", last_name: "Hoya", email:"marry@gmail.com", pas
 
 User.create(first_name: "James", last_name: "Rothschild", email:"jr@gmail.com", password:"password", city: "chicago", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: '11+ years', experience: '11+ years')
 
+MeetOption.create(name: "Coffee")
+MeetOption.create(name: "Feedback/Advice")
+MeetOption.create(name: "Mentorship")
+MeetOption.create(name: "New Friends In Comedy")
+MeetOption.create(name: "Open Mic Buddy")
+MeetOption.create(name: "Seeking Mentors")
+
 Event.create(
 	user_id:2,
 	title: "A Great Event",

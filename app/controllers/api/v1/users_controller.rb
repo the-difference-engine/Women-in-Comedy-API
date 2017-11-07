@@ -47,6 +47,14 @@ class Api::V1::UsersController < ApplicationController
 			meeting: params[:meeting],
 			photo: "https://image.freepik.com/free-icon/female-student-silhouette_318-62252.jpg"
 		)
+
+		#Add meeting options for user
+		MeetOption.all.each do | option |
+			if params[option.name.to_sym]
+				user.meet_options << option
+			end
+		end
+		
 		if (user.save)
 			render json: user.as_json(only: [:id, :email])
 		end
