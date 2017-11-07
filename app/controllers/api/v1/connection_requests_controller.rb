@@ -1,5 +1,5 @@
 class Api::V1::ConnectionRequestsController < ApplicationController
-
+  skip_before_action :verify_authenticity_token
   def get_connections
     id = request.headers['id'].to_i
     #query connection request where sender_id or receiver_id is equal to user Id.
