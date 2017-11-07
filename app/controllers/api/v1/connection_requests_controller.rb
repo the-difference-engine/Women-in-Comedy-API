@@ -80,7 +80,6 @@ class Api::V1::ConnectionRequestsController < ApplicationController
   def destroy
     connection_request = ConnectionRequest.find_by(id: params[:id])
     connection_request.destroy
-
   end
 
   def status

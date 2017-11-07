@@ -1,5 +1,5 @@
 class Api::V1::NotificationsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def index
     @notifications = Notification.where(recipient: current_user).recent
@@ -12,10 +12,11 @@ class Api::V1::NotificationsController < ApplicationController
   end
 
   def get_notifications
-    unseen_notifications = Notification.where(notifiable_id: current_user.id, seen: nil)
-    notifications = Notification.where(notifiable_id: current_user.id)
-    
-    render json: {:notifications => notifications, :unseen_notifications => unseen_notifications}
+    id = request.headers['id'].to_i
+    unseen_notifications = Notification.where(notifiable_id: id, seen: nil)
+    notifications = Notification.where(notifiable_id: id)
+
+    render json: notifications
   end
 
   # def create_notification(sender_id, receiver_id, notifiable_type)

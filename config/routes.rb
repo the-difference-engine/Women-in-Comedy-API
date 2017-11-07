@@ -67,7 +67,7 @@ Rails.application.routes.draw do
   #NOTIFICATION ROUTES
   # post '/api/v1/notifications', to: 'api/v1/notifications#create_notification'
   #For getting user notifications
-  get '/api/v1/notifications', to: 'api/v1/notifications#get_notifications'
+  get '/api/v1/notifications/:id', to: 'api/v1/notifications#get_notifications'
 
 
 
