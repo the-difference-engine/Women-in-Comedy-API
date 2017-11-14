@@ -108,3 +108,43 @@ ConnectionRequest.create(
 	receiver_id: 4,
 	status: false
 )
+
+Notification.create(
+	user_id: 1,
+	recipient_id: 2,
+	action: "connection_request",
+	notifiable_type: "User",
+	notifiable_id: 1
+	)
+
+Notification.create(
+	user_id: 3,
+	recipient_id: 2,
+	action: "connection_request",
+	notifiable_type: "User",
+	notifiable_id: 3
+	)
+
+Notification.create(
+	user_id: 4,
+	recipient_id: 2,
+	action: "connection_request",
+	notifiable_type: "User",
+	notifiable_id: 4
+	)
+
+	Notification.create(
+	user_id: 5,
+	recipient_id: 2,
+	action: "connection_request",
+	notifiable_type: "User",
+	notifiable_id: 5
+	)
+
+	Notification.create(
+	user_id: 1,
+	recipient_id: 2,
+	action: "connection_request",
+	notifiable_type: "User",
+	notifiable_id: 1
+	)
