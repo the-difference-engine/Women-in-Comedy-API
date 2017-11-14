@@ -32,6 +32,7 @@ gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
+gem 'devise_suspendable'
 gem 'rails_12factor'
 gem 'omniauth'
 gem 'omniauth-facebook'

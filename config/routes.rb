@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   #for getting users feed
   get '/api/v1/users/feed', to: 'api/v1/users#fetch_user_feed'
 
+  #Suspension
+  post '/api/v1/users/suspend' => 'api/v1/users#suspend'
+  post '/api/v1/users/unsuspend' => 'api/v1/users#unsuspend'
 
   # config/routes.rb
   mount ActionCable.server => '/cable'
@@ -78,6 +81,8 @@ Rails.application.routes.draw do
     end
   end
 
+  post '/api/v1/users/suspend' => 'api/v1/users#suspend'
+  post '/api/v1/users/unsuspend' => 'api/v1/users#unsuspend'
 
 
 end

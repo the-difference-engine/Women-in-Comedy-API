@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   #meet_options associations
   has_and_belongs_to_many :meet_options
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,:confirmable,:omniauthable,:omniauth_providers => [:facebook]
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :suspendable, :confirmable,:omniauthable,:omniauth_providers => [:facebook]
   has_many :events
   has_many :posts, as: :postable
   has_and_belongs_to_many :oauth_credentials
