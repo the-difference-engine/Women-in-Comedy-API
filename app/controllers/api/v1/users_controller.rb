@@ -54,7 +54,7 @@ class Api::V1::UsersController < ApplicationController
 				user.meet_options << option
 			end
 		end
-		
+
 		if (user.save)
 			render json: user.as_json(only: [:id, :email])
 		end
