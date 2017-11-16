@@ -9,4 +9,11 @@ class Api::V1::SessionsController < ApplicationController
       head(:unauthorized)
     end
   end
+
+  def destroy
+    if User.current_user
+      User.current_user = nil
+      render json: {logout_message: 'Successfully logged out!'}
+    end
+  end
 end

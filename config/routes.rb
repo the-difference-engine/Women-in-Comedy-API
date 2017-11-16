@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   #USERS DATA ROUTES
 
+
+  get 'api/v1/sessions/sign_out', to: 'api/v1/sessions#destroy'
+
+
   #for getting users info when they login
   get '/api/v1/users/info', to: 'api/v1/users#fetch_user_info'
   #for getting users feed
