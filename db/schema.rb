@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027014724) do
+ActiveRecord::Schema.define(version: 20171104051300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,17 @@ ActiveRecord::Schema.define(version: 20171027014724) do
     t.datetime "updated_at", null: false
     t.string   "photo"
     t.integer  "event_id"
+  end
+
+  create_table "meet_options", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "meet_options_users", id: false, force: :cascade do |t|
+    t.integer "user_id",        null: false
+    t.integer "meet_option_id", null: false
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -115,6 +126,7 @@ ActiveRecord::Schema.define(version: 20171027014724) do
     t.text     "meeting"
     t.string   "birthdate"
     t.boolean  "admin"
+    t.string   "photo"
     t.boolean  "block_connection_requests"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
