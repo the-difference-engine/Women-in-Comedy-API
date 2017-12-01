@@ -89,7 +89,7 @@ class Api::V1::UsersController < ApplicationController
 			first_name: params[:firstName],
 			last_name: params[:lastName],
 			birthdate: params[:birthdate],
-			about: params[:about],
+			about: params[:bio],
 			video_link: params[:video_link],
 			city: params[:city],
 			website: params[:website],
