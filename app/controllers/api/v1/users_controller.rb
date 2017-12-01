@@ -86,13 +86,12 @@ class Api::V1::UsersController < ApplicationController
 	def update
 		@user = User.find(params[:id])
 		@user.update(
-			first_name: params[:first_name],
-			last_name: params[:last_name],
-			birthday: params[:birthday],
+			first_name: params[:firstName],
+			last_name: params[:lastName],
+			birthdate: params[:birthdate],
 			about: params[:about],
-			avatar: params[:avatar],
 			video_link: params[:video_link],
-			location: params[:location],
+			city: params[:city],
 			website: params[:website],
 			training: params[:training],
 			experience: params[:experience],
