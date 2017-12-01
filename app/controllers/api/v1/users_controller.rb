@@ -9,7 +9,7 @@ class Api::V1::UsersController < ApplicationController
 		if current_user.admin
 			all_users = User.all
 		else
-		# If current user is not admin, return non-admin users only
+		# If current user is not admin, return non-admingi users only
 			all_users = User.where(admin: false)
 		end
 		users = []
