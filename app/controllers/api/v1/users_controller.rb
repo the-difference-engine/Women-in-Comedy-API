@@ -65,7 +65,15 @@ class Api::V1::UsersController < ApplicationController
 		id = request.headers['id'].to_i
 		session[:user_id] = id
 		user = User.find_by(id: id)
-		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], admin: user[:admin], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests]}
+		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], admin: user[:admin], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests],
+			city: user[:city],
+			training: user[:training],
+			experience: user[:experience],
+			meeting: user[:meeting],
+			website: user[:website],
+			video: user[:video_link]
+
+		}
 
 		render json: user_info
 	end
@@ -90,7 +98,7 @@ class Api::V1::UsersController < ApplicationController
 			last_name: params[:lastName],
 			birthdate: params[:birthdate],
 			about: params[:bio],
-			video_link: params[:video_link],
+			video_link: params[:video],
 			city: params[:city],
 			website: params[:website],
 			training: params[:training],
