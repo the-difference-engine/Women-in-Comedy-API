@@ -44,7 +44,6 @@ class Api::V1::UsersController < ApplicationController
 			gender: params[:gender],
 			training: params[:training],
 			experience: params[:experience],
-			meeting: params[:meeting],
 			admin: false,
 			photo: "https://image.freepik.com/free-icon/female-student-silhouette_318-62252.jpg"
 		)
@@ -69,10 +68,9 @@ class Api::V1::UsersController < ApplicationController
 			city: user[:city],
 			training: user[:training],
 			experience: user[:experience],
-			meeting: user[:meeting],
 			website: user[:website],
-			video: user[:video_link]
-
+			video: user[:video_link],
+			meeting_options: user.meet_options
 		}
 
 		render json: user_info
@@ -106,6 +104,13 @@ class Api::V1::UsersController < ApplicationController
 			admin: params[:admin],
 			photo: "https://image.freepik.com/free-icon/female-student-silhouette_318-62252.jpg"
 		)
+
+		#Add meeting options for user
+		MeetOption.all.each do | option |
+			if params[option.name.to_sym]
+				@user.meet_options << option
+			end
+		end
 
 		render 'show.json.jbuilder'
 	end
