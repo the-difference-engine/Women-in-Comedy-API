@@ -64,14 +64,20 @@ class Api::V1::UsersController < ApplicationController
 		id = request.headers['id'].to_i
 		session[:user_id] = id
 		user = User.find_by(id: id)
+		meeting_options_hash = {}
+		user.meet_options.each do |option|
+			meeting_options_hash[option.name.to_sym] = true;
+		end
+
 		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], admin: user[:admin], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests],
 			city: user[:city],
 			training: user[:training],
 			experience: user[:experience],
 			website: user[:website],
 			video: user[:video_link],
-			meeting_options: user.meet_options
+			meeting_options: meeting_options_hash
 		}
+
 
 		render json: user_info
 	end
@@ -107,8 +113,12 @@ class Api::V1::UsersController < ApplicationController
 
 		#Add meeting options for user
 		MeetOption.all.each do | option |
-			if params[option.name.to_sym]
+			if params[option.name.to_sym] == true
 				@user.meet_options << option
+			#Delete the meeting options that user uncheck in the edit form
+			else if params[option.name.to_sym] == false
+				@user.meet_options.delete(option);
+			end
 			end
 		end
 
