@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get 'api/v1/sessions/sign_out', to: 'api/v1/sessions#destroy'
 
-  get 'api/v1/resend_confirmation_instructions', to: 'api/v1/users#resend_confirmation_instructions'
+  post 'api/v1/resend_confirmation_instructions', to: 'api/v1/users#resend_confirmation_instructions'
 
 
   #for getting users info when they login
