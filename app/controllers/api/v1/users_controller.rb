@@ -64,7 +64,7 @@ class Api::V1::UsersController < ApplicationController
 		id = request.headers['id'].to_i
 		session[:user_id] = id
 		user = User.find_by(id: id)
-		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests], suspended: user[:suspended]}
+		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests], suspended: user[:suspended], admin: user[:admin]}
 
 		render json: user_info
 	end
@@ -128,6 +128,7 @@ class Api::V1::UsersController < ApplicationController
 			user = User.find_by(id: id)
 			user.suspend!("Suspended!")
 			user.update(suspended: true)
+			render json: user.as_json(only: [:id, :suspended])		
 	end
 
 	def unsuspend
@@ -136,6 +137,7 @@ class Api::V1::UsersController < ApplicationController
 		user = User.find_by(id: id)
 		user.unsuspend!
 		user.update(suspended: false)
+		render json: user.as_json(only: [:id, :suspended])
 		# end
 		end
 
