@@ -124,7 +124,7 @@ class Api::V1::UsersController < ApplicationController
 
 	def resend_confirmation_instructions
     user = User.where(email: params[:email]).first
-    if user && user.valid_password?(params[:password])
+    if user
     	user.send_confirmation_instructions
     else
       head(:unauthorized)
