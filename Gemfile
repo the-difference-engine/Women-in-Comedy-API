@@ -59,6 +59,7 @@ group :development do
   # ERD generates a visualization of the database associations
   # See https://voormedia.github.io/rails-erd/install.html for further installation and visualization generation instructions - super easy!
   gem 'rails-erd'
+  gem 'pry-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
