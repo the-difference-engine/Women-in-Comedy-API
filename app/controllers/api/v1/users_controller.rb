@@ -113,7 +113,7 @@ class Api::V1::UsersController < ApplicationController
 
 	def destroy
 		user = User.find(params[:id])
-		user.destroy
+		user.delete
 
 		# @users = User.all
 		# render 'index.json.jbuilder'
