@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users, :class_name => "User"
+  devise_for :users, :class_name => "User", controllers: {sessions: 'api/v1/sessions'}, skip: :sessions
+
   #devise_for :models
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   #USERS DATA ROUTES
-
-
   get 'api/v1/sessions/sign_out', to: 'api/v1/sessions#destroy'
+
+  devise_scope :user do
+    post 'api/v1/sessions', to: 'devise/sessions#create'
+  end
 
 
   #for getting users info when they login
