@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   #USERS DATA ROUTES
   get 'api/v1/sessions/sign_out', to: 'api/v1/sessions#destroy'
 
-  devise_scope :user do
-    post 'api/v1/sessions', to: 'devise/sessions#create'
-  end
+  # devise_scope :user do
+  #   post 'api/v1/sessions', to: 'devise/sessions#create'
+  # end
 
 
   #for getting users info when they login
@@ -72,14 +72,13 @@ Rails.application.routes.draw do
   post '/api/v1/guests', to: 'api/v1/guests#create'
   delete '/api/v1/guests/:id', to: 'api/v1/guests#destroy'
 
-
-
   namespace :api do
     namespace :v1 do
       resources :users
-      # devise_for :users
     end
   end
+
+
   namespace :api do
     namespace :v1 do
       resources :sessions

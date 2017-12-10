@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   :confirmable,
   :omniauthable,
   omniauth_providers: [:facebook]
-  
+
   has_many :events
   has_many :posts, as: :postable
   has_and_belongs_to_many :oauth_credentials
@@ -36,11 +36,13 @@ class User < ActiveRecord::Base
       end
     end
   end
-  # def self.current_user=(user)
-  # 	@current_user = user
-  # end
-  #
-  # def self.current_user
-  # 	@current_user
-  # end
+
+  
+  def self.current_user=(user)
+  	@current_user = user
+  end
+
+  def self.current_user
+  	@current_user
+  end
 end

@@ -1,23 +1,18 @@
 class Api::V1::UsersController < ApplicationController
-	skip_before_action :verify_authenticity_token
-	before_action :authenticate_user!, only: [:test_user]
-    #
-		# # Get current user logged in
-		# current_user  = User.current_user
-		# puts user_signed_in?
-	def index
-		# If current user is admin, return all users
-		# puts "CURRENT USER"
-		# puts current_user.first_name
+	# before_action :authenticate_user!, only: [:index]
 
-		# if current_user.admin
-		# 	puts current_user
-		# 	all_users = User.all
-		# else
-		# # If current user is not admin, return non-admin users only
-		# 	all_users = User.where(admin: false)
-		# end
-		all_users = User.all
+	def index
+		# # Get current user logged in
+		current_user  = User.current_user
+
+		#if current loggin user is admin, return all users
+		if current_user.admin
+			all_users = User.all
+		else
+		# If current user is not admin, return non-admin users only
+			all_users = User.where(admin: false)
+		end
+
 		users = []
 
 		all_users.each do |user|
@@ -68,7 +63,6 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def fetch_user_info
-
 		id = request.headers['id'].to_i
 		session[:user_id] = id
 		user = User.find_by(id: id)
