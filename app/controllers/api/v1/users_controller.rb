@@ -3,7 +3,10 @@ class Api::V1::UsersController < ApplicationController
 
 	def index
 		# # Get current user logged in
-		current_user  = User.current_user
+		# log_user  = User.current_user
+		# log_in log_user
+		log_in User.current_user
+
 
 		#if current loggin user is admin, return all users
 		if current_user.admin
