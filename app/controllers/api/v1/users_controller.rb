@@ -44,7 +44,7 @@ class Api::V1::UsersController < ApplicationController
 			gender: params[:gender],
 			training: params[:training],
 			experience: params[:experience],
-			meeting: params[:meeting],
+			admin: false,
 			photo: "https://image.freepik.com/free-icon/female-student-silhouette_318-62252.jpg"
 		)
 
@@ -54,7 +54,7 @@ class Api::V1::UsersController < ApplicationController
 				user.meet_options << option
 			end
 		end
-		
+
 		if (user.save)
 			render json: user.as_json(only: [:id, :email])
 		end
@@ -64,7 +64,22 @@ class Api::V1::UsersController < ApplicationController
 		id = request.headers['id'].to_i
 		session[:user_id] = id
 		user = User.find_by(id: id)
-		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests], suspended: user[:suspended], admin: user[:admin]}
+# <<<<<<< HEAD
+# 		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests], suspended: user[:suspended], admin: user[:admin]}
+# =======
+		meeting_options_hash = {}
+		user.meet_options.each do |option|
+			meeting_options_hash[option.name.to_sym] = true;
+		end
+
+		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], admin: user[:admin], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests],
+			city: user[:city],
+			training: user[:training],
+			experience: user[:experience],
+			website: user[:website],
+			video: user[:video_link],
+			meeting_options: meeting_options_hash
+		}
 
 		render json: user_info
 	end
@@ -85,18 +100,29 @@ class Api::V1::UsersController < ApplicationController
 	def update
 		@user = User.find(params[:id])
 		@user.update(
-			first_name: params[:first_name],
-			last_name: params[:last_name],
-			birthday: params[:birthday],
-			about: params[:about],
-			avatar: params[:avatar],
-			video_link: params[:video_link],
-			location: params[:location],
+			first_name: params[:firstName],
+			last_name: params[:lastName],
+			birthdate: params[:birthdate],
+			about: params[:bio],
+			video_link: params[:video],
+			city: params[:city],
 			website: params[:website],
 			training: params[:training],
 			experience: params[:experience],
+			admin: params[:admin],
 			photo: "https://image.freepik.com/free-icon/female-student-silhouette_318-62252.jpg"
 		)
+
+		#Add meeting options for user
+		MeetOption.all.each do | option |
+			if params[option.name.to_sym] == true
+				@user.meet_options << option
+			#Delete the meeting options that user uncheck in the edit form
+			else if params[option.name.to_sym] == false
+				@user.meet_options.delete(option);
+			end
+			end
+		end
 
 		render 'show.json.jbuilder'
 	end
@@ -105,10 +131,6 @@ class Api::V1::UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@user.update(block_connection_requests: !@user.block_connection_requests)
 		@user.save
-	end
-
-	def search
-		render 'search.html.erb'
 	end
 
 	def destroy
