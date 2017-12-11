@@ -6,14 +6,18 @@ class Api::V1::UsersController < ApplicationController
 		# log_user  = User.current_user
 		# log_in log_user
 		log_in User.current_user
+		all_users = []
 
-
-		#if current loggin user is admin, return all users
-		if current_user.admin
-			all_users = User.all
+		if current_user
+			#if current loggin user is admin, return all users
+			if current_user.admin
+				all_users = User.all
+			else
+			# If current user is not admin, return non-admin users only
+				all_users = User.where(admin: false)
+			end
 		else
-		# If current user is not admin, return non-admin users only
-			all_users = User.where(admin: false)
+			all_users = User.all
 		end
 
 		users = []
@@ -148,10 +152,5 @@ class Api::V1::UsersController < ApplicationController
 
 		# UsersController.index
 		#needs testing
-	end
-
-	def test_user
-		puts "CURRENT USER"
-		puts current_user
 	end
 end

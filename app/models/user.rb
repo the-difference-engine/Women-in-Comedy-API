@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # meet_options associations
   has_and_belongs_to_many :meet_options
   #user has many chat chat_messages
-  # has_many :chat_messages
+  has_many :chat_messages
 
   devise :database_authenticatable,
   :registerable,
