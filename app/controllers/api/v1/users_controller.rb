@@ -1,18 +1,27 @@
 class Api::V1::UsersController < ApplicationController
-	skip_before_action :verify_authenticity_token
+	# before_action :authenticate_user!, only: [:index]
+
 	def index
+		# # Get current user logged in
+		# log_user  = User.current_user
+		# log_in log_user
+		log_in User.current_user
+		all_users = []
 
-		# Get current user logged in
-		current_user  = User.current_user
-
-		# If current user is admin, return all users
-		if current_user.admin
-			all_users = User.all
+		if current_user
+			#if current loggin user is admin, return all users
+			if current_user.admin
+				all_users = User.all
+			else
+			# If current user is not admin, return non-admin users only
+				all_users = User.where(admin: false)
+			end
 		else
-		# If current user is not admin, return non-admin users only
-			all_users = User.where(admin: false)
+			all_users = User.all
 		end
+
 		users = []
+
 		all_users.each do |user|
 			user = {firstName: user[:first_name],
 				lastName: user[:last_name],
@@ -55,7 +64,7 @@ class Api::V1::UsersController < ApplicationController
 			end
 		end
 
-		if (user.save)
+		if user.save
 			render json: user.as_json(only: [:id, :email])
 		end
 	end
@@ -113,23 +122,26 @@ class Api::V1::UsersController < ApplicationController
 
 		#Add meeting options for user
 		MeetOption.all.each do | option |
-			if params[option.name.to_sym] == true
-				@user.meet_options << option
-			#Delete the meeting options that user uncheck in the edit form
-			else if params[option.name.to_sym] == false
-				@user.meet_options.delete(option);
-			end
-			end
-		end
+				if params[option.name.to_sym] == true
+					@user.meet_options << option
+				#Delete the meeting options that user uncheck in the edit form
+				else
+					@user.meet_options.delete(option);
+				end
+	  end
 
 		render 'show.json.jbuilder'
 	end
+
+
+
 
 	def block_connection_requests
 		@user = User.find(params[:id])
 		@user.update(block_connection_requests: !@user.block_connection_requests)
 		@user.save
 	end
+
 
 	def destroy
 		user = User.find(params[:id])
@@ -141,7 +153,4 @@ class Api::V1::UsersController < ApplicationController
 		# UsersController.index
 		#needs testing
 	end
-
-
-
 end
