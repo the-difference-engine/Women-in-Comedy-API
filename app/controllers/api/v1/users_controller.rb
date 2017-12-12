@@ -1,10 +1,27 @@
 class Api::V1::UsersController < ApplicationController
-	# skip_before_action :verify_authenticity_token
+	skip_before_action :verify_authenticity_token
 	def index
-		all_users = User.all
+
+		# Get current user logged in
+		current_user  = User.current_user
+
+		# If current user is admin, return all users
+		if current_user.admin
+			all_users = User.all
+		else
+		# If current user is not admin, return non-admin users only
+			all_users = User.where(admin: false)
+		end
 		users = []
 		all_users.each do |user|
-			user = {firstName: user[:first_name], lastName: user[:last_name], id: user[:id]}
+			user = {firstName: user[:first_name],
+				lastName: user[:last_name],
+				id: user[:id],
+				city: user[:city],
+			  	training: user[:training],
+			  	experience: user[:experience],
+			  	gender: user[:gender]
+				}
 			users.push(user)
 		end
 		render json: users
@@ -26,8 +43,18 @@ class Api::V1::UsersController < ApplicationController
 			video_link: params[:video],
 			gender: params[:gender],
 			training: params[:training],
-			experience: params[:experience]
+			experience: params[:experience],
+			meeting: params[:meeting],
+			photo: "https://image.freepik.com/free-icon/female-student-silhouette_318-62252.jpg"
 		)
+
+		#Add meeting options for user
+		MeetOption.all.each do | option |
+			if params[option.name.to_sym]
+				user.meet_options << option
+			end
+		end
+		
 		if (user.save)
 			render json: user.as_json(only: [:id, :email])
 		end
@@ -35,8 +62,10 @@ class Api::V1::UsersController < ApplicationController
 
 	def fetch_user_info
 		id = request.headers['id'].to_i
+		session[:user_id] = id
 		user = User.find_by(id: id)
-		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], bio: user[:about], block_connection_requests: user[:block_connection_requests]}
+		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests]}
+
 		render json: user_info
 	end
 
@@ -65,7 +94,8 @@ class Api::V1::UsersController < ApplicationController
 			location: params[:location],
 			website: params[:website],
 			training: params[:training],
-			experience: params[:experience]
+			experience: params[:experience],
+			photo: "https://image.freepik.com/free-icon/female-student-silhouette_318-62252.jpg"
 		)
 
 		render 'show.json.jbuilder'
@@ -88,9 +118,10 @@ class Api::V1::UsersController < ApplicationController
 		# @users = User.all
 		# render 'index.json.jbuilder'
 
-		UsersController.index
+		# UsersController.index
 		#needs testing
 	end
+
 
 
 end

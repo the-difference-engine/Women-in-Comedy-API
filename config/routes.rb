@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   #USERS DATA ROUTES
 
+
+  get 'api/v1/sessions/sign_out', to: 'api/v1/sessions#destroy'
+
+
   #for getting users info when they login
   get '/api/v1/users/info', to: 'api/v1/users#fetch_user_info'
   #for getting users feed
@@ -50,6 +54,8 @@ Rails.application.routes.draw do
   get '/api/v1/events', to: 'api/v1/events#index'
   #get all events made by a user
   get '/api/v1/events/user/:user_id', to: 'api/v1/events#my_events'
+  # edit an existing event
+  post '/api/v1/events/:id', to: 'api/v1/events#update'
 
 
   #Post ROUTES
