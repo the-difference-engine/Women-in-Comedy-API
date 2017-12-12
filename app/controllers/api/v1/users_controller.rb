@@ -123,12 +123,12 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def resend_confirmation_instructions
-    user = User.where(email: params[:email]).first
-    if user
-    	user.send_confirmation_instructions
-    else
-      head(:unauthorized)
-    end
+		user = User.where(email: params[:email]).first
+		if user
+			user.send_confirmation_instructions
+		else
+			head(:unauthorized)
+		end
 	end
 
 end
