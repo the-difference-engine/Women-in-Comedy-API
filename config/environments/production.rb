@@ -85,6 +85,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   config.action_mailer.default_url_options = { host: 'https://qa-womenincomedy.herokuapp.com/'}
+
+  ActionCable.server.config.disable_request_forgery_protection = true
+  
   # ActionMailer::Base.delivery_method = :smtp
   # ActionMailer::Base.smtp_settings = {
   #   address:              'smtp.gmail.com',
