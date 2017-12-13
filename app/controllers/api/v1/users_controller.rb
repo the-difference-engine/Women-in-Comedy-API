@@ -78,7 +78,8 @@ class Api::V1::UsersController < ApplicationController
 			experience: user[:experience],
 			website: user[:website],
 			video: user[:video_link],
-			meeting_options: meeting_options_hash
+			meeting_options: meeting_options_hash,
+			suspended: user[:suspended]
 		}
 
 		render json: user_info
