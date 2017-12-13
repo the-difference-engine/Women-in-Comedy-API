@@ -39,7 +39,8 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   config.action_cable.url = 'wss://qa-womenincomedy.herokuapp.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://localhost:3000/', /http:\/\/example.*/ ]
-  config.action_cable.allowed_request_origins = ['http://localhost:3000']
+  # config.action_cable.allowed_request_origins = ['http://localhost:3000']
+  ActionCable.server.config.disable_request_forgery_protection = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -87,7 +88,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   config.action_mailer.default_url_options = { host: 'https://qa-womenincomedy.herokuapp.com/'}
 
-  # ActionCable.server.config.disable_request_forgery_protection = true
+
 
   # ActionMailer::Base.delivery_method = :smtp
   # ActionMailer::Base.smtp_settings = {
