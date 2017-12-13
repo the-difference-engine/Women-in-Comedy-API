@@ -1,5 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  # skip_before_action :verify_authenticity_token
 
   # GET /resource/sign_in
   # def new
@@ -8,9 +9,16 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   # def create
-  #   super
+  #   user = User.where(email: params[:email]).first
+  #   if user && user.valid_password?(params[:password])
+  #     sign_in(user)
+  #     puts "CURRENT USER HAHAHHAA"
+  #     puts current_user
+  #     render json: user.as_json(only: [:id, :admin, :email, :confirmed_at])
+  #   else
+  #     head(:unauthorized)
+  #   end
   # end
-
   # DELETE /resource/sign_out
   # def destroy
   #   super
