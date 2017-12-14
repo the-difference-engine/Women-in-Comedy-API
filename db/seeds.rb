@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create(first_name: "Anthony", last_name: "Hawkins", email:"s0menarutofan@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: 'less than 1 year', experience: '1-3 years')
+User.create(first_name: "Calvin", last_name: "Chan", email:"mrcalvinkc@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: 'less than 1 year', experience: '1-3 years')
 
 User.create(first_name: "DeMarcus", last_name: "Cousins", email:"dcousins@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: '4-7 years', experience: '11+ years')
 
@@ -35,19 +35,19 @@ MeetOption.create(name: "Seeking Mentors")
 Event.create(
 	user_id:2,
 	title: "A Great Event",
-	photo:"my pix",
+	photo:"https://ak0.picdn.net/shutterstock/videos/11618780/thumb/1.jpg",
 	date:"4-16-98",
 	ticket_link:"www.yahoo.com",
-	about: "view my website yeahhhh"
+	about: "view my website"
 )
 
 Event.create(
 	user_id:2,
 	title: "A Wicked Event",
-	photo:"my pix",
+	photo:"http://l7.alamy.com/zooms/7372c9d283624c8997fa967be857623e/julie-grady-thomas-stand-up-comedy-performer-at-an-open-mike-night-d1mmwj.jpg",
 	date:"4-16-98",
 	ticket_link:"www.yahoo.com",
-	about: "view my website yeahhhh"
+	about: "Some interesting facts"
 )
 
 
@@ -55,14 +55,12 @@ Event.create(
 	Event.create(
 		user_id:1,
 		title: "A Great Event",
-		photo:"my pix",
+		photo:"http://c8.alamy.com/comp/HT19FB/audience-at-stand-up-comedy-shows-at-festival-lent-maribor-slovenia-HT19FB.jpg",
 		date:"7-16-2016",
 		ticket_link:"www.google.com",
-		about: "mine is bigger",
+		about: "This is the about section",
 	)
 end
-
-
 
 Post.create(
 	postable_id: 1,
@@ -99,13 +97,13 @@ Post.create(
 Comment.create(
 	post_id: 1,
 	author_id: 1,
-	body: "who is the best coder"
+	body: "Comments go here"
 )
 
 Comment.create(
 	post_id: 1,
 	author_id: 2,
-	body: "to my class whats uppppp"
+	body: "Hi everyone!! Welcome"
 )
 
 ConnectionRequest.create(
