@@ -53,10 +53,6 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.action_mailer.default_url_options = { host: 'http://localhost:9000'}
-  ActionCable.server.config.disable_request_forgery_protection = true
-
-
-
   # ActionMailer::Base.delivery_method = :smtp
   # ActionMailer::Base.smtp_settings = {
   #   address:              'smtp.gmail.com',
