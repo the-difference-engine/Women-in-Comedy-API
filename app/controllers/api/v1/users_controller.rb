@@ -73,9 +73,7 @@ class Api::V1::UsersController < ApplicationController
 		id = request.headers['id'].to_i
 		session[:user_id] = id
 		user = User.find_by(id: id)
-# <<<<<<< HEAD
-# 		user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests], suspended: user[:suspended], admin: user[:admin]}
-# =======
+		
 		meeting_options_hash = {}
 		user.meet_options.each do |option|
 			meeting_options_hash[option.name.to_sym] = true;
