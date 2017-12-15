@@ -6,6 +6,7 @@ class Api::V1::UsersController < ApplicationController
 		# log_user  = User.current_user
 		# log_in log_user
 		log_in User.current_user
+		current_user = User.current_user
 		all_users = []
 
 		if current_user
@@ -73,7 +74,7 @@ class Api::V1::UsersController < ApplicationController
 		id = request.headers['id'].to_i
 		session[:user_id] = id
 		user = User.find_by(id: id)
-		
+
 		meeting_options_hash = {}
 		user.meet_options.each do |option|
 			meeting_options_hash[option.name.to_sym] = true;
@@ -161,7 +162,7 @@ class Api::V1::UsersController < ApplicationController
 			user = User.find_by(id: id)
 			user.suspend!("Suspended!")
 			user.update(suspended: true)
-			render json: user.as_json(only: [:id, :suspended])		
+			render json: user.as_json(only: [:id, :suspended])
 	end
 
 	def unsuspend
