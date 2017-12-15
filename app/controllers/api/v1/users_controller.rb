@@ -73,6 +73,7 @@ class Api::V1::UsersController < ApplicationController
 		id = request.headers['id'].to_i
 		session[:user_id] = id
 		user = User.find_by(id: id)
+		
 		meeting_options_hash = {}
 		user.meet_options.each do |option|
 			meeting_options_hash[option.name.to_sym] = true;
@@ -84,9 +85,9 @@ class Api::V1::UsersController < ApplicationController
 			experience: user[:experience],
 			website: user[:website],
 			video: user[:video_link],
-			meeting_options: meeting_options_hash
+			meeting_options: meeting_options_hash,
+			suspended: user[:suspended]
 		}
-
 
 		render json: user_info
 	end
@@ -145,7 +146,7 @@ class Api::V1::UsersController < ApplicationController
 
 	def destroy
 		user = User.find(params[:id])
-		user.destroy
+		user.delete
 
 		# @users = User.all
 		# render 'index.json.jbuilder'
@@ -153,4 +154,24 @@ class Api::V1::UsersController < ApplicationController
 		# UsersController.index
 		#needs testing
 	end
+
+
+	def suspend
+			id = request.headers['id'].to_i
+			user = User.find_by(id: id)
+			user.suspend!("Suspended!")
+			user.update(suspended: true)
+			render json: user.as_json(only: [:id, :suspended])		
+	end
+
+	def unsuspend
+		# if current_user
+		id = request.headers['id'].to_i
+		user = User.find_by(id: id)
+		user.unsuspend!
+		user.update(suspended: false)
+		render json: user.as_json(only: [:id, :suspended])
+		# end
+		end
+
 end

@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   :omniauthable,
   omniauth_providers: [:facebook]
 
+
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :suspendable, :confirmable,:omniauthable,:omniauth_providers => [:facebook]
+
   has_many :events
   has_many :posts, as: :postable
   has_and_belongs_to_many :oauth_credentials
