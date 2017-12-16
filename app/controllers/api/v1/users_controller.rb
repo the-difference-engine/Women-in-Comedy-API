@@ -119,7 +119,7 @@ class Api::V1::UsersController < ApplicationController
 			training: params[:training],
 			experience: params[:experience],
 			admin: params[:admin],
-			superuser: params[:superuser],
+			superuser: true,
 			photo: "https://image.freepik.com/free-icon/female-student-silhouette_318-62252.jpg"
 		)
 
