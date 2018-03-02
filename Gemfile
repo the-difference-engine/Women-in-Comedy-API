@@ -39,6 +39,7 @@ gem 'omniauth-facebook'
 gem 'dotenv-rails'
 gem 'rack-cors'
 gem 'cancancan', '~> 2.0'
+gem 'nio4r', '~> 2.2'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
