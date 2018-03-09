@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   omniauth_providers: [:facebook]
 
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :suspendable, :confirmable,:omniauthable,:omniauth_providers => [:facebook]
+  # devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :suspendable, :confirmable,:omniauthable,:omniauth_providers => [:facebook]
 
   has_many :events
   has_many :posts, as: :postable
@@ -44,6 +44,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def meet_options_users_attributes(params)
+    params[:meet_options_users_attributes].each do |mo_id|
+      self.meet_options_users.build(meet_option_id: mo_id)
+    end
+  end
 
   def self.current_user=(user)
   	@current_user = user

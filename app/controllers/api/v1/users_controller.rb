@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
 	# before_action :authenticate_user!, only: [:index]
+	skip_before_action :verify_authenticity_token
 
 	def index
 		# # Get current user logged in
@@ -54,9 +55,8 @@ class Api::V1::UsersController < ApplicationController
 			gender: params[:gender],
 			training: params[:training],
 			experience: params[:experience],
-			meet_options_users_attributes: params[:meet_options_users_attributes],
 			admin: false,
-			photo: "https://image.freepik.com/free-icon/female-student-silhouette_318-62252.jpg"
+			photo: params[:photo]
 		)
 
 		if user.save
