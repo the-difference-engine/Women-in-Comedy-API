@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   # meet_options associations
-  has_and_belongs_to_many :meet_options
+  has_many :meet_options_users
+  has_many :meet_options, :through => :meet_options_users
+  accepts_nested_attributes_for :meet_options_users
   #user has many chat chat_messages
   has_many :chat_messages
 
