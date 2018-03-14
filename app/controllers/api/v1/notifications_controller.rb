@@ -13,9 +13,9 @@ class Api::V1::NotificationsController < ApplicationController
 
   def get_notifications
     # unseen_notifications = Notification.where(notifiable_id: id, seen: nil)
-    notifications = Notification.where(notifiable_id: params[:id])
+    @notifications = Notification.where(notifiable_id: params[:id])
 
-    render json: notifications
+    render 'get_notifications.json.jbuilder'
   end
 
   # def create_notification(sender_id, receiver_id, notifiable_type)
