@@ -1,6 +1,6 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   # meet_options associations
-  has_many :meet_option_users
+  has_many :meet_option_users, inverse_of: :user
   has_many :meet_options, through: :meet_option_users
   accepts_nested_attributes_for :meet_option_users
   #user has many chat chat_messages
@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   end
 
   def meet_option_users_attributes=(params)
-    params[:meet_option_users_attributes].each do |mo_id|
+    params.each do |mo_id|
       self.meet_option_users.build(meet_option_id: mo_id)
     end
   end
