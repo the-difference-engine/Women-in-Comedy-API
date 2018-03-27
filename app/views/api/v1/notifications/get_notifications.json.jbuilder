@@ -1,4 +1,5 @@
 json.notifications @notifications do |notification|
+  json.id notification.id
   json.sent_from notification.recipient_id
   json.sent_to notification.user_id
   json.action notification.action
