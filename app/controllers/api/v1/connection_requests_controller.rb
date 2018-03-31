@@ -92,13 +92,13 @@ class Api::V1::ConnectionRequestsController < ApplicationController
     connection.update(status: true)
     connection.save
 
-    sender = User.find_by(id: params[:sender_id])
-    receiver = User.find_by(id: params[:receiver_id])
+    connection_request_sender = User.find_by(id: params[:sender_id])
+    connection_request_receiver = User.find_by(id: params[:receiver_id])
 
     Notification.create(
-      user: sender,
-      recipient: receiver,
-      notifiable: sender,
+      user: connection_request_receiver,
+      recipient: connection_request_sender,
+      # notifiable: sender,
       action: "connection_accepted"
       )
 

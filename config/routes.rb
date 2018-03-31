@@ -75,8 +75,8 @@ Rails.application.routes.draw do
   #For getting user notifications
   get '/api/v1/notifications/:id', to: 'api/v1/notifications#get_notifications'
 
-  put '/api/v1/notifications/mark_all_read/:id', to: 'api/v1/notifications#mark_all_as_read'
-  put '/api/v1/notifications/mark_read/:id', to: 'api/v1/notifications#mark_as_read'
+  get '/api/v1/notifications/mark_all_read/:id', to: 'api/v1/notifications#mark_all_as_read'
+  get '/api/v1/notifications/mark_read/:id', to: 'api/v1/notifications#mark_as_read'
 
 
 

@@ -7,24 +7,24 @@ class Api::V1::NotificationsController < ApplicationController
 
   def mark_all_as_read
     Rails.logger.info "Inside mark_all_as_read"
-    Notification.where(notifiable_id: params[:id], seen: nil).update_all(seen: Time.zone.now)
+    Notification.where(recipient_id: params[:id], seen: nil).update_all(seen: Time.zone.now)
 
-    @notifications = Notification.where(notifiable_id: params[:id])
+    @notifications = Notification.where(recipient_id: params[:id])
     render 'get_notifications.json.jbuilder'
   end
 
   def mark_as_read
-    byebug
-    Notification.where(id: params[:notification_id], seen: nil).update(seen: Time.zone.now)
+    # byebug
+    Notification.where(id: params[:notification_id], recipient_id: params[:id], seen: nil).update(seen: Time.zone.now)
 
-    @notifications = Notification.where(notifiable_id: params[:id])
+    @notifications = Notification.where(recipient_id: params[:id])
 
     render 'get_notifications.json.jbuilder'
   end
 
   def get_notifications
     # unseen_notifications = Notification.where(notifiable_id: id, seen: nil)
-    @notifications = Notification.where(notifiable_id: params[:id])
+    @notifications = Notification.where(recipient_id: params[:id])
 
     render 'get_notifications.json.jbuilder'
   end
