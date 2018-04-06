@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   #devise_for :models
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  #MEET OPTION ROUTES
+  get 'api/v1/meet_options', to: 'api/v1/meet_options#index'
+
   #USERS DATA ROUTES
   get 'api/v1/sessions/sign_out', to: 'api/v1/sessions#destroy'
 
@@ -17,15 +20,17 @@ Rails.application.routes.draw do
   #for getting users feed
   get '/api/v1/users/feed', to: 'api/v1/users#fetch_user_feed'
 
+  #Suspension
+  post '/api/v1/users/suspend' => 'api/v1/users#suspend'
+  post '/api/v1/users/unsuspend' => 'api/v1/users#unsuspend'
 
   # config/routes.rb
   mount ActionCable.server => '/cable'
 
 
-
   #CONNECTIONS REQUEST ROUTES
 
-   #search users
+  #search users
   get '/api/v1/users/search', to: 'api/v1/users#search'
 
 
@@ -85,6 +90,7 @@ Rails.application.routes.draw do
     end
   end
 
-
+  post '/api/v1/users/suspend' => 'api/v1/users#suspend'
+  post '/api/v1/users/unsuspend' => 'api/v1/users#unsuspend'
 
 end

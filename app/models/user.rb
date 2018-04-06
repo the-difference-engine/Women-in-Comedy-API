@@ -1,6 +1,8 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   # meet_options associations
-  has_and_belongs_to_many :meet_options
+  has_many :meet_option_users, inverse_of: :user
+  has_many :meet_options, through: :meet_option_users
+  accepts_nested_attributes_for :meet_option_users
   #user has many chat chat_messages
   has_many :chat_messages
 
@@ -13,6 +15,9 @@ class User < ActiveRecord::Base
   :confirmable,
   :omniauthable,
   omniauth_providers: [:facebook]
+
+
+  # devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :suspendable, :confirmable,:omniauthable,:omniauth_providers => [:facebook]
 
   has_many :events
   has_many :posts, as: :postable
@@ -39,6 +44,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def meet_option_users_attributes=(params)
+    params.each do |mo_id|
+      self.meet_option_users.build(meet_option_id: mo_id)
+    end
+  end
 
   def self.current_user=(user)
   	@current_user = user
