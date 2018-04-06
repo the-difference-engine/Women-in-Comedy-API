@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171216155504) do
+ActiveRecord::Schema.define(version: 20180319232239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,15 +63,15 @@ ActiveRecord::Schema.define(version: 20171216155504) do
     t.integer  "event_id"
   end
 
+  create_table "meet_option_users", id: false, force: :cascade do |t|
+    t.integer "user_id",        null: false
+    t.integer "meet_option_id", null: false
+  end
+
   create_table "meet_options", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "meet_options_users", id: false, force: :cascade do |t|
-    t.integer "user_id",        null: false
-    t.integer "meet_option_id", null: false
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -96,12 +96,12 @@ ActiveRecord::Schema.define(version: 20171216155504) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                     default: "", null: false
-    t.string   "encrypted_password",        default: "", null: false
+    t.string   "email",                     default: "",    null: false
+    t.string   "encrypted_password",        default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",             default: 0,  null: false
+    t.integer  "sign_in_count",             default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
@@ -110,8 +110,8 @@ ActiveRecord::Schema.define(version: 20171216155504) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.string   "provider"
     t.string   "uid"
     t.string   "first_name"
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20171216155504) do
     t.string   "experience"
     t.text     "meeting"
     t.string   "birthdate"
-    t.boolean  "admin"
+    t.boolean  "admin",                     default: false
     t.string   "photo"
     t.boolean  "block_connection_requests"
     t.datetime "suspended_at"
