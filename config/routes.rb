@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   #USERS DATA ROUTES
   get 'api/v1/sessions/sign_out', to: 'api/v1/sessions#destroy'
 
-  # devise_scope :user do
-  #   post 'api/v1/sessions', to: 'devise/sessions#create'
-  # end
+
+  post 'api/v1/resend_confirmation_instructions', to: 'api/v1/users#resend_confirmation_instructions'
+
 
 
   #for getting users info when they login

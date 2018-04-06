@@ -93,13 +93,11 @@ class Api::V1::UsersController < ApplicationController
     render 'show.json.jbuilder'
   end
 
-
   def block_connection_requests
     @user = User.find(params[:id])
     @user.update(block_connection_requests: !@user.block_connection_requests)
     @user.save
   end
-
 
   def destroy
     user = User.find(params[:id])
@@ -111,7 +109,15 @@ class Api::V1::UsersController < ApplicationController
     # UsersController.index
     #needs testing
   end
-
+  
+  def resend_confirmation_instructions
+		user = User.where(email: params[:email]).first
+		if user
+			user.send_confirmation_instructions
+		else
+			head(:unauthorized)
+		end
+	end
 
   def suspend
     id = request.headers['id'].to_i
