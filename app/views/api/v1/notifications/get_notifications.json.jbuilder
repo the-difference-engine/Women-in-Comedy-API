@@ -1,4 +1,4 @@
-json.notifications @notifications do |notification|
+json.notifications @notifications.sort_by {|n| n[:created_at] } do |notification|
   json.id notification.id
   json.sent_from notification.user_id
   json.sent_to notification.recipient_id
