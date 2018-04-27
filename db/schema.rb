@@ -50,8 +50,7 @@ ActiveRecord::Schema.define(version: 20180426003630) do
     t.string   "time"
     t.string   "location"
     t.string   "address"
-    t.string   "status"
-    t.string   "string"
+    t.boolean  "is_private"
   end
 
   create_table "guests", force: :cascade do |t|
