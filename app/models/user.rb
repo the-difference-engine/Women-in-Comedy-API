@@ -50,16 +50,13 @@ class User < ApplicationRecord
     end
   end
 
-<<<<<<< HEAD
   def full_name
     "#{first_name} #{last_name}"
   end
 
-=======
   def self.current_user=(user)
   	@current_user = user
   end
->>>>>>> bf3860b8781256c87bd1c67080384e0d8d0e3752
 
   def self.current_user
   	@current_user
