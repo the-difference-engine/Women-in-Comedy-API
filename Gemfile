@@ -32,11 +32,14 @@ gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
+gem 'devise_suspendable'
 gem 'rails_12factor'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'dotenv-rails'
 gem 'rack-cors'
+gem 'cancancan', '~> 2.0'
+gem 'nio4r', '~> 2.2'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -57,6 +60,7 @@ group :development do
   # ERD generates a visualization of the database associations
   # See https://voormedia.github.io/rails-erd/install.html for further installation and visualization generation instructions - super easy!
   gem 'rails-erd'
+  gem 'pry-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
