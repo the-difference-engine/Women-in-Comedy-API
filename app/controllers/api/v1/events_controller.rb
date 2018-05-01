@@ -1,6 +1,10 @@
 class Api::V1::EventsController < ApplicationController
 	def index
-		events = Event.all
+		if params[:admin_user] == "true"
+			events = Event.all
+		else
+			events = Event.where(user_id: 1)
+		end
 		render json: events
 	end
 
