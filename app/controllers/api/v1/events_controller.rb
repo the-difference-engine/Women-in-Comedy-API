@@ -3,7 +3,7 @@ class Api::V1::EventsController < ApplicationController
 		if params[:admin_user] == "true"
 			events = Event.all
 		else
-			events = Event.where(user_id: 1)
+			events = Event.where(is_private: false)
 		end
 		render json: events
 	end
