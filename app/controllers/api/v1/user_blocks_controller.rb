@@ -38,11 +38,10 @@ class Api::V1::UserBlocksController < ApplicationController
     else
       block_request = UserBlock.create(
         sender_id: params[:sender_id],
-        receiver_id: params[:receiver_id],
-        status: false)
-        render json: block_request.as_json
-      end
+        receiver_id: params[:receiver_id])
+      render json: block_request.as_json
     end
+  end
     
     def destroy
       block_request = UserBlock.find_by(id: params[:id])

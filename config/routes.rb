@@ -50,6 +50,9 @@ Rails.application.routes.draw do
   #block incoming connection requests
   post '/api/v1/users/:id', to: 'api/v1/users#block_connection_requests'
 
+
+  #for blocking a user
+  post '/api/v1/users/blocks/:id', to: 'api/v1/user_blocks#create' 
   #for getting users blocked
   get '/api/v1/users/blocked', to: 'api/v1/user_blocks#get_blocked_users'
   #for getting users blocked by
