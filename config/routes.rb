@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :class_name => "User", controllers: {sessions: 'api/v1/sessions'}, skip: :sessions
+
   #devise_for :models
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  #MEET OPTION ROUTES
+  get 'api/v1/meet_options', to: 'api/v1/meet_options#index'
+
   #USERS DATA ROUTES
-
-
   get 'api/v1/sessions/sign_out', to: 'api/v1/sessions#destroy'
+
+
+  post 'api/v1/resend_confirmation_instructions', to: 'api/v1/users#resend_confirmation_instructions'
+
 
 
   #for getting users info when they login
@@ -14,16 +20,18 @@ Rails.application.routes.draw do
   #for getting users feed
   get '/api/v1/users/feed', to: 'api/v1/users#fetch_user_feed'
 
+  #Suspension
+  post '/api/v1/users/suspend' => 'api/v1/users#suspend'
+  post '/api/v1/users/unsuspend' => 'api/v1/users#unsuspend'
 
   # config/routes.rb
   mount ActionCable.server => '/cable'
   resources :notifications
 
 
-
   #CONNECTIONS REQUEST ROUTES
 
-   #search users
+  #search users
   get '/api/v1/users/search', to: 'api/v1/users#search'
 
 
@@ -83,12 +91,15 @@ Rails.application.routes.draw do
       resources :users
     end
   end
+
+
   namespace :api do
     namespace :v1 do
       resources :sessions
     end
   end
 
-
+  post '/api/v1/users/suspend' => 'api/v1/users#suspend'
+  post '/api/v1/users/unsuspend' => 'api/v1/users#unsuspend'
 
 end

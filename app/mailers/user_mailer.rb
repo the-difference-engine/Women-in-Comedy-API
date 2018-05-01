@@ -6,6 +6,7 @@ class UserMailer < Devise::Mailer
   #   en.user_mailer.new_user.subject
   #
   default template_path: 'devise/mailer'
+  
   def new_user(user)
     @email = user.email
 
