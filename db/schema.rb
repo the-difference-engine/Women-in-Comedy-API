@@ -45,12 +45,12 @@ ActiveRecord::Schema.define(version: 20180426003630) do
     t.string   "date"
     t.text     "ticket_link"
     t.text     "about"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "time"
     t.string   "location"
     t.string   "address"
-    t.boolean  "is_private"
+    t.boolean  "is_private",  default: false
   end
 
   create_table "guests", force: :cascade do |t|
