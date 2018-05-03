@@ -41,11 +41,11 @@ class Api::V1::ConnectionRequestsController < ApplicationController
   end
 
   def create
-    # if ConnectionRequest.exists?(sender_id: params[:sender_id], receiver_id:params[:receiver_id])
-    #
-    # elsif ConnectionRequest.exists?(sender_id: params[:receiver_id], receiver_id: params[:sender_id])
-    #
-    # else
+    if ConnectionRequest.exists?(sender_id: params[:sender_id], receiver_id:params[:receiver_id])
+
+    elsif ConnectionRequest.exists?(sender_id: params[:receiver_id], receiver_id: params[:sender_id])
+
+    else
 
       connection_request = ConnectionRequest.create(
         sender_id: params[:sender_id],
@@ -59,13 +59,16 @@ class Api::V1::ConnectionRequestsController < ApplicationController
       Notification.create(
         user: sender,
         recipient: receiver,
-        notifiable: receiver,
+        # notifiable: receiver,
         action: "connection_request"
         )
+      new_notification = Notification.last
+      p new_notification
+
       # redirect_to action: "create_notification", controller: "v1/notifications", sender_id: params[:sender_id], receiver_id: params[:receiver_id], notifiable_type: "connection request"
 
       render json: connection_request.as_json
-    # end
+    end
   end
 
   def update
@@ -105,5 +108,5 @@ class Api::V1::ConnectionRequestsController < ApplicationController
     render json: connection.as_json
   end
 
-  
+
 end
