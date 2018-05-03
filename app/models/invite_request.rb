@@ -1,0 +1,2 @@
+class InviteRequest < ApplicationRecord
+end
