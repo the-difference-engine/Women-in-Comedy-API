@@ -1,0 +1,2 @@
+class InviteRequestController < ApplicationController
+end
