@@ -50,6 +50,18 @@ Rails.application.routes.draw do
   #block incoming connection requests
   post '/api/v1/users/:id', to: 'api/v1/users#block_connection_requests'
 
+  #INVITE REQUEST ROUTES
+
+  #for getting invites
+  get '/api/v1/users/invites', to: 'api/v1/invite_request#get_invites'
+  #for getting pending invites
+  get '/api/v1/users/pending_invites', to: 'api/v1/invite_request#get_pending_invites'
+  #for accepting invites
+  post '/api/v1/users/accept_invites', to: 'api/v1/invite_request#accept'
+  #for updating invite status
+  patch '/ap1/v1/users/invites/:id', to: 'api/v1/invite_request#update'
+  #for declining invites
+  delete '/api/v1/user/invites/:id', to: 'api/v1/invite_request#destroy'
 
   #EVENTS ROUTES
 
