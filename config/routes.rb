@@ -61,7 +61,7 @@ Rails.application.routes.draw do
   #for updating invite status
   patch '/ap1/v1/users/invites/:id', to: 'api/v1/invite_request#update'
   #for declining invites
-  delete '/api/v1/user/invites/:id', to: 'api/v1/invite_request#destroy'
+  delete '/api/v1/users/invites/:id', to: 'api/v1/invite_request#destroy'
 
   #EVENTS ROUTES
 
