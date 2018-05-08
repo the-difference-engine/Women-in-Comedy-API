@@ -84,7 +84,7 @@ Rails.application.routes.draw do
   get '/api/v1/notifications/:id', to: 'api/v1/notifications#get_notifications'
 
   get '/api/v1/notifications/mark_all_read/:id', to: 'api/v1/notifications#mark_all_as_read'
-  post '/api/v1/notifications/mark_one/:user_id', to: 'api/v1/notifications#mark_one_as_read'
+  put '/api/v1/notifications/mark_one/:user_id', to: 'api/v1/notifications#mark_one_as_read'
 
   namespace :api do
     namespace :v1 do
