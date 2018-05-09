@@ -48,6 +48,7 @@ class Api::V1::InviteRequestController < ApplicationController
             invite_request = InviteRequest.create(
                 sender_id: params[:sender_id],
                 receiver_id: params[:receiver_id],
+                event_id: params[:event_id],
                 status: false
             )
         render json: invite_request.as_json

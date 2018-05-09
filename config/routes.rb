@@ -56,6 +56,8 @@ Rails.application.routes.draw do
   get '/api/v1/users/invites', to: 'api/v1/invite_request#get_invites'
   #for getting pending invites
   get '/api/v1/users/pending_invites', to: 'api/v1/invite_request#get_pending_invites'
+  #for creating new invites
+  post '/api/v1/users/invites', to: 'api/v1/invite_request#create'
   #for accepting invites
   post '/api/v1/users/accept_invites', to: 'api/v1/invite_request#accept'
   #for updating invite status
