@@ -53,18 +53,18 @@ Rails.application.routes.draw do
   #INVITE REQUEST ROUTES
 
   #for getting invites
-  get '/api/v1/users/invites', to: 'api/v1/invite_request#get_invites'
+  get '/api/v1/invites', to: 'api/v1/invite_requests#get_invites'
   #for getting pending invites
-  get '/api/v1/users/pending_invites', to: 'api/v1/invite_request#get_pending_invites'
+  get '/api/v1/invites/pending_invites', to: 'api/v1/invite_requests#get_pending_invites'
   #for creating new invites
-  post '/api/v1/users/invites', to: 'api/v1/invite_request#create'
-  post '/api/v1/users/invite/status', to: 'api/v1/invite_request#status'
+  post '/api/v1/invites', to: 'api/v1/invite_requests#create'
+  post '/api/v1/invites/status', to: 'api/v1/invite_requests#status'
   #for accepting invites
-  post '/api/v1/users/accept_invites', to: 'api/v1/invite_request#accept'
+  post '/api/v1/invites/accept_invites', to: 'api/v1/invite_requests#accept'
   #for updating invite status
-  patch '/ap1/v1/users/invites/:id', to: 'api/v1/invite_request#update'
+  patch '/ap1/v1/invites/invites/:id', to: 'api/v1/invite_requests#update'
   #for declining invites
-  delete '/api/v1/users/invites/:id', to: 'api/v1/invite_request#destroy'
+  delete '/api/v1/invites/invites/:id', to: 'api/v1/invite_requests#destroy'
 
   #EVENTS ROUTES
 

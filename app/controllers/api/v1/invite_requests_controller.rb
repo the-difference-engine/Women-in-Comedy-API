@@ -1,8 +1,8 @@
-class Api::V1::InviteRequestController < ApplicationController
+class Api::V1::InviteRequestsController < ApplicationController
     def get_invites
         id = request.headers['id'].to_i
 
-        invites = InviteRequest.where(sender_id: id).(InviteRequest.where(receiver_id: id))
+        invites = InviteRequest.where(sender_id: id).or(InviteRequest.where(receiver_id: id))
 
         invites = invites.where(status: true)
 
@@ -14,7 +14,7 @@ class Api::V1::InviteRequestController < ApplicationController
                 user = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
                 user_array.push(user)
             else
-                user = User.find_by(id: invite[sender_id])
+                user = User.find_by(id: invite[:sender_id])
                 user = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
                 user_array.push(user)
             end
@@ -44,13 +44,14 @@ class Api::V1::InviteRequestController < ApplicationController
 
         elsif InviteRequest.exists?(sender_id: params[:receiver_id], receiver_id: params[:sender_id])
 
-        else
+        else #create new invite
             invite_request = InviteRequest.create(
                 sender_id: params[:sender_id],
                 receiver_id: params[:receiver_id],
                 event_id: params[:event_id],
                 status: false
             )
+        end
         render json: invite_request.as_json
     end
 
@@ -67,7 +68,7 @@ class Api::V1::InviteRequestController < ApplicationController
     end
 
     def status
-        invite = InviteRequest.where(sender_id: params[:sender_id], receiver_id: params[:receiver_id]).or(InviteRequest.where(sender_id: params[:receiver_id], receiver_id: params[:sender_id])
+        invite = InviteRequest.where(sender_id: params[:sender_id], receiver_id: params[:receiver_id]).or(InviteRequest.where(sender_id: params[:receiver_id], receiver_id: params[:sender_id]))
         render json: invite[0]
     end
 
