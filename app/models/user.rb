@@ -54,7 +54,12 @@ class User < ApplicationRecord
   	@current_user = user
   end
 
-  def self.current_user
-  	@current_user
+	def self.current_user
+		@current_user
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
 end
