@@ -34,7 +34,7 @@ class Api::V1::InviteRequestsController < ApplicationController
         pending_invites.each do |invite|
             user = User.find_by(id: invite[:sender_id])
             event = Event.find_by(id: invite[:event_id])
-            invite = {id: user[:id], event: event[:title], firstName: user[:first_name], lastName: user[:last_name]}
+            invite = {requestId: invite[:id], event: event[:title], firstName: user[:first_name], lastName: user[:last_name]}
             invite_array.push(invite)
         end
         render json: invite_array
