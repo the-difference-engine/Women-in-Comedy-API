@@ -34,7 +34,7 @@ class Api::V1::InviteRequestsController < ApplicationController
         pending_invites.each do |invite|
             user = User.find_by(id: invite[:sender_id])
             event = Event.find_by(id: invite[:event_id])
-            invite = {requestId: invite[:id], event: event[:title], firstName: user[:first_name], lastName: user[:last_name]}
+            invite = {requestId: invite[:id], event: event[:title], senderId: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
             invite_array.push(invite)
         end
         render json: invite_array
@@ -75,8 +75,15 @@ class Api::V1::InviteRequestsController < ApplicationController
 
     def accept
         invite = InviteRequest.find_by(sender_id: params[:sender_id], receiver_id: params[:receiver_id])
+        user = User.find_by(id: params[:receiver_id])
         invite.update(status: true)
         invite.save
+        Guest.create(
+            event_id: invite[:event_id],
+            user_id: user[:id],
+            first_name: user[:first_name],
+            last_name: user[:last_name],
+        )
         render json: invite.as_json
     end
 end
