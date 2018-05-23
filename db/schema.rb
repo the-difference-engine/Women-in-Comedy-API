@@ -95,10 +95,10 @@ ActiveRecord::Schema.define(version: 20180426000640) do
   end
 
   create_table "user_blocks", force: :cascade do |t|
-    t.integer  "sender_id"
-    t.integer  "receiver_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "blocker_id"
+    t.integer  "blocked_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
