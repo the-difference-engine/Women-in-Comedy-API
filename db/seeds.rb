@@ -125,6 +125,7 @@ ConnectionRequest.create(
 )
 
 UserBlock.create(
-    sender_id: 2,
-    receiver_id: 1
+  blocker_id: User.where(first_name: "Calvin", last_name: "Chan").first.id,
+  blocked_id: User.where(first_name: "DeMarcus", last_name: "Cousins").first.id
 )
+
