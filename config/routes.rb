@@ -10,10 +10,7 @@ Rails.application.routes.draw do
   #USERS DATA ROUTES
   get 'api/v1/sessions/sign_out', to: 'api/v1/sessions#destroy'
 
-
   post 'api/v1/resend_confirmation_instructions', to: 'api/v1/users#resend_confirmation_instructions'
-
-
 
   #for getting users info when they login
   get '/api/v1/users/info', to: 'api/v1/users#fetch_user_info'
@@ -27,12 +24,10 @@ Rails.application.routes.draw do
   # config/routes.rb
   mount ActionCable.server => '/cable'
 
-
   #CONNECTIONS REQUEST ROUTES
 
   #search users
   get '/api/v1/users/search', to: 'api/v1/users#search'
-
 
   #for getting users connections
   get '/api/v1/users/connections', to: 'api/v1/connection_requests#get_connections'
@@ -50,16 +45,14 @@ Rails.application.routes.draw do
   #block incoming connection requests
   post '/api/v1/users/:id', to: 'api/v1/users#block_connection_requests'
 
-
   #for blocking a user
   post '/api/v1/users/blocks/:id', to: 'api/v1/user_blocks#create' 
   #for getting users blocked
   get '/api/v1/users/blocked', to: 'api/v1/user_blocks#get_blocked_users'
   #for getting users blocked by
-  get '/api/v1/users/blockedby', to: 'api/v1/user_blocks#get_blocked_by'
+  get '/api/v1/users/blocked_by', to: 'api/v1/user_blocks#get_blocked_by'
   #for deleting user blocks
   delete '/api/v1/users/blocks/:id', to: 'api/v1/user_blocks#destroy'
-
 
   #EVENTS ROUTES
 
@@ -73,7 +66,6 @@ Rails.application.routes.draw do
   get '/api/v1/events/user/:user_id', to: 'api/v1/events#my_events'
   # edit an existing event
   post '/api/v1/events/:id', to: 'api/v1/events#update'
-
 
   #Post ROUTES
 
@@ -92,8 +84,7 @@ Rails.application.routes.draw do
       resources :users
     end
   end
-
-
+  
   namespace :api do
     namespace :v1 do
       resources :sessions
