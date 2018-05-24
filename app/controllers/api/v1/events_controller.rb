@@ -26,8 +26,8 @@ class Api::V1::EventsController < ApplicationController
 		event = Event.find(params[:id])
 		event.update(
 			title: params[:title],
-			photo: params[:img],
-			ticket_link: params[:ticketLink],
+			photo: params[:photo],
+			ticket_link: params[:ticket_link],
 			about: params[:description],
 			time: params[:time],
 			date: params[:date],
@@ -43,8 +43,8 @@ class Api::V1::EventsController < ApplicationController
 		event = Event.create(
 			user_id: params[:userId],
 			title: params[:title],
-			photo: params[:img],
-			ticket_link: params[:ticketLink],
+			photo: params[:photo],
+			ticket_link: params[:ticket_link],
 			about: params[:description],
 			time: params[:time],
 			date: params[:date],
