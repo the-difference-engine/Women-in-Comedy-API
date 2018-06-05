@@ -46,12 +46,11 @@ class Api::V1::ConnectionRequestsController < ApplicationController
     elsif ConnectionRequest.exists?(sender_id: params[:receiver_id], receiver_id: params[:sender_id])
 
     else
-
       connection_request = ConnectionRequest.create(
         sender_id: params[:sender_id],
         receiver_id: params[:receiver_id],
         status: false
-        )
+      )
 
       sender = User.find_by(id: params[:sender_id])
       receiver = User.find_by(id: params[:receiver_id])
@@ -59,22 +58,15 @@ class Api::V1::ConnectionRequestsController < ApplicationController
       Notification.create(
         user: sender,
         recipient: receiver,
-        # notifiable: receiver,
         action: "connection_request"
-        )
-      new_notification = Notification.last
-      p new_notification
-
-      # redirect_to action: "create_notification", controller: "v1/notifications", sender_id: params[:sender_id], receiver_id: params[:receiver_id], notifiable_type: "connection request"
+      )
 
       render json: connection_request.as_json
     end
   end
 
   def update
-    # current_user = request.headers['current_user'].to_i
     connection_request = ConnectionRequest.find_by(id: params[:id])
-    # unless connection_request.receiver_id == current_user
     connection_request.update(status: params[:status])
     connection_request.save
     render json: connection_request.as_json
@@ -101,12 +93,9 @@ class Api::V1::ConnectionRequestsController < ApplicationController
     Notification.create(
       user: connection_request_receiver,
       recipient: connection_request_sender,
-      # notifiable: sender,
       action: "connection_accepted"
-      )
+    )
 
     render json: connection.as_json
   end
-
-
 end

@@ -18,3 +18,7 @@
 .byebug_history
 .DS_Store
 .env
+
+# npm log files
+npm-debug.log
+.npm-debug.*

@@ -79,10 +79,8 @@ Rails.application.routes.draw do
   delete '/api/v1/guests/:id', to: 'api/v1/guests#destroy'
 
   #NOTIFICATION ROUTES
-  # post '/api/v1/notifications', to: 'api/v1/notifications#create_notification'
   #For getting user notifications
   get '/api/v1/notifications/:id', to: 'api/v1/notifications#get_notifications'
-
   get '/api/v1/notifications/mark_all_read/:id', to: 'api/v1/notifications#mark_all_as_read'
   put '/api/v1/notifications/mark_one/:user_id', to: 'api/v1/notifications#mark_one_as_read'
 
