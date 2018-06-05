@@ -46,12 +46,11 @@ class Api::V1::ConnectionRequestsController < ApplicationController
     elsif ConnectionRequest.exists?(sender_id: params[:receiver_id], receiver_id: params[:sender_id])
 
     else
-
       connection_request = ConnectionRequest.create(
         sender_id: params[:sender_id],
         receiver_id: params[:receiver_id],
         status: false
-        )
+      )
 
       sender = User.find_by(id: params[:sender_id])
       receiver = User.find_by(id: params[:receiver_id])
@@ -60,7 +59,7 @@ class Api::V1::ConnectionRequestsController < ApplicationController
         user: sender,
         recipient: receiver,
         action: "connection_request"
-        )
+      )
 
       render json: connection_request.as_json
     end
