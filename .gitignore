@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+.idea/
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -17,3 +18,7 @@
 .byebug_history
 .DS_Store
 .env
+
+# npm log files
+npm-debug.log
+.npm-debug.*

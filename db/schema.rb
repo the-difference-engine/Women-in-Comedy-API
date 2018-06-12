@@ -77,10 +77,9 @@ ActiveRecord::Schema.define(version: 20180417003314) do
     t.integer  "user_id"
     t.integer  "recipient_id"
     t.string   "action"
-    t.string   "notifiable_type"
-    t.integer  "notifiable_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.datetime "seen"
     t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree
   end
 

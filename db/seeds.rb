@@ -123,3 +123,33 @@ ConnectionRequest.create(
 	receiver_id: 4,
 	status: false
 )
+
+Notification.create(
+	user_id: 2,
+	recipient_id: 1,
+	action: "connection_request",
+	)
+
+Notification.create(
+	user_id: 2,
+	recipient_id: 3,
+	action: "connection_request",
+	)
+
+Notification.create(
+	user_id: 2,
+	recipient_id: 4,
+	action: "connection_request",
+	)
+
+	Notification.create(
+	user_id: 2,
+	recipient_id: 5,
+	action: "connection_request",
+	)
+
+	Notification.create(
+	user_id: 2,
+	recipient_id: 1,
+	action: "connection_request",
+	)
