@@ -29,6 +29,7 @@ class Api::V1::UsersController < ApplicationController
               firstName: user[:first_name],
               lastName: user[:last_name],
               id: user[:id],
+              email: user[:email],
               city: user[:city],
               training: user[:training],
               experience: user[:experience],
