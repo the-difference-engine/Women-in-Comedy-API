@@ -16,7 +16,8 @@ class Api::V1::UsersController < ApplicationController
         all_users = User.all
       else
         # If current user is not admin, return non-admin users only
-        all_users = User.where(admin: false)
+        # all_users = User.where(admin: false)
+        all_users = User.where(admin: false).where.not(id: UserBlock.blocked_users(current_user.id).pluck(:blocked_id) + UserBlock.blocker_users(current_user.id).pluck(:blocker_id) + [current_user.id])
       end
     else
       all_users = User.all
