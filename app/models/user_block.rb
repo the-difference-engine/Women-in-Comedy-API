@@ -3,13 +3,15 @@ class UserBlock < ApplicationRecord
   belongs_to :blocker, class_name: 'User', foreign_key: 'blocker_id'
   belongs_to :blocked, class_name: 'User', foreign_key: 'blocked_id'
   validate :unique_record
+  scope :blocked_users, ->(user_id) { where(blocker_id: user_id) }
+  scope :blocker_users, ->(user_id) { where(blocked_id: user_id) }
 
   after_create do
     connection_request = ConnectionRequest.where(sender_id: self.blocker_id, receiver_id: self.blocked_id).first
     if connection_request.present?
       connection_request.destroy
     end
-  else
+  # else
     connection_request = ConnectionRequest.where(sender_id: self.blocked_id, receiver_id: self.blocker_id).first
     if connection_request.present?
       connection_request.destroy
