@@ -25,9 +25,9 @@ class Api::V1::UsersController < ApplicationController
     users = []
 
     all_users.each do |user|
-      user = {email: user[:email],
-              firstName: user[:first_name],
+      user = {firstName: user[:first_name],
               lastName: user[:last_name],
+              admin: user[:admin],
               id: user[:id],
               email: user[:email],
               city: user[:city],
