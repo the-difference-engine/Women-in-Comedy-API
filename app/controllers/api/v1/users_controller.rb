@@ -138,6 +138,10 @@ class Api::V1::UsersController < ApplicationController
     # end
   end
 
+  def admin_mail
+    AdminMailer.email_all_users.deliver_now
+  end
+
   private
 
   def user_params
