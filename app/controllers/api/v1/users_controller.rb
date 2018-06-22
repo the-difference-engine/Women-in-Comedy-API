@@ -140,7 +140,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def admin_mail
-    AdminMailer.email_all_users.deliver_now
+    AdminMailer.email_all_users(params[:email]).deliver_now
   end
 
   private
