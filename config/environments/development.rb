@@ -66,16 +66,20 @@ Rails.application.configure do
   #   #     authentication: "plain",
   #   #     enable_starttls_auto: true
   #   # }
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'your-app-name.herokuapp.com',
-    user_name:            'testwomenincomedy@gmail.com',
-    password:             'womenincomedy',
-    authentication:       'plain',
-    enable_starttls_auto: true
-  }
+  # uncomment below to get previous settings to work
+  # ActionMailer::Base.delivery_method = :smtp
+  # ActionMailer::Base.smtp_settings = {
+  #   address:              'smtp.gmail.com',
+  #   port:                 587,
+  #   domain:               'your-app-name.herokuapp.com',
+  #   user_name:            'testwomenincomedy@gmail.com',
+  #   password:             'womenincomedy',
+  #   authentication:       'plain',
+  #   enable_starttls_auto: true
+  # }
 
+  # below is the info to test mailcatcher
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
 
 end
