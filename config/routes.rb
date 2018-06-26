@@ -51,7 +51,7 @@ Rails.application.routes.draw do
   #block incoming connection requests
   post '/api/v1/users/:id', to: 'api/v1/users#block_connection_requests'
   #admin sending email to all users
-  post '/api/v1/users/emails/mass_mail/:email', to: 'api/v1/users#admin_mail'
+  post '/api/v1/users/emails/mass_mail', to: 'api/v1/users#admin_mail'
 
 
   #EVENTS ROUTES
