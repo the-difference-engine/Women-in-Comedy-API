@@ -1,4 +1,6 @@
 class Api::V1::InviteRequestsController < ApplicationController
+    skip_before_action :verify_authenticity_token
+
     def get_invites
         id = request.headers['id'].to_i
 
