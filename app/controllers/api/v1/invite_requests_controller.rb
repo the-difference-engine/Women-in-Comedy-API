@@ -12,12 +12,12 @@ class Api::V1::InviteRequestsController < ApplicationController
 
         invites.each do |invite|
             if invite[:sender_id] == id
-                user = User.find_by(id: invite[:receiver_id])
-                user = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
+                user = User.find_by(id: invite.receiver_id)
+                user = {id: user.id, firstName: user.first_name, lastName: user.last_name}
                 user_array.push(user)
             else
-                user = User.find_by(id: invite[:sender_id])
-                user = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
+                user = User.find_by(id: invite.sender_id)
+                user = {id: user.id, firstName: user.first_name, lastName: user.last_name}
                 user_array.push(user)
             end
         end
@@ -34,9 +34,9 @@ class Api::V1::InviteRequestsController < ApplicationController
         invite_array = []
         
         pending_invites.each do |invite|
-            user = User.find_by(id: invite[:sender_id])
-            event = Event.find_by(id: invite[:event_id])
-            invite = {requestId: invite[:id], event: event[:title], senderId: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
+            user = User.find_by(id: invite.sender_id)
+            event = Event.find_by(id: invite.event_id)
+            invite = {requestId: invite.id, event: event.title, senderId: user.id, firstName: user.first_name, lastName: user.last_name}
             invite_array.push(invite)
         end
         render json: invite_array
@@ -81,10 +81,10 @@ class Api::V1::InviteRequestsController < ApplicationController
         invite.update(status: true)
         invite.save
         Guest.create(
-            event_id: invite[:event_id],
-            user_id: user[:id],
-            first_name: user[:first_name],
-            last_name: user[:last_name],
+            event_id: invite.event_id,
+            user_id: user.id,
+            first_name: user.first_name,
+            last_name: user.last_name,
         )
         render json: invite.as_json
     end
