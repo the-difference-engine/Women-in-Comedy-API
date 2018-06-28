@@ -6,6 +6,8 @@ class UserBlock < ApplicationRecord
   scope :blocked_users, ->(user_id) { where(blocker_id: user_id) }
   scope :blocker_users, ->(user_id) { where(blocked_id: user_id) }
 
+
+
   after_create do
     connection_request = ConnectionRequest.where(sender_id: self.blocker_id, receiver_id: self.blocked_id).first
     if connection_request.present?
@@ -21,7 +23,7 @@ class UserBlock < ApplicationRecord
   private
   def unique_record
     if UserBlock.exists?(blocker_id: self.blocker_id, blocked_id: self.blocked_id) || UserBlock.exists?(blocker_id: self.blocked_id, blocked_id: self.blocker_id)
-      return false
+      self.errors.add(:base, "User is already blocked")
     end 
   end
 end
