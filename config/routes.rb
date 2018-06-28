@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   # config/routes.rb
   mount ActionCable.server => '/cable'
+  resources :notifications
 
 
   #CONNECTIONS REQUEST ROUTES
@@ -76,6 +77,12 @@ Rails.application.routes.draw do
   #for creating a guest for a event
   post '/api/v1/guests', to: 'api/v1/guests#create'
   delete '/api/v1/guests/:id', to: 'api/v1/guests#destroy'
+
+  #NOTIFICATION ROUTES
+  #For getting user notifications
+  get '/api/v1/notifications/:id', to: 'api/v1/notifications#get_notifications'
+  get '/api/v1/notifications/mark_all_read/:id', to: 'api/v1/notifications#mark_all_as_read'
+  put '/api/v1/notifications/mark_one/:user_id', to: 'api/v1/notifications#mark_one_as_read'
 
   namespace :api do
     namespace :v1 do
