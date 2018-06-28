@@ -74,7 +74,7 @@ Rails.application.routes.draw do
   # get event by Id
   get '/api/v1/events/:id', to: 'api/v1/events#show'
   # get all upcoming events
-  get '/api/v1/events', to: 'api/v1/events#index'
+  get '/api/v1/events/admin_user/:admin_user', to: 'api/v1/events#index'
   #get all events made by a user
   get '/api/v1/events/user/:user_id', to: 'api/v1/events#my_events'
   # edit an existing event
