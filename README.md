@@ -11,7 +11,7 @@ The API is a Rails app running on Heroku.
 ## Running Locally
 
 With Postgres running, gems installed, and the DB setup (as described in
-[Setup](#setup), run:
+[Setup](#setup)), run:
 
 ```sh
 rails server -p 9000
@@ -58,12 +58,12 @@ git clone https://github.com/the-difference-engine/Women-in-Comedy-API.git
 cd Women-in-Comedy-API
 ```
 
-8. Bundler is a Ruby package manager, like npm. You'll need to install it:
+7. Bundler is a Ruby package manager, like npm. You'll need to install it:
 ```
 gem install bundler
 ```
 
-9. Bundler will use the Gemfile and Gemfile.lock to install the package versions
+8. Bundler will use the Gemfile and Gemfile.lock to install the package versions
 you need:
 ```sh
 bundle install
@@ -74,7 +74,7 @@ real-time protection in your anti-virus program. In the future, you may need to
 run `bundle install` again after `git pull`ing to install new and updated
 dependencies.
 
-10. Rake is a Ruby tool that allows you to execute pre-defined tasks. Here,
+9. Rake is a Ruby tool that allows you to execute pre-defined tasks. Here,
 we'll use it to create database tables and store some test data:
 ```sh
 rake db:setup
