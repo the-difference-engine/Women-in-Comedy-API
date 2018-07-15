@@ -50,6 +50,8 @@ Rails.application.routes.draw do
   delete '/api/v1/users/connections/:id', to: 'api/v1/connection_requests#destroy'
   #block incoming connection requests
   post '/api/v1/users/:id', to: 'api/v1/users#block_connection_requests'
+  #admin sending email to all users
+  post '/api/v1/users/emails/mass_mail', to: 'api/v1/users#admin_mail'
 
   #INVITE REQUEST ROUTES
 
