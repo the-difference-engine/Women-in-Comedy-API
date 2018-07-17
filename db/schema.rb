@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 20180508002958) do
     t.datetime "suspended_at"
     t.string   "suspension_reason"
     t.boolean  "suspended"
-    t.boolean  "superuser"
+    t.boolean  "superuser", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
