@@ -7,6 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.create(first_name: "Calvin", last_name: "Chan", email:"mrcalvinkc@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: 'less than 1 year', experience: '1-3 years')
 
+User.create(first_name: "Thor", last_name: "God of Thunder", email:"iamthor@gmail.com", password:"password", city: "Valhallas", about:"I like Thunder", gender: 'male', confirmed_at: '2017-11-17 02:36:15.130753', admin: true, superuser: true, training: 'less than 1 year', experience: '1-3 years')
+
 User.create(first_name: "DeMarcus", last_name: "Cousins", email:"dcousins@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: '4-7 years', experience: '11+ years')
 
 User.create(first_name: "Jim", last_name: "Sriracha", email:"jsriracha@gmail.com", password:"password", city: "Chicago", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, training: '7-10 years', experience: '11+ years')
