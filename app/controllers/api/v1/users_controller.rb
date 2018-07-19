@@ -33,7 +33,8 @@ class Api::V1::UsersController < ApplicationController
               city: user[:city],
               training: user[:training],
               experience: user[:experience],
-              gender: user[:gender]
+              gender: user[:gender],
+              superuser: user[:superuser]
       }
       users.push(user)
     end
@@ -62,7 +63,7 @@ class Api::V1::UsersController < ApplicationController
       meeting_options_hash[option.name.to_sym] = true;
     end
 
-    user_info = {email: user[:email], id: user[:id], firstName: user[:first_name], lastName: user[:last_name], admin: user[:admin], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests],
+    user_info = {email: user[:email], id: user[:id], firstName: user[:first_name], lastName: user[:last_name], admin: user[:admin], superuser: user[:superuser], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests],
                  city: user[:city],
                  training: user[:training],
                  experience: user[:experience],
