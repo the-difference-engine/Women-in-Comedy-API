@@ -13,7 +13,6 @@ class UserBlock < ApplicationRecord
     if connection_request.present?
       connection_request.destroy
     end
-  # else
     connection_request = ConnectionRequest.where(sender_id: self.blocked_id, receiver_id: self.blocker_id).first
     if connection_request.present?
       connection_request.destroy
