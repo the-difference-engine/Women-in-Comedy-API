@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180426000640) do
+ActiveRecord::Schema.define(version: 20180508002958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,11 +45,12 @@ ActiveRecord::Schema.define(version: 20180426000640) do
     t.string   "date"
     t.text     "ticket_link"
     t.text     "about"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "time"
     t.string   "location"
     t.string   "address"
+    t.boolean  "is_private",  default: false
   end
 
   create_table "guests", force: :cascade do |t|
@@ -59,6 +60,15 @@ ActiveRecord::Schema.define(version: 20180426000640) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "photo"
+    t.integer  "event_id"
+  end
+
+  create_table "invite_requests", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.boolean  "status"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "event_id"
   end
 
@@ -77,10 +87,9 @@ ActiveRecord::Schema.define(version: 20180426000640) do
     t.integer  "user_id"
     t.integer  "recipient_id"
     t.string   "action"
-    t.string   "notifiable_type"
-    t.integer  "notifiable_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.datetime "seen"
     t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree
   end
 

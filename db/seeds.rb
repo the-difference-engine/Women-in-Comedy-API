@@ -129,3 +129,32 @@ UserBlock.create(
   blocked_id: User.where(first_name: "DeMarcus", last_name: "Cousins").first.id
 )
 
+Notification.create(
+	user_id: 2,
+	recipient_id: 1,
+	action: "connection_request",
+	)
+
+Notification.create(
+	user_id: 2,
+	recipient_id: 3,
+	action: "connection_request",
+	)
+
+Notification.create(
+	user_id: 2,
+	recipient_id: 4,
+	action: "connection_request",
+	)
+
+	Notification.create(
+	user_id: 2,
+	recipient_id: 5,
+	action: "connection_request",
+	)
+
+	Notification.create(
+	user_id: 2,
+	recipient_id: 1,
+	action: "connection_request",
+	)

@@ -1,6 +1,10 @@
 class Api::V1::EventsController < ApplicationController
 	def index
-		events = Event.all
+		if params[:admin_user] == "true"
+			events = Event.all
+		else
+			events = Event.where(is_private: false)
+		end
 		render json: events
 	end
 
@@ -26,9 +30,9 @@ class Api::V1::EventsController < ApplicationController
 		event = Event.find(params[:id])
 		event.update(
 			title: params[:title],
-			photo: params[:img],
-			ticket_link: params[:ticketLink],
-			about: params[:description],
+			photo: params[:photo],
+			ticket_link: params[:ticket_link],
+			about: params[:about],
 			time: params[:time],
 			date: params[:date],
 			address: params[:address],
@@ -39,12 +43,13 @@ class Api::V1::EventsController < ApplicationController
 	end
 
 	def create
+		
 		event = Event.create(
 			user_id: params[:userId],
 			title: params[:title],
-			photo: params[:img],
-			ticket_link: params[:ticketLink],
-			about: params[:description],
+			photo: params[:photo],
+			ticket_link: params[:ticket_link],
+			about: params[:about],
 			time: params[:time],
 			date: params[:date],
 			address: params[:address],

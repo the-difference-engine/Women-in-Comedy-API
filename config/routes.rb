@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   # config/routes.rb
   mount ActionCable.server => '/cable'
+  resources :notifications
 
   #CONNECTIONS REQUEST ROUTES
 
@@ -53,6 +54,24 @@ Rails.application.routes.draw do
   get '/api/v1/users/blocked_by', to: 'api/v1/user_blocks#get_blocked_by'
   #for deleting user blocks
   delete '/api/v1/users/blocks/:id', to: 'api/v1/user_blocks#destroy'
+  #admin sending email to all users
+  post '/api/v1/users/emails/mass_mail', to: 'api/v1/users#admin_mail'
+
+  #INVITE REQUEST ROUTES
+
+  #for getting invites
+  get '/api/v1/invites', to: 'api/v1/invite_requests#get_invites'
+  #for getting pending invites
+  get '/api/v1/invites/pending_invites', to: 'api/v1/invite_requests#get_pending_invites'
+  #for creating new invites
+  post '/api/v1/invites', to: 'api/v1/invite_requests#create'
+  post '/api/v1/invites/status', to: 'api/v1/invite_requests#status'
+  #for accepting invites
+  post '/api/v1/invites/accept_invites', to: 'api/v1/invite_requests#accept'
+  #for updating invite status
+  patch '/ap1/v1/invites/invites/:id', to: 'api/v1/invite_requests#update'
+  #for declining invites
+  delete '/api/v1/invites/:id', to: 'api/v1/invite_requests#destroy'
 
   #EVENTS ROUTES
 
@@ -61,11 +80,11 @@ Rails.application.routes.draw do
   # get event by Id
   get '/api/v1/events/:id', to: 'api/v1/events#show'
   # get all upcoming events
-  get '/api/v1/events', to: 'api/v1/events#index'
+  get '/api/v1/events/admin_user/:admin_user', to: 'api/v1/events#index'
   #get all events made by a user
   get '/api/v1/events/user/:user_id', to: 'api/v1/events#my_events'
   # edit an existing event
-  post '/api/v1/events/:id', to: 'api/v1/events#update'
+  put '/api/v1/events/:id', to: 'api/v1/events#update'
 
   #Post ROUTES
 
@@ -78,6 +97,12 @@ Rails.application.routes.draw do
   #for creating a guest for a event
   post '/api/v1/guests', to: 'api/v1/guests#create'
   delete '/api/v1/guests/:id', to: 'api/v1/guests#destroy'
+
+  #NOTIFICATION ROUTES
+  #For getting user notifications
+  get '/api/v1/notifications/:id', to: 'api/v1/notifications#get_notifications'
+  get '/api/v1/notifications/mark_all_read/:id', to: 'api/v1/notifications#mark_all_as_read'
+  put '/api/v1/notifications/mark_one/:user_id', to: 'api/v1/notifications#mark_one_as_read'
 
   namespace :api do
     namespace :v1 do

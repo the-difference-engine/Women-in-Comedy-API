@@ -16,9 +16,6 @@ class User < ApplicationRecord
   :omniauthable,
   omniauth_providers: [:facebook]
 
-
-  # devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :suspendable, :confirmable,:omniauthable,:omniauth_providers => [:facebook]
-
   has_many :events
   has_many :posts, as: :postable
   has_and_belongs_to_many :oauth_credentials
@@ -55,6 +52,10 @@ class User < ApplicationRecord
   end
 
   def self.current_user
-  	@current_user
+	 @current_user
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 end

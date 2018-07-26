@@ -28,7 +28,9 @@ class Api::V1::UsersController < ApplicationController
     all_users.each do |user|
       user = {firstName: user[:first_name],
               lastName: user[:last_name],
+              admin: user[:admin],
               id: user[:id],
+              email: user[:email],
               city: user[:city],
               training: user[:training],
               experience: user[:experience],
@@ -61,7 +63,7 @@ class Api::V1::UsersController < ApplicationController
       meeting_options_hash[option.name.to_sym] = true;
     end
 
-    user_info = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name], admin: user[:admin], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests],
+    user_info = {email: user[:email], id: user[:id], firstName: user[:first_name], lastName: user[:last_name], admin: user[:admin], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests],
                  city: user[:city],
                  training: user[:training],
                  experience: user[:experience],
@@ -136,6 +138,10 @@ class Api::V1::UsersController < ApplicationController
     user.update(suspended: false)
     render json: user.as_json(only: [:id, :suspended])
     # end
+  end
+
+  def admin_mail
+    AdminMailer.email_all_users(params[:email], params[:subject]).deliver_now
   end
 
   private
