@@ -18,6 +18,7 @@ class Api::V1::UsersController < ApplicationController
         # If current user is not admin, return non-admin users only
         all_users = User.where(admin: false)
       end
+      
     else
       all_users = User.all
     end
@@ -147,6 +148,6 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:email, :password, :first_name, :last_name, :city, :website, :video_link, :gender, :training, :experience, :admin, :photo, :birthDate, :about, :superuser, meet_option_users_attributes: [])
+    params.permit(:email, :password, :first_name, :last_name, :city, :website, :video_link, :gender, :training, :experience, :admin, :superuser, :photo, :birthDate, :about, :superuser, meet_option_users_attributes: [])
   end
 end

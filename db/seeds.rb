@@ -21,7 +21,7 @@ User.create(first_name: "Christina", last_name: "Durant", email:"cdurant@gmail.c
 
 User.create(first_name: "Luna", last_name: "Hassen", email:"luna@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'female', confirmed_at: '2017-10-17 02:26:15.130453', admin: true, superuser: false, training: 'less than 1 year', experience: '1-3 years')
 
-User.create(first_name: "David", last_name: "Taylor", email:"david@gmail.com", password:"password", city: "bay area", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, superuser: false, training: '7-10 years', experience: '1-3 years')
+User.create(first_name: "David", last_name: "Taylor", email:"david@gmail.com", password:"password", city: "bay area", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: true, superuser: false, training: '7-10 years', experience: '1-3 years')
 
 User.create(first_name: "Marry", last_name: "Hoya", email:"marry@gmail.com", password:"password", city: "oakland", about:"I like apples", gender: 'female', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, superuser: false, training: 'less than 1 year', experience: '1-3 years')
 
