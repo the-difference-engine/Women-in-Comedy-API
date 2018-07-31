@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get '/api/v1/users/info', to: 'api/v1/users#fetch_user_info'
   #for getting users feed
   get '/api/v1/users/feed', to: 'api/v1/users#fetch_user_feed'
+  #for getting each feed's comments
+  get '/api/v1/users/feed/comments', to: 'api/v1/comments#fetch_post_comments'
 
   #Suspension
   post '/api/v1/users/suspend' => 'api/v1/users#suspend'
@@ -88,6 +90,7 @@ Rails.application.routes.draw do
   #for creating a post
   post '/api/v1/posts', to: 'api/v1/posts#create'
   post '/api/v1/posts/event', to: 'api/v1/posts#event_post'
+  post '/api/v1/posts/comments', to: 'api/v1/comments#create'
 
   #GUESTS ROUTES
 

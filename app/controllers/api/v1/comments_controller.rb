@@ -15,6 +15,18 @@ class Api::V1::CommentsController < ApplicationController
 		render json: comment
 	end
 
+	def fetch_post_comments
+		id = request_headers['id'].to_i
+		post = Post.find_by(id: id)
+		comments = []
+		post.comments.each do |comment|
+			author = comment.author
+			new_comment = {postId: comment[:id], body: comment[:body], authorId: author[:id]}
+			comments.push(new_comment)
+		end
+		render json: comments.reverse
+	end
+
 end
 
 
