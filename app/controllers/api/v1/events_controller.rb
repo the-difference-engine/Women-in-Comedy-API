@@ -36,7 +36,8 @@ class Api::V1::EventsController < ApplicationController
 			time: params[:time],
 			date: params[:date],
 			address: params[:address],
-			location: params[:location]
+			location: params[:location],
+			is_private: params[:is_private]
 		)
 		render json: event[:id]
 
@@ -53,7 +54,8 @@ class Api::V1::EventsController < ApplicationController
 			time: params[:time],
 			date: params[:date],
 			address: params[:address],
-			location: params[:location]
+			location: params[:location],
+			is_private: params[:is_private]
 		)
 		render json: event[:id]
 	end
