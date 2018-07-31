@@ -5,6 +5,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :meet_option_users
   #user has many chat chat_messages
   has_many :chat_messages
+  has_and_belongs_to_many :conversations
 
   devise :database_authenticatable,
   :registerable,
