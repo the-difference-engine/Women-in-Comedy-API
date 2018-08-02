@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   #for getting users feed
   get '/api/v1/users/feed', to: 'api/v1/users#fetch_user_feed'
   #for getting each feed's comments
-  get '/api/v1/users/feed/comments', to: 'api/v1/comments#fetch_post_comments'
+  get '/api/v1/feed/comments', to: 'api/v1/comments#fetch_post_comments'
 
   #Suspension
   post '/api/v1/users/suspend' => 'api/v1/users#suspend'
