@@ -23,7 +23,11 @@ class Api::V1::CommentsController < ApplicationController
 		comments = []
 		post.comments.each do |comment|
 			author = comment.author
-			new_comment = {postId: comment[:post_id], body: comment[:body], authorId: author[:id]}
+			new_comment = {id: comment[:id],
+			               postId: comment[:post_id], 
+						   body: comment[:body], 
+						   authorFirstName: author[:first_name], 
+						   authorLastName: author[:last_name]}
 			comments.push(new_comment)
 		end
 		render json: comments.reverse
