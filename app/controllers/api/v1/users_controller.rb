@@ -33,8 +33,8 @@ class Api::V1::UsersController < ApplicationController
               city: user[:city],
               training: user[:training],
               experience: user[:experience],
-			  gender: user[:gender],
-			  public_figure: user[:public_figure]
+			        gender: user[:gender],
+			        public_figure: user[:public_figure]
       }
       users.push(user)
     end
