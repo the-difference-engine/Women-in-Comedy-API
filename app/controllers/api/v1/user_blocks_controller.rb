@@ -45,6 +45,8 @@ class Api::V1::UserBlocksController < ApplicationController
   end
   def destroy
     block = UserBlock.find_by(id: params[:id])
-    block.destroy
+    if block.exists?
+      block.destroy
+    end 
   end
 end
