@@ -11,9 +11,9 @@ class Api::V1::UserBlocksController < ApplicationController
     user_array = []
     #each through the blockers and push the user to the user_array
     blockers.each do |block|
-        user = User.find_by(id: block[:blocked_id])
-        user = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
-        user_array.push(user)
+      user = User.find_by(id: block[:blocked_id])
+      user = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
+      user_array.push(user)
     end
     blocked_bys.each do |block|
       user = User.find_by(id: block[:blocker_id])
@@ -30,23 +30,21 @@ class Api::V1::UserBlocksController < ApplicationController
     user_array = []
     #each through the blocks and push the user to the user_array
     blocks.each do |block|
-        user = User.find_by(id: block[:blocker_id])
-        user = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
-        user_array.push(user)
-      end
+      user = User.find_by(id: block[:blocker_id])
+      user = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
+      user_array.push(user)
+    end
     render json: user_array
   end
   def create
     block = UserBlock.create(
       blocker_id: params[:blocker_id],
       blocked_id: params[:blocked_id]
-    )
-    render json: block.as_json
+      )
+      render json: block.as_json
+    end
+    def destroy
+      block = UserBlock.find_by(id: params[:id])
+      block.destroy if block.present?
+    end
   end
-  def destroy
-    block = UserBlock.find_by(id: params[:id])
-    if block.exists?
-      block.destroy
-    end 
-  end
-end
