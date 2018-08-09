@@ -3,9 +3,7 @@ class Api::V1::UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    # # Get current user logged in
-    # log_user  = User.current_user
-    # log_in log_user
+    # get current user logged in
     log_in User.current_user
     current_user = User.current_user
     all_users = []
@@ -16,7 +14,6 @@ class Api::V1::UsersController < ApplicationController
         all_users = User.all
       else
         # If current user is not admin, return non-admin users only
-        # all_users = User.where(admin: false)
         all_users = User.where(admin: false).where.not(id: UserBlock.blocked_users(current_user.id).pluck(:blocked_id) + UserBlock.blocker_users(current_user.id).pluck(:blocker_id) + [current_user.id])
       end
     else
@@ -79,7 +76,6 @@ class Api::V1::UsersController < ApplicationController
   def fetch_user_feed
     id = request.headers['id'].to_i
     user = User.find_by(id: id)
-    # post = user.posts[0]
     users_feed = []
     user.posts.each do |post|
       author = post.author
@@ -105,12 +101,6 @@ class Api::V1::UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     user.delete
-
-    # @users = User.all
-    # render 'index.json.jbuilder'
-
-    # UsersController.index
-    #needs testing
   end
   
   def resend_confirmation_instructions
@@ -131,13 +121,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def unsuspend
-    # if current_user
     id = request.headers['id'].to_i
     user = User.find_by(id: id)
     user.unsuspend!
     user.update(suspended: false)
     render json: user.as_json(only: [:id, :suspended])
-    # end
   end
 
   def admin_mail
