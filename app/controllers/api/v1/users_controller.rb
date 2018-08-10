@@ -82,7 +82,19 @@ class Api::V1::UsersController < ApplicationController
     users_feed = []
     user.posts.each do |post|
       author = post.author
-      feed = {postId: post[:id], body: post[:body], authorId: author[:id], authorFirstName: author[:first_name]}
+      #fetch comments for each post
+      post_comments = []
+		  post.comments.each do |comment|
+			  author = comment.author
+			  new_comment = {id: comment[:id],
+			                 postId: comment[:post_id], 
+						           body: comment[:body], 
+						           authorFirstName: author[:first_name], 
+						          authorLastName: author[:last_name]}
+			  post_comments.push(new_comment)
+		  end
+      feed = {postId: post[:id], body: post[:body], authorId: author[:id], authorFirstName: author[:first_name],
+              postType: post[:postable_type], comments: post_comments.reverse}
       users_feed.push(feed)
     end
     render json: users_feed.reverse
