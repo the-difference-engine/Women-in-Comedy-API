@@ -40,8 +40,8 @@ Rails.application.configure do
   # config.action_cable.url = 'wss://qa-womenincomedy.herokuapp.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://localhost:3000/', /http:\/\/example.*/ ]
   # ActionCable.server.config.disable_request_forgery_protection = true
-  config.action_cable.allowed_request_origins = ['http://localhost:3000/','https://frontend-qa-women-in-comedy.herokuapp.com']
-  config.action_cable.url = 'wss://qa-womenincomedy.herokuapp.com/cable'
+  config.action_cable.allowed_request_origins = ['https://qa-womenincomedy-api.herokuapp.com']
+  config.action_cable.url = 'wss://qa-womenincomedy-api.herokuapp.com/cable'
   # config.action_cable.allowed_request_origins = [
   #   'https://peaceful-basin-31856.herokuapp.com' ]
 
