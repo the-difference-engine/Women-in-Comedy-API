@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApplicationController
     if current_user
       #if current loggin user is admin, return all users
       if current_user.admin
-        all_users = User.all
+        all_users = User.order(:first_name)
       else
         # If current user is not admin, return non-admin users only
         all_users = User.where(admin: false)
