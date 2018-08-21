@@ -7,25 +7,14 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module WomenInComedyApi
-
-    class Application < Rails::Application
-      config.middleware.insert_before 0, Rack::Cors do
-        allow do
+  class Application < Rails::Application
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
         origins '*'
-        resource '*', headers: :any, methods: %I[get post put patch delete options]
-          end
-        end
-
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-        address: "smtp.gmail.com",
-        port: 587,
-        domain: "gmail.com",
-        user_name: 'testwomenincomedy@gmail.com',
-        password: 'womenincomedy',
-        authentication: "plain",
-        enable_starttls_auto: true
-    }
-
+        resource '*',
+          headers: :any,
+          methods: %i(get post put patch delete options)
+      end
+    end
   end
 end
