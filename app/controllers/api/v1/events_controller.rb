@@ -17,12 +17,12 @@ class Api::V1::EventsController < ApplicationController
 			#fetch comments for each post
 			post_comments = []
 			post.comments.each do |comment|
-				author = comment.author
+				commentAuthor = comment.author
 				new_comment = {id: comment[:id],
 							   postId: comment[:post_id], 
 							   body: comment[:body], 
-							   authorFirstName: author[:first_name], 
-							   authorLastName: author[:last_name]}
+							   authorFirstName: commentAuthor[:first_name], 
+							   authorLastName: commentAuthor[:last_name]}
 				post_comments.push(new_comment)
 			end
 			event_post = { postId: post[:id], body: post[:body], authorId: author[:id], authorFirstName: author[:first_name],
