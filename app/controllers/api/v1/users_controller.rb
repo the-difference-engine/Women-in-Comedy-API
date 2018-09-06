@@ -63,14 +63,23 @@ class Api::V1::UsersController < ApplicationController
       meeting_options_hash[option.name.to_sym] = true;
     end
 
-    user_info = {email: user[:email], id: user[:id], firstName: user[:first_name], lastName: user[:last_name], admin: user[:admin], superuser: user[:superuser], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests],
-                 city: user[:city],
-                 training: user[:training],
-                 experience: user[:experience],
-                 website: user[:website],
-                 video: user[:video_link],
-                 meeting_options: meeting_options_hash,
-                 suspended: user[:suspended]
+    user_info = {
+      email: user[:email], 
+      id: user[:id], 
+      firstName: user[:first_name], 
+      lastName: user[:last_name], 
+      admin: user[:admin], 
+      superuser: user[:superuser], 
+      bio: user[:about], 
+      photo: user[:photo], 
+      block_connection_requests: user[:block_connection_requests],
+      city: user[:city],
+      training: user[:training],
+      experience: user[:experience],
+      website: user[:website],
+      video: user[:video_link],
+      meeting_options: meeting_options_hash,
+      suspended: user[:suspended]
     }
 
     render json: user_info
