@@ -56,6 +56,7 @@ brew services start postgresql
 ```sh
 git clone https://github.com/the-difference-engine/Women-in-Comedy-API.git
 cd Women-in-Comedy-API
+git checkout qa
 ```
 
 7. Bundler is a Ruby package manager, like npm. You'll need to install it:
