@@ -32,7 +32,7 @@ brew install rvm
 3. Use your Ruby management tool to install the Ruby version used by this
 project:
 ```sh
-rvm install 2.4.4
+rvm install 2.5.1
 ```
 
 4. Install postgres:
