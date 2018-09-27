@@ -28,7 +28,7 @@ class Api::V1::UsersController < ApplicationController
       user = {firstName: user[:first_name],
               lastName: user[:last_name],
               admin: user[:admin],
-              superuser:user[:superuser],
+              superadmin:user[:superadmin],
               id: user[:id],
               email: user[:email],
               city: user[:city],
@@ -63,7 +63,7 @@ class Api::V1::UsersController < ApplicationController
       meeting_options_hash[option.name.to_sym] = true;
     end
 
-    user_info = {email: user[:email], id: user[:id], firstName: user[:first_name], lastName: user[:last_name], admin: user[:admin], superuser: user[:superuser], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests],
+    user_info = {email: user[:email], id: user[:id], firstName: user[:first_name], lastName: user[:last_name], admin: user[:admin], superadmin: user[:superadmin], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests],
                  city: user[:city],
                  training: user[:training],
                  experience: user[:experience],
@@ -147,6 +147,6 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:email, :password, :first_name, :last_name, :city, :website, :video_link, :gender, :training, :experience, :admin, :photo, :birthDate, :about, :superuser, meet_option_users_attributes: [])
+    params.permit(:email, :password, :first_name, :last_name, :city, :website, :video_link, :gender, :training, :experience, :admin, :photo, :birthDate, :about, :superadmin, meet_option_users_attributes: [])
   end
 end
