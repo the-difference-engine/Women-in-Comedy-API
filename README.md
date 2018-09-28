@@ -32,7 +32,7 @@ brew install rvm
 3. Use your Ruby management tool to install the Ruby version used by this
 project:
 ```sh
-rvm install 2.4.4
+rvm install 2.5.1
 ```
 
 4. Install postgres:
@@ -56,6 +56,7 @@ brew services start postgresql
 ```sh
 git clone https://github.com/the-difference-engine/Women-in-Comedy-API.git
 cd Women-in-Comedy-API
+git checkout qa
 ```
 
 7. Bundler is a Ruby package manager, like npm. You'll need to install it:
