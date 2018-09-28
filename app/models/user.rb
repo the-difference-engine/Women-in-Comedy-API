@@ -41,6 +41,7 @@ class User < ApplicationRecord
 
   def meet_option_users_attributes=(params)
     params.each do |meet_option_id|
+      # TODO: Check the linter error on this
       self.meet_option_users.build(meet_option_id: meet_option_id)
     end
   end
