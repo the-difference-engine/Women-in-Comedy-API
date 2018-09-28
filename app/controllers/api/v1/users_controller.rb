@@ -10,7 +10,7 @@ class Api::V1::UsersController < ApplicationController
     all_users = []
 
     if current_user
-      # if current  user is admin, return all users
+      # if current user is admin, return all users
       if current_user.admin
         all_users = User.order(:first_name)
       else
@@ -25,7 +25,7 @@ class Api::V1::UsersController < ApplicationController
 
     users = []
 
-    # TODO: It's been a minute since I did Rails, but there's no way in hell this is how they do serialization.
+    # TODO: It's been a minute since I did Rails, but I don't believe this is how they recommend doing serialization.
     all_users.each do |user|
       user = {
         firstName: user[:first_name],
@@ -71,7 +71,7 @@ class Api::V1::UsersController < ApplicationController
       meeting_options_hash[option.name.to_sym] = true
     end
 
-    # TODO: Ibid.
+    # TODO: Fix serialization
     user_info = {
       email: user[:email],
       id: user[:id],
@@ -99,7 +99,7 @@ class Api::V1::UsersController < ApplicationController
     id = request.headers['id'].to_i
     user = User.find_by(id: id)
     users_feed = []
-    # TODO: Ibid.
+    # TODO: Fix serialization
     user.posts.each do |post|
       author = post.author
       feed = {
