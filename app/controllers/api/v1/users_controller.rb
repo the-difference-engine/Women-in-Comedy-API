@@ -2,6 +2,7 @@ class Api::V1::UsersController < ApplicationController
   # before_action :authenticate_user!, only: [:index]
   skip_before_action :verify_authenticity_token
 
+  # TODO: Reduce ABC score
   def index
     log_in User.current_user
     # TODO: I think Rails has a better way of getting the current user
@@ -59,6 +60,7 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  # TODO: Reduce ABC score
   def fetch_user_info
     id = request.headers['id'].to_i
     session[:user_id] = id
@@ -92,6 +94,7 @@ class Api::V1::UsersController < ApplicationController
     render json: user_info
   end
 
+  # TODO: Reduce ABC score
   def fetch_user_feed
     id = request.headers['id'].to_i
     user = User.find_by(id: id)
