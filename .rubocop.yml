@@ -1,5 +1,10 @@
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+
 Metrics/LineLength:
   Max: 120
 
 Metrics/MethodLength: 
   Max: 20
+
