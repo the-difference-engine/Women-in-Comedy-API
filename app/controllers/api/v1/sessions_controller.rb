@@ -1,24 +1,27 @@
 class Api::V1::SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token
+
   def create
     user = User.where(email: params[:email]).first
-    if user && user.valid_password?(params[:password]) 
+    if user && user.valid_password?(params[:password])
+      head(:unauthorized) if user.suspended?
+      # TODO: Fix this current user assignment
       User.current_user = user
       request.env['warden'].set_user(user)
-      render json: user.as_json(only: [:id, :admin, :email, :confirmed_at])
-      if user.suspended?
-        head(:unauthorized)
-      end
-    else
-      head(:unauthorized)
+      render json: user.as_json(only: %i[id admin email confirmed_at])
     end
+    head(:unauthorized)
   end
 
   def destroy
+    # TODO: Is there any cost to just logging out? I suspect log_out is idempotent.
     if User.current_user
       log_out
+      # TODO: We gotta stop doing this
       User.current_user = nil
-      render json: {logout_message: 'Successfully logged out!'}
+      render json: {
+        logout_message: 'Successfully logged out!'
+      }
     end
   end
 end

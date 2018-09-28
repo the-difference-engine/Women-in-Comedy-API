@@ -1,65 +1,73 @@
+# TODO: All of the serialization & DB interactions here needs to be cleaned up
 class Api::V1::EventsController < ApplicationController
-	def index
-		if params[:admin_user] == "true"
-			events = Event.all
-		else
-			events = Event.where(is_private: false)
-		end
-		render json: events
-	end
+  def index
+    if params[:admin_user] == 'true'
+      events = Event.all
+    else
+      events = Event.where(is_private: false)
+    end
+    render json: events
+  end
 
-	def show
-		event = Event.find_by(id: params[:id])
-		guests = event.guests
-		posts = []
-		event.posts.each do |post|
-			author = post.author
-			event_post = { postId: post[:id], body: post[:body], authorId: author[:id], authorFirstName: author[:first_name] }
-			posts.push(event_post)
-		end
-		event = {info: event, guests: guests, posts: posts.reverse}
-		render json: event
-	end
+  def show
+    event = Event.find_by(id: params[:id])
+    guests = event.guests
+    posts = []
+    event.posts.each do |post|
+      author = post.author
+      event_post = {
+        postId: post[:id],
+        body: post[:body],
+        authorId: author[:id],
+        authorFirstName: author[:first_name]
+      }
+      posts.push(event_post)
+    end
+    event = {
+      info: event,
+      guests: guests,
+      posts: posts.reverse
+    }
+    render json: event
+  end
 
-	def my_events
-		events = Event.where(user_id: params[:user_id])
-		render json: events
-	end
+  def my_events
+    events = Event.where(user_id: params[:user_id])
+    render json: events
+  end
 
-	def update
-		event = Event.find(params[:id])
-		event.update(
-			title: params[:title],
-			photo: params[:photo],
-			ticket_link: params[:ticket_link],
-			about: params[:about],
-			time: params[:time],
-			date: params[:date],
-			address: params[:address],
-			location: params[:location]
-		)
-		render json: event[:id]
+  def update
+    event = Event.find(params[:id])
+    event.update(
+      title: params[:title],
+      photo: params[:photo],
+      ticket_link: params[:ticket_link],
+      about: params[:about],
+      time: params[:time],
+      date: params[:date],
+      address: params[:address],
+      location: params[:location]
+    )
+    render json: event[:id]
+  end
 
-	end
+  def create
+    event = Event.create(
+      user_id: params[:userId],
+      title: params[:title],
+      photo: params[:photo],
+      ticket_link: params[:ticket_link],
+      about: params[:about],
+      time: params[:time],
+      date: params[:date],
+      address: params[:address],
+      location: params[:location]
+    )
+    render json: event[:id]
+  end
 
-	def create
-		
-		event = Event.create(
-			user_id: params[:userId],
-			title: params[:title],
-			photo: params[:photo],
-			ticket_link: params[:ticket_link],
-			about: params[:about],
-			time: params[:time],
-			date: params[:date],
-			address: params[:address],
-			location: params[:location]
-		)
-		render json: event[:id]
-	end
-
-	def destroy
-		event = Event.find(params[:id])
-		event.destroy
-	end
+  def destroy
+    event = Event.find(params[:id])
+    event.destroy
+  end
 end

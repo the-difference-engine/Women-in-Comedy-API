@@ -1,50 +1,51 @@
 class Api::V1::ConnectionRequestsController < ApplicationController
   skip_before_action :verify_authenticity_token
+
+  # TODO: Rename this & reduce ABC score
   def get_connections
     id = request.headers['id'].to_i
-    #query connection request where sender_id or receiver_id is equal to user Id.
     connections = ConnectionRequest.where(sender_id: id).or(ConnectionRequest.where(receiver_id: id))
-    #query connection where status is equal to connected
     connections = connections.where(status: true)
-    #declare an array for all the connected users
     user_array = []
-    #each through the connections and push the user to the user_array
     connections.each do |connection|
       if connection[:sender_id] == id
         user = User.find_by(id: connection[:receiver_id])
-        user = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
-        user_array.push(user)
       else
         user = User.find_by(id: connection[:sender_id])
-        user = {id: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
-        user_array.push(user)
       end
+      user = {
+        id: user[:id],
+        firstName: user[:first_name],
+        lastName: user[:last_name]
+      }
+      user_array.push(user)
     end
     render json: user_array
   end
 
+  # TODO: Rename this & reduce ABC score
   def get_pending_connections
     id = request.headers['id'].to_i
-    #query connection request where sender_id or receiver_id is equal to user Id.
     connections = ConnectionRequest.where(receiver_id: id)
-    #query connection where status is equal to pending
     pending_connections = connections.where(status: false)
-    #declare an array for all the pending users
     user_array = []
-    #each through the users and push to the user_array
     pending_connections.each do |connection|
-        user = User.find_by(id: connection[:sender_id])
-        user = {requestId: connection[:id], senderId: user[:id], firstName: user[:first_name], lastName: user[:last_name]}
-        user_array.push(user)
+      user = User.find_by(id: connection[:sender_id])
+      user = {
+        requestId: connection[:id],
+        senderId: user[:id],
+        firstName: user[:first_name],
+        lastName: user[:last_name]
+      }
+      user_array.push(user)
     end
     render json: user_array
   end
 
+  # TODO: Reduce ABC score
   def create
-    if ConnectionRequest.exists?(sender_id: params[:sender_id], receiver_id:params[:receiver_id])
-
+    if ConnectionRequest.exists?(sender_id: params[:sender_id], receiver_id: params[:receiver_id])
     elsif ConnectionRequest.exists?(sender_id: params[:receiver_id], receiver_id: params[:sender_id])
-
     else
       connection_request = ConnectionRequest.create(
         sender_id: params[:sender_id],
@@ -58,7 +59,7 @@ class Api::V1::ConnectionRequestsController < ApplicationController
       Notification.create(
         user: sender,
         recipient: receiver,
-        action: "connection_request"
+        action: 'connection_request'
       )
 
       render json: connection_request.as_json
@@ -78,10 +79,20 @@ class Api::V1::ConnectionRequestsController < ApplicationController
   end
 
   def status
-    connection = ConnectionRequest.where(sender_id: params[:sender_id], receiver_id: params[:receiver_id]).or(ConnectionRequest.where(sender_id: params[:receiver_id], receiver: params[:sender_id]))
+    # TODO: There has to be a simpler way to do this
+    connection = ConnectionRequest.where(
+      sender_id: params[:sender_id],
+      receiver_id: params[:receiver_id]
+    ).or(
+      ConnectionRequest.where(
+        sender_id: params[:receiver_id],
+        receiver: params[:sender_id]
+      )
+    )
     render json: connection[0]
   end
 
+  # TODO: Reduce ABC score
   def accept
     connection = ConnectionRequest.find_by(sender_id: params[:sender_id], receiver_id: params[:receiver_id])
     connection.update(status: true)
@@ -93,7 +104,7 @@ class Api::V1::ConnectionRequestsController < ApplicationController
     Notification.create(
       user: connection_request_receiver,
       recipient: connection_request_sender,
-      action: "connection_accepted"
+      action: 'connection_accepted'
     )
 
     render json: connection.as_json

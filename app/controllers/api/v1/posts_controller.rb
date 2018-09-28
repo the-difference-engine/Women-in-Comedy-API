@@ -1,54 +1,45 @@
 class Api::V1::PostsController < ApplicationController
-	protect_from_forgery prepend: true
-	def index
-		@posts = Post.all
+  protect_from_forgery prepend: true
 
-		render 'index.json.jbuilder'
-	end
+  def index
+    @posts = Post.all
+    render 'index.json.jbuilder'
+  end
 
-	def show
-		@post = Post.find(params[:id])
+  def show
+    @post = Post.find(params[:id])
+    render 'show.json.jbuilder'
+  end
 
-		render 'show.json.jbuilder'
-	end
+  def update
+    @post = Post.find(params[:id])
+    # TODO: This was broken; now it's probably broken in a different way
+    @post.update(params)
+    render 'show.json.jbuilder'
+  end
 
-	def update
-		@post = Post.find(params[:id])
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+  end
 
-		@post.update(
-			# host_id: params[:host_id],
-			# title: params[:title],
-			# photo: params[:photo],
-			# date: params[:date],
-			# ticket_link: params[:ticket_link],
-			# about: params[:about]
-		)
+  def create
+    # TODO: We should just be able to pass params here
+    post = Post.create(
+      body: params[:body],
+      postable_id: params[:userId],
+      postable_type: 'User',
+      author_id: params[:authorId]
+    )
+    render json: post
+  end
 
-		render 'show.json.jbuilder'
-	end
-
-	def destroy
-		post = Post.find(params[:id])
-		post.destroy
-	end
-
-	def create
-		post = Post.create(
-			body: params[:body],
-			postable_id: params[:userId],
-			postable_type: 'User',
-			author_id: params[:authorId]
-		)
-		render json: post
-	end
-
-	def event_post
-		post = Post.create(
-			body: params[:body],
-			postable_id: params[:eventId],
-			postable_type: 'Event',
-			author_id: params[:authorId]
-		)
-	end
-
+  def event_post
+    Post.create(
+      body: params[:body],
+      postable_id: params[:eventId],
+      postable_type: 'Event',
+      author_id: params[:authorId]
+    )
+  end
 end

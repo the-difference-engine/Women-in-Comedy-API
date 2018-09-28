@@ -1,5 +1,4 @@
 class Api::V1::NotificationsController < ApplicationController
-  # before_action :authenticate_user!
   skip_before_action :verify_authenticity_token
 
   def index
@@ -19,6 +18,7 @@ class Api::V1::NotificationsController < ApplicationController
     render 'get_notifications.json.jbuilder'
   end
 
+  # TODO: rename this
   def get_notifications
     @notifications = Notification.where(recipient_id: params[:id])
     render 'get_notifications.json.jbuilder'

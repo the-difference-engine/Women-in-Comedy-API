@@ -1,6 +1,6 @@
 class Api::V1::MeetOptionsController < ApplicationController
   def index
-    meetOptions = MeetOption.all
-    render json: meetOptions
+    meet_options = MeetOption.all
+    render json: meet_options
   end
 end
