@@ -9,11 +9,11 @@ module ApplicationCable
     protected
 
     def find_verified_user
-      if verified_user = User.find_by(id: 5)
-          verified_user
+      if verified_user == User.find_by(id: 5)
+        verified_user
       else
         reject_unauthorized_connection
       end
-   end
+    end
   end
 end
