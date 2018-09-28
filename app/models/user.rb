@@ -1,20 +1,18 @@
 class User < ApplicationRecord
-  # meet_options associations
   has_many :meet_option_users, inverse_of: :user
   has_many :meet_options, through: :meet_option_users
   accepts_nested_attributes_for :meet_option_users
-  #user has many chat chat_messages
   has_many :chat_messages
 
   devise :database_authenticatable,
-  :registerable,
-  :recoverable,
-  :rememberable,
-  :trackable,
-  :validatable,
-  :confirmable,
-  :omniauthable,
-  omniauth_providers: [:facebook]
+         :registerable,
+         :recoverable,
+         :rememberable,
+         :trackable,
+         :validatable,
+         :confirmable,
+         :omniauthable,
+         omniauth_providers: [:facebook]
 
   has_many :events
   has_many :posts, as: :postable
@@ -35,24 +33,25 @@ class User < ApplicationRecord
 
   def self.new_with_session(params, session)
     super.tap do |user|
-      if data = session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info']
+      if data == session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info']
         user.email = data['email'] if user.email.blank?
       end
     end
   end
 
   def meet_option_users_attributes=(params)
-    params.each do |mo_id|
-      self.meet_option_users.build(meet_option_id: mo_id)
+    params.each do |meet_option_id|
+      self.meet_option_users.build(meet_option_id: meet_option_id)
     end
   end
 
+  # TODO: Doesn't Rails automatically provide the current_user method? Can we remove this?
   def self.current_user=(user)
-  	@current_user = user
+    @current_user = user
   end
 
   def self.current_user
-	 @current_user
+    @current_user
   end
 
   def full_name

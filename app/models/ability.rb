@@ -30,12 +30,12 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
     alias_action :create, :read, :update, :destroy, to: :crud
     cannot :create, Sessions, user.suspended?
-    if user.present? 
-        can :crud, User, id: user.id
-        if user.admin?
-            can :manage, :all
-        end
+    # TODO: Fix these conditionals
+    if user.present?
+      can :crud, User, id: user.id
+      if user.admin?
+        can :manage, :all
+      end
     end
-
   end
 end
