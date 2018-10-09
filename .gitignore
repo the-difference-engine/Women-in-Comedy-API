@@ -19,8 +19,6 @@
 .DS_Store
 .env
 
-# npm log files
+# Ignore npm log files
 npm-debug.log
 .npm-debug.*
-
-Procfile

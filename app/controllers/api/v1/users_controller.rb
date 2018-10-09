@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApplicationController
     if current_user
       #if current loggin user is admin, return all users
       if current_user.admin
-        all_users = User.all
+        all_users = User.order(:first_name)
       else
         # If current user is not admin, return non-admin users only
         all_users = User.where(admin: false)
@@ -28,6 +28,7 @@ class Api::V1::UsersController < ApplicationController
       user = {firstName: user[:first_name],
               lastName: user[:last_name],
               admin: user[:admin],
+              superadmin:user[:superadmin],
               id: user[:id],
               email: user[:email],
               city: user[:city],
@@ -62,7 +63,7 @@ class Api::V1::UsersController < ApplicationController
       meeting_options_hash[option.name.to_sym] = true;
     end
 
-    user_info = {email: user[:email], id: user[:id], firstName: user[:first_name], lastName: user[:last_name], admin: user[:admin], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests],
+    user_info = {email: user[:email], id: user[:id], firstName: user[:first_name], lastName: user[:last_name], admin: user[:admin], superadmin: user[:superadmin], bio: user[:about], photo: user[:photo], block_connection_requests: user[:block_connection_requests],
                  city: user[:city],
                  training: user[:training],
                  experience: user[:experience],
@@ -146,6 +147,6 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:email, :password, :first_name, :last_name, :city, :website, :video_link, :gender, :training, :experience, :admin, :photo, :birthDate, :about, :superuser, meet_option_users_attributes: [])
+    params.permit(:email, :password, :first_name, :last_name, :city, :website, :video_link, :gender, :training, :experience, :admin, :photo, :birthDate, :about, :superadmin, meet_option_users_attributes: [])
   end
 end
