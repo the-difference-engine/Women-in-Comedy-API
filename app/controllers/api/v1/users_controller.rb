@@ -4,44 +4,15 @@ class Api::V1::UsersController < ApplicationController
 
   # TODO: Reduce ABC score
   def index
-    log_in User.current_user
-    # TODO: I think Rails has a better way of getting the current user
-    current_user = User.current_user
     all_users = []
 
-    if current_user
-      # if current user is admin, return all users
-      if current_user.admin
-        all_users = User.order(:first_name)
-      else
-        # If current user is not admin, return non-admin users only
-        all_users = User.where(admin: false)
-      end
+    if @current_user && @current_user.admin
+      all_users = User.order(:first_name)
     else
-      # TODO: This makes no sense. If no logged in user, return all users, including admins?
-      # Behavior is *more* permissive than logged in non-admin user
-      all_users = User.all
+      all_users = User.where(admin: false)
     end
 
-    users = []
-
-    # TODO: It's been a minute since I did Rails, but I don't believe this is how they recommend doing serialization.
-    all_users.each do |user|
-      user = {
-        firstName: user[:first_name],
-        lastName: user[:last_name],
-        admin: user[:admin],
-        superadmin: user[:superadmin],
-        id: user[:id],
-        email: user[:email],
-        city: user[:city],
-        training: user[:training],
-        experience: user[:experience],
-        gender: user[:gender]
-      }
-      users.push(user)
-    end
-    render json: users
+    render json: all_users
   end
 
   def show
