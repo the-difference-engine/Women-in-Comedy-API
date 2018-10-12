@@ -2,15 +2,18 @@ class Api::V1::SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    user = User.where(email: params[:email]).first
-    if user && user.valid_password?(params[:password])
-      head(:unauthorized) if user.suspended?
-      # TODO: Fix this current user assignment
-      User.current_user = user
-      request.env['warden'].set_user(user)
-      render json: user.as_json(only: %i[id admin email confirmed_at])
-    end
-    head(:unauthorized)
+    puts "I'm definitely here"
+    user = User.find_by(email: params[:email])
+    sign_in(User, user)
+    render json: user.as_json(only: %i[id admin email confirmed_at])
+    # user = User.find(email: params[:email])
+    # if user && user.valid_password?(params[:password])
+    #   head(:unauthorized) if user.suspended?
+    #   # TODO: Fix this current user assignment
+    #   User.current_user = user
+    #   # request.env['warden'].set_user(user)
+    # end
+    # head(:unauthorized)
   end
 
   def destroy

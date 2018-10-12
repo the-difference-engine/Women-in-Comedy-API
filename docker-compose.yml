@@ -31,3 +31,5 @@ services:
       - 'api'
     volumes:
       - ../Women-in-Comedy-2.0-Frontend:/code
+    ports:
+      - 3000:3000
