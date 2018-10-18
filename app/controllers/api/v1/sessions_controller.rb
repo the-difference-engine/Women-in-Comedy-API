@@ -2,7 +2,6 @@ class Api::V1::SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    puts "I'm definitely here"
     user = User.find_by(email: params[:email])
     sign_in(User, user)
     render json: user.as_json(only: %i[id admin email confirmed_at])
