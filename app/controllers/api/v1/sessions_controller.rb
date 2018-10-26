@@ -5,7 +5,7 @@ class Api::V1::SessionsController < ApplicationController
     if user && user.valid_password?(params[:password]) 
       User.current_user = user
       request.env['warden'].set_user(user)
-      render json: user.as_json(only: [:id, :admin, :superuser, :email, :confirmed_at])
+      render json: user.as_json(only: [:id, :admin, :superadmin, :email, :confirmed_at])
       if user.suspended?
         head(:unauthorized)
       end
