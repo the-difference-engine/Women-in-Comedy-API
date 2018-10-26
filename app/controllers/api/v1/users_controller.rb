@@ -25,17 +25,18 @@ class Api::V1::UsersController < ApplicationController
     users = []
 
     all_users.each do |user|
-      user = {firstName: user[:first_name],
-              lastName: user[:last_name],
-              admin: user[:admin],
-              id: user[:id],
-              email: user[:email],
-              city: user[:city],
-              training: user[:training],
-              experience: user[:experience],
-			        gender: user[:gender],
-              public_figure: user[:public_figure],
-              is_mentor: user[:is_mentor]
+      user = {
+        firstName: user[:first_name],
+        lastName: user[:last_name],
+        admin: user[:admin],
+        id: user[:id],
+        email: user[:email],
+        city: user[:city],
+        training: user[:training],
+        experience: user[:experience],
+			  gender: user[:gender],
+        public_figure: user[:public_figure],
+        is_mentor: user[:is_mentor]
       }
       users.push(user)
     end
