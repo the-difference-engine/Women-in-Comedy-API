@@ -36,40 +36,40 @@ class Api::V1::EventsController < ApplicationController
     render json: events
   end
 
-	def update
-		event = Event.find(params[:id])
-		event.update(
-			title: params[:title],
-			photo: params[:photo],
-			ticket_link: params[:ticket_link],
-			about: params[:about],
-			time: params[:time],
-			date: params[:date],
-			address: params[:address],
-			location: params[:location],
-			is_private: params[:is_private]
-		)
-		render json: event[:id]
+  def update
+    event = Event.find(params[:id])
+    event.update(
+      title: params[:title],
+      photo: params[:photo],
+      ticket_link: params[:ticket_link],
+      about: params[:about],
+      time: params[:time],
+      date: params[:date],
+      address: params[:address],
+      location: params[:location],
+      is_private: params[:is_private]
+    )
+    render json: event[:id]
+  end
 
-	def create
+  def create
+    event = Event.create(
+      user_id: params[:userId],
+      title: params[:title],
+      photo: params[:photo],
+      ticket_link: params[:ticket_link],
+      about: params[:about],
+      time: params[:time],
+      date: params[:date],
+      address: params[:address],
+      location: params[:location],
+      is_private: params[:is_private]
+    )
+    render json: event[:id]
+  end
 
-		event = Event.create(
-			user_id: params[:userId],
-			title: params[:title],
-			photo: params[:photo],
-			ticket_link: params[:ticket_link],
-			about: params[:about],
-			time: params[:time],
-			date: params[:date],
-			address: params[:address],
-			location: params[:location],
-			is_private: params[:is_private]
-		)
-		render json: event[:id]
-	end
-
-	def destroy
-		event = Event.find(params[:id])
-		event.destroy
-	end
+  def destroy
+    event = Event.find(params[:id])
+    event.destroy
+  end
 end
