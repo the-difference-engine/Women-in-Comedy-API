@@ -42,6 +42,7 @@ gem 'rack-cors'
 gem 'cancancan', '~> 2.0'
 gem 'nio4r', '~> 2.2'
 gem 'mail_form'
+gem 'sendgrid-ruby'   
 
 
 # Use Capistrano for deployment
