@@ -33,9 +33,12 @@ class Api::V1::UsersController < ApplicationController
 
   # TODO: Reduce ABC score
   def fetch_user_info
+    puts request.headers['id'].to_i
     id = request.headers['id'].to_i
     session[:user_id] = id
+    puts session[:user_id]
     user = User.find_by(id: id)
+    puts user
 
     meeting_options_hash = {}
     user.meet_options.each do |option|
