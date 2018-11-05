@@ -28,7 +28,11 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
   resources :notifications
 
-
+  # CHAT ROUTES
+  get '/api/v1/chat_rooms', to: 'api/v1/chat_rooms#index'
+  post '/api/v1/chat_rooms', to: 'api/v1/chat_rooms#create'
+  get '/api/v1/chat_rooms', to: 'api/v1/chat_rooms#show'
+  
   #CONNECTIONS REQUEST ROUTES
 
   #search users
