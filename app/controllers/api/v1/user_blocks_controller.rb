@@ -4,8 +4,8 @@ class Api::V1::UserBlocksController < ApplicationController
   def get_blocked_users
     id = request.headers['id'].to_i
     #query block request where blocker_id is equal to user Id and blocked_id is equal to User id.
-    block_ids = UserBlock.where(blocker_id: id).or(UserBlock.where(blocked_id: id))
-    
+    # block_ids = UserBlock.where(blocker_id: id).or(UserBlock.where(blocked_id: id))
+    block_ids = UserBlock.all().map { |UserBlock| UserBlock.map { |id| id == user_id ? nil : id}}.to_set
     
     
     #declare an array for all the blocked users
