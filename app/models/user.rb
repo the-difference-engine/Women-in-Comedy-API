@@ -3,8 +3,8 @@ class User < ApplicationRecord
   has_many :meet_option_users, inverse_of: :user
   has_many :meet_options, through: :meet_option_users
   accepts_nested_attributes_for :meet_option_users
-  has_many :chat_rooms, dependent: :destroy
-  has_many :messages, dependent: :destroy
+  has_and_belongs_to_many :chat_rooms, dependent: :destroy
+  has_many :chat_messages, dependent: :destroy
 
   devise :database_authenticatable,
   :registerable,
