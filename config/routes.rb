@@ -33,6 +33,21 @@ Rails.application.routes.draw do
 
   #search users
   get '/api/v1/users/search', to: 'api/v1/users#search'
+  # test view page
+  get '/test/index', to: 'api/v1/users#stuff'
+
+  # search action
+  get '/search/action', to: 'api/v1/users#got'
+
+  # index json
+  get '/index.json', to: 'api/v1/users#pig'
+
+  #global search call
+  get :search, controller: :main
+
+
+
+
 
 
   #for getting users connections
