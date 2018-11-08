@@ -12,18 +12,23 @@ class Api::V1::ChatRoomsController < ApplicationController
   end
 
   def create
-    @chat_room = current_user.chat_rooms.build(chat_room_params)
-    if @chat_room.save
-      flash[:success] = 'Chat room added!'
-      redirect_to chat_rooms_path
-    else
-      render 'new'
+    target = User.find_by(id: params[:target_user])
+    head(:conflict) unless target?
+
+    # try to find an existing chat room with these two users
+    room = current_user.chat_rooms.where(:private: true).includes(:users).where("users.id" => target.id).includes(:chat_messages).first
+    
+    unless room
+      room = current_user.chat_rooms.build(:private: true, :users: [current_user, target])
+      room.save
     end
+
+    render json: room
   end
 
   private
 
   def chat_room_params
-    params.require(:chat_room).permit(:title)
+    params.require(:target_user)
   end
 end
