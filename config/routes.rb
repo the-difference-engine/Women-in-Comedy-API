@@ -105,6 +105,9 @@ Rails.application.routes.draw do
   get '/api/v1/notifications/mark_all_read/:id', to: 'api/v1/notifications#mark_all_as_read'
   put '/api/v1/notifications/mark_one/:user_id', to: 'api/v1/notifications#mark_one_as_read'
 
+
+
+
   namespace :api do
     namespace :v1 do
       resources :users
@@ -120,5 +123,28 @@ Rails.application.routes.draw do
 
   post '/api/v1/users/suspend' => 'api/v1/users#suspend'
   post '/api/v1/users/unsuspend' => 'api/v1/users#unsuspend'
+
+
+  #CHAT
+  # for creating a chat room 
+  get 'api/v1/chat_rooms', to: 'api/v1/chat_rooms#index'
+  # get chat room 
+  get '/api/v1/events/:id', to: 'api/v1/chat_rooms#show'
+
+
+
+  #EVENTS ROUTES
+
+  # for creating an event
+  post '/api/v1/events', to: 'api/v1/events#create'
+  # get event by Id
+  get '/api/v1/events/:id', to: 'api/v1/events#show'
+  # get all upcoming events
+  get '/api/v1/events/admin_user/:admin_user', to: 'api/v1/events#index'
+  #get all events made by a user
+  get '/api/v1/events/user/:user_id', to: 'api/v1/events#my_events'
+  # edit an existing event
+  put '/api/v1/events/:id', to: 'api/v1/events#update'
+
 
 end

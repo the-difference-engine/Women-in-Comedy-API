@@ -40,12 +40,12 @@ class Api::V1::UsersController < ApplicationController
     end
     render json: users
   end
-
+ 
   def show
     user = User.find(params[:id])
     render json: {status: 'SUCCESS', message: 'Loaded User', data: user}, status: :ok
   end
-
+  
   def create
     user = User.new(user_params)
     if user.save

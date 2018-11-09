@@ -1,14 +1,26 @@
 class Api::V1::ChatRoomsController < ApplicationController
   def index
-    @chat_rooms = ChatRoom.all
+    chats = current_user.chat_rooms.all
+    render json: chats
   end
 
   def show
-    @chat_room = ChatRoom.includes(:messages).find_by(id: params[:id])
-  end
+    chat_room = ChatRoom.find_by(id: params[:id]).includes(:chat_messages).includes(:users).first
 
-  def new
-    @chat_room = ChatRoom.new
+    if chat_room && chat_room.private
+      permitted = false
+      chat_room.users.each do |u|
+        if u.id = current_user.id
+          permitted = true
+        end
+      end
+
+      if !permitted
+        chat_room = nil
+      end
+    end
+
+    render json: chat_room
   end
 
   def create
