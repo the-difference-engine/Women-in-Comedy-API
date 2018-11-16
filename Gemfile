@@ -61,6 +61,9 @@ gem 'cancancan', '~> 2.0'
 # Use nio4r to help ActionCable function
 gem 'nio4r', '~> 2.2'
 
+# Use sendgrid-ruby to integrate with Sendgrid to send emails
+gem 'sendgrid-ruby'   
+
 # Use mail_form to send emails from forms without needing to define endpoints
 gem 'mail_form'
 
