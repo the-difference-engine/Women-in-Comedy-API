@@ -27,6 +27,10 @@ User.create(first_name: "Marry", last_name: "Hoya", email:"marry@gmail.com", pas
 
 User.create(first_name: "James", last_name: "Rothschild", email:"jr@gmail.com", password:"password", city: "chicago", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: true, superuser: false, public_figure: false, is_mentor: false, training: '11+ years', experience: '11+ years')
 
+User.create(first_name: "Lizzie", last_name: "B", email:"lizziebennet@gmail.com", password:"password", city: "chicago", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: true, superadmin: true, training: 'less than 1 year', experience: '1-3 years', username: 'lbennet')
+
+User.create(first_name: "Monroe", last_name: "C", email:"monroec@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: true, superadmin: true, training: 'less than 1 year', experience: '1-3 years', username: 'cmonroe')
+
 MeetOption.create(name: "Coffee")
 MeetOption.create(name: "Feedback/Advice")
 MeetOption.create(name: "Mentorship")
