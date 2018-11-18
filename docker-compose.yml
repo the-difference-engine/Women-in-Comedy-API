@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  db:
+    image: 'postgres:9.5'
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: women-in-comedy-api_dev
+    ports:
+      - 5432:5432
+  api:
+    build: 
+      context: .
+    tty: true
+    stdin_open: true
+    restart: always
+    depends_on:
+      - 'db'
+    volumes:
+      - .:/code
+    ports:
+      - 9000:9000
+    environment:
+      DATABASE_URL: "postgres://postgres:password@db"
+      POSTGRES_PASSWORD: password
+  frontend:
+    build:
+      context: ../Women-in-Comedy-2.0-Frontend
+    depends_on:
+      - 'api'
+    volumes:
+      - ../Women-in-Comedy-2.0-Frontend:/code
+    ports:
+      - 3000:3000
