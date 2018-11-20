@@ -18,6 +18,7 @@ class Api::V1::UsersController < ApplicationController
         # If current user is not admin, return non-admin users only
         all_users = User.where(admin: false)
       end
+      
     else
       all_users = User.all
     end
@@ -29,6 +30,7 @@ class Api::V1::UsersController < ApplicationController
         firstName: user[:first_name],
         lastName: user[:last_name],
         admin: user[:admin],
+        superadmin:user[:superadmin],
         id: user[:id],
         email: user[:email],
         city: user[:city],
