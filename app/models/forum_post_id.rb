@@ -1,0 +1,2 @@
+class ForumPostId < ApplicationRecord
+end

@@ -42,7 +42,8 @@ gem 'rack-cors'
 gem 'cancancan', '~> 2.0'
 gem 'nio4r', '~> 2.2'
 gem 'mail_form'
-
+gem 'haml', '~> 5.0', '>= 5.0.4'
+gem 'simple_form', '~> 4.0', '>= 4.0.1'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

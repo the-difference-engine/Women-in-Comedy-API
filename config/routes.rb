@@ -117,4 +117,11 @@ Rails.application.routes.draw do
   post '/api/v1/users/suspend' => 'api/v1/users#suspend'
   post '/api/v1/users/unsuspend' => 'api/v1/users#unsuspend'
 
+
+  #forum routes
+  get '/api/v1/forum_posts', to: 'api/v1/forum_posts#index'
+  post '/api/v1/forum_posts/create', to: 'api/v1/forum_posts#create'
+  get '/api/v1/forum_posts/:id', to: 'api/v1/forum_posts#show'
+  
+
 end
