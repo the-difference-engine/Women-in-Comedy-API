@@ -6,8 +6,6 @@ class UserBlock < ApplicationRecord
   scope :blocked_users, ->(user_id) { where(blocker_id: user_id) }
   scope :blocker_users, ->(user_id) { where(blocked_id: user_id) }
 
-
-
   after_create do
     connection_request = ConnectionRequest.where(sender_id: self.blocker_id, receiver_id: self.blocked_id).first
     if connection_request.present?
