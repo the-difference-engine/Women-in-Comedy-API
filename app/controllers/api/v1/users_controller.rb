@@ -152,4 +152,5 @@ class Api::V1::UsersController < ApplicationController
   def user_params
     params.permit(:email, :password, :first_name, :last_name, :city, :website, :video_link, :gender, :training, :experience, :admin, :photo, :birthDate, :about, :superadmin, :public_figure, :is_mentor, meet_option_users_attributes: [])
   end
+
 end
