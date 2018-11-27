@@ -158,15 +158,6 @@ class Api::V1::UsersController < ApplicationController
     AdminMailer.email_all_users(params[:email], params[:subject]).deliver_now
   end
 
-  def got
-    @users = User.all
-    if params[:search]
-      @users = User.search(params[:search]).order("created_at DESC")
-    else
-      @users = User.all.order("created_at DESC")
-    end
-  end
-
 
   private
 

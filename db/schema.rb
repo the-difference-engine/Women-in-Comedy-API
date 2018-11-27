@@ -141,7 +141,6 @@ ActiveRecord::Schema.define(version: 2018_11_02_000932) do
     t.boolean "suspended"
     t.boolean "superadmin", default: false
     t.boolean "public_figure"
-    t.boolean "mentor"
     t.boolean "is_mentor"
     t.string "username"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
