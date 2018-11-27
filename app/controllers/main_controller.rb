@@ -1,6 +1,4 @@
 class MainController < ApplicationController
-
-
   before_action :force_json, only: :search
 
   def index; end

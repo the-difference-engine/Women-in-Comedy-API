@@ -34,9 +34,6 @@ Rails.application.routes.draw do
   #search users
   get '/api/v1/users/search', to: 'api/v1/users#search'
 
-  # search action
-  get '/search/action', to: 'api/v1/users#get'
-
   #global search call
   get :search, controller: :main
 
