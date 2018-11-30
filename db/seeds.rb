@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
 User.create(first_name: "Calvin", last_name: "Chan", email:"mrcalvinkc@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, superadmin: false, public_figure: false, is_mentor: false, training: 'less than 1 year', experience: '1-3 years')
 
 User.create(first_name: "DeMarcus", last_name: "Cousins", email:"dcousins@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: false, superadmin: false, public_figure: false, is_mentor: false, training: '4-7 years', experience: '11+ years')
@@ -31,6 +32,7 @@ User.create(first_name: "Lizzie", last_name: "B", email:"lizziebennet@gmail.com"
 
 User.create(first_name: "Monroe", last_name: "C", email:"monroec@gmail.com", password:"password", city: "san francisco", about:"I like apples", gender: 'male', confirmed_at: '2017-10-17 02:26:15.130453', admin: true, superadmin: true, training: 'less than 1 year', experience: '1-3 years', username: 'cmonroe')
 
+
 MeetOption.create(name: "Coffee")
 MeetOption.create(name: "Feedback/Advice")
 MeetOption.create(name: "Mentorship")
@@ -39,95 +41,100 @@ MeetOption.create(name: "Open Mic Buddy")
 MeetOption.create(name: "Seeking Mentors")
 
 Event.create(
-	user_id:2,
-	title: "A Great Event",
-	photo:"https://ak0.picdn.net/shutterstock/videos/11618780/thumb/1.jpg",
-	date:"4-16-98",
-	ticket_link:"www.yahoo.com",
-	about: "view my website"
+    user_id: 2,
+    title: "A Great Event",
+    photo: "https://ak0.picdn.net/shutterstock/videos/11618780/thumb/1.jpg",
+    date: "4-16-98",
+    ticket_link: "www.yahoo.com",
+    about: "view my website"
 )
 
 Event.create(
-	user_id:2,
-	title: "A Wicked Event",
-	photo:"http://l7.alamy.com/zooms/7372c9d283624c8997fa967be857623e/julie-grady-thomas-stand-up-comedy-performer-at-an-open-mike-night-d1mmwj.jpg",
-	date:"4-16-98",
-	ticket_link:"www.yahoo.com",
-	about: "Some interesting facts"
+    user_id: 2,
+    title: "A Wicked Event",
+    photo: "http://l7.alamy.com/zooms/7372c9d283624c8997fa967be857623e/julie-grady-thomas-stand-up-comedy-performer-at-an-open-mike-night-d1mmwj.jpg",
+    date: "4-16-98",
+    ticket_link: "www.yahoo.com",
+    about: "Some interesting facts"
 )
 
 
 5.times do
-	Event.create(
-		user_id:1,
-		title: "A Great Event",
-		photo:"http://c8.alamy.com/comp/HT19FB/audience-at-stand-up-comedy-shows-at-festival-lent-maribor-slovenia-HT19FB.jpg",
-		date:"7-16-2016",
-		ticket_link:"www.google.com",
-		about: "This is the about section",
-	)
+  Event.create(
+      user_id: 1,
+      title: "A Great Event",
+      photo: "http://c8.alamy.com/comp/HT19FB/audience-at-stand-up-comedy-shows-at-festival-lent-maribor-slovenia-HT19FB.jpg",
+      date: "7-16-2016",
+      ticket_link: "www.google.com",
+      about: "This is the about section",
+      )
 end
 
 Post.create(
-	postable_id: 1,
-	postable_type: 'Event',
-	title: "comedy is the best",
-	body: "come and have fun",
-	author_id: 2
+    postable_id: 1,
+    postable_type: 'Event',
+    title: "comedy is the best",
+    body: "come and have fun",
+    author_id: 2
 )
 
 Post.create(
-	postable_id: 1,
-	postable_type: 'Event',
-	title: "Tonight!!!",
-	body: "see all the women of comedy",
-	author_id: 1
+    postable_id: 1,
+    postable_type: 'Event',
+    title: "Tonight!!!",
+    body: "see all the women of comedy",
+    author_id: 1
 )
 
 Post.create(
-	postable_id: 1,
-	postable_type: 'User',
-	title: 'Hello',
-	body: 'Where you at?',
-	author_id: 2
+    postable_id: 1,
+    postable_type: 'User',
+    title: 'Hello',
+    body: 'Where you at?',
+    author_id: 2
 )
 
 Post.create(
-	postable_id: 2,
-	postable_type: 'User',
-	title: 'Hey',
-	body: 'LIT',
-	author_id: 1
+    postable_id: 2,
+    postable_type: 'User',
+    title: 'Hey',
+    body: 'LIT',
+    author_id: 1
 )
 
 Comment.create(
-	post_id: 1,
-	author_id: 1,
-	body: "Comments go here"
+    post_id: 1,
+    author_id: 1,
+    body: "Comments go here"
 )
 
 Comment.create(
-	post_id: 1,
-	author_id: 2,
-	body: "Hi everyone!! Welcome"
+    post_id: 1,
+    author_id: 2,
+    body: "Hi everyone!! Welcome"
 )
 
 ConnectionRequest.create(
-	sender_id:1,
-	receiver_id: 2,
-	status: true
+    sender_id: 1,
+    receiver_id: 2,
+    status: true
 )
 
 ConnectionRequest.create(
-	sender_id:3,
-	receiver_id: 1,
-	status: true
+    sender_id: 3,
+    receiver_id: 1,
+    status: true
 )
 
 ConnectionRequest.create(
-	sender_id: 1,
-	receiver_id: 4,
-	status: false
+    sender_id: 1,
+    receiver_id: 4,
+    status: false
+)
+
+UserBlock.create(
+  blocker_id: User.where(first_name: "Calvin", last_name: "Chan").first.id,
+  blocked_id: User.where(first_name: "DeMarcus", last_name: "Cousins").first.id
 )
 
 Notification.create(
