@@ -44,7 +44,6 @@ class Api::V1::EventsController < ApplicationController
 	end
 
 	def create
-		
 		event = Event.create(
 			user_id: params[:userId],
 			title: params[:title],
