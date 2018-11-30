@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   #search users
   get '/api/v1/users/search', to: 'api/v1/users#search'
 
+  #global search call
+  get :search, controller: :main
+
   #for getting users connections
   get '/api/v1/users/connections', to: 'api/v1/connection_requests#get_connections'
   #for getting pending user connections

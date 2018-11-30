@@ -117,7 +117,7 @@ class Api::V1::UsersController < ApplicationController
     user = User.find(params[:id])
     user.delete
   end
-  
+
   def resend_confirmation_instructions
 		user = User.where(email: params[:email]).first
 		if user
@@ -147,10 +147,10 @@ class Api::V1::UsersController < ApplicationController
     AdminMailer.email_all_users(params[:email], params[:subject]).deliver_now
   end
 
+
   private
 
   def user_params
     params.permit(:email, :password, :first_name, :last_name, :city, :website, :video_link, :gender, :training, :experience, :admin, :photo, :birthDate, :about, :superadmin, :public_figure, :is_mentor, meet_option_users_attributes: [])
   end
-
 end
