@@ -28,7 +28,8 @@ class Api::V1::EventsController < ApplicationController
 
 	def update
 		event = Event.find(params[:id])
-		event.update(
+		if user_id: params[:admin_user] == "true" || Event.where(user_id: params[:user_id])
+			event.update(
 			title: params[:title],
 			photo: params[:photo],
 			ticket_link: params[:ticket_link],
@@ -38,9 +39,10 @@ class Api::V1::EventsController < ApplicationController
 			address: params[:address],
 			location: params[:location],
 			is_private: params[:is_private]
-		)
-		render json: event[:id]
-
+			)
+			render json: event[:id]
+		else
+			halt(404)
 	end
 
 	def create
