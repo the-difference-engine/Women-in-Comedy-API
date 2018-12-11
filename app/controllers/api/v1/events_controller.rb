@@ -43,7 +43,7 @@ class Api::V1::EventsController < ApplicationController
 		else
 			halt(404)
 		end
-		render json: event
+		render json: event[:id]
 	end
 
 	def create
