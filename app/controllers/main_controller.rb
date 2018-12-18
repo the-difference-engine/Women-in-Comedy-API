@@ -4,7 +4,7 @@ class MainController < ApplicationController
   def index; end
 
   def search
-    @users = User.ransack(first_name_or_last_name_cont: params[:q]).result(distinct: true).limit(10)
+    @users = User.ransack(id_or_first_name_or_last_name_or_email_cont: params[:q]).result(distinct: true).limit(10)
     # render json: users.as_json(only: [:q, :first_name, :last_name])
   end
 
