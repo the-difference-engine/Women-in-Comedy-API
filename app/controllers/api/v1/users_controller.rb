@@ -4,7 +4,6 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     # get current user logged in
-    log_in User.current_user
     current_user = User.current_user
     all_users = []
 
@@ -16,9 +15,8 @@ class Api::V1::UsersController < ApplicationController
         # If current user is not admin, return non-admin users only
         all_users = User.where(admin: false).where.not(id: UserBlock.blocked_users(current_user.id).pluck(:blocked_id) + UserBlock.blocker_users(current_user.id).pluck(:blocker_id) + [current_user.id])
       end
-      
     else
-      all_users = User.all
+      all_users = []
     end
 
     users = []

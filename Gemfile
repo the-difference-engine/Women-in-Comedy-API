@@ -70,6 +70,8 @@ gem 'sendgrid-ruby'
 # Use mail_form to send emails from forms without needing to define endpoints
 gem 'mail_form'
 
+gem 'bootsnap'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 group :development, :test do
