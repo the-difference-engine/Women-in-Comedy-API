@@ -50,6 +50,8 @@ Rails.application.routes.draw do
   delete '/api/v1/users/connections/:id', to: 'api/v1/connection_requests#destroy'
   #block incoming connection requests
   post '/api/v1/users/:id', to: 'api/v1/users#block_connection_requests'
+  # upload a photo
+  post '/api/v1/users/:id/photo', to: 'api/v1/users#upload_profile_photo'
 
   #for blocking a user
   post '/api/v1/users/blocks/:id', to: 'api/v1/user_blocks#create' 

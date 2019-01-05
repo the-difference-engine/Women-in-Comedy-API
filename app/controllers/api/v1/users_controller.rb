@@ -1,3 +1,5 @@
+require 'cloudinary'
+
 class Api::V1::UsersController < ApplicationController
   # before_action :authenticate_user!, only: [:index]
   skip_before_action :verify_authenticity_token
@@ -65,27 +67,7 @@ class Api::V1::UsersController < ApplicationController
       meeting_options_hash[option.name.to_sym] = true;
     end
 
-    user_info = {email: user[:email],
-                 id: user[:id],
-                 firstName: user[:first_name],
-                 lastName: user[:last_name],
-                 admin: user[:admin], 
-                 superadmin: user[:superadmin], 
-                 public_figure: user[:public_figure], 
-                 is_mentor: user[:is_mentor], 
-                 bio: user[:about], 
-                 photo: user[:photo], 
-                 block_connection_requests: user[:block_connection_requests],
-                 city: user[:city],
-                 training: user[:training],
-                 experience: user[:experience],
-                 website: user[:website],
-                 video: user[:video_link],
-                 meeting_options: user[:meeting_options_hash],
-                 suspended: user[:suspended]
-    }
-
-    render json: user_info
+    render json: serialize_user(user)
   end
 
   def fetch_user_feed
@@ -105,6 +87,20 @@ class Api::V1::UsersController < ApplicationController
     @user.update(user_params)
 
     render 'show.json.jbuilder'
+  end
+
+  def upload_profile_photo
+    head(:forbidden) unless params[:id] == req.headers['id'].to_i
+    head(:bad_request) unless ["image/jpeg", "image/gif", "image/png"].include?(@content_type)
+
+    user = User.find(params[:id])
+    upload = Cloudinary::Uploader.upload(@tempfile,
+      :folder => "profile_photos", :public_id => user.id, :overwrite => true,
+      :resource_type => "image")
+    head(:bad_gateway) unless upload
+    
+    user.update(profile_pic_url: upload.secure_url)
+    render json: serialize_user(user)
   end
 
   def block_connection_requests
@@ -147,8 +143,30 @@ class Api::V1::UsersController < ApplicationController
     AdminMailer.email_all_users(params[:email], params[:subject]).deliver_now
   end
 
-
   private
+
+  def serialize_user(user)
+    return {
+      email: user[:email],
+      id: user[:id],
+      firstName: user[:first_name],
+      lastName: user[:last_name],
+      admin: user[:admin], 
+      superadmin: user[:superadmin], 
+      public_figure: user[:public_figure], 
+      is_mentor: user[:is_mentor], 
+      bio: user[:about], 
+      photo: user[:photo], 
+      block_connection_requests: user[:block_connection_requests],
+      city: user[:city],
+      training: user[:training],
+      experience: user[:experience],
+      website: user[:website],
+      video: user[:video_link],
+      meeting_options: user[:meeting_options_hash],
+      suspended: user[:suspended]
+    }
+  end
 
   def user_params
     params.permit(:email, :password, :first_name, :last_name, :city, :website, :video_link, :gender, :training, :experience, :admin, :photo, :birthDate, :about, :superadmin, :public_figure, :is_mentor, meet_option_users_attributes: [])
