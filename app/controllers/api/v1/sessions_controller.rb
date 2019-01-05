@@ -16,9 +16,9 @@ class Api::V1::SessionsController < ApplicationController
 
   def destroy
     if User.current_user
-      log_out
       User.current_user = nil
-      render json: {logout_message: 'Successfully logged out!'}
     end
+    log_out
+    render json: {logout_message: "You don't have a user!"}
   end
 end
