@@ -44,7 +44,7 @@ Event.create(
     user_id: 2,
     title: "A Great Event",
     photo: "https://ak0.picdn.net/shutterstock/videos/11618780/thumb/1.jpg",
-    date: "4-16-98",
+    date: "4-16-2021",
     ticket_link: "www.yahoo.com",
     about: "view my website"
 )
@@ -53,7 +53,7 @@ Event.create(
     user_id: 2,
     title: "A Wicked Event",
     photo: "http://l7.alamy.com/zooms/7372c9d283624c8997fa967be857623e/julie-grady-thomas-stand-up-comedy-performer-at-an-open-mike-night-d1mmwj.jpg",
-    date: "4-16-98",
+    date: "4-16-2022",
     ticket_link: "www.yahoo.com",
     about: "Some interesting facts"
 )
@@ -64,7 +64,7 @@ Event.create(
       user_id: 1,
       title: "A Great Event",
       photo: "http://c8.alamy.com/comp/HT19FB/audience-at-stand-up-comedy-shows-at-festival-lent-maribor-slovenia-HT19FB.jpg",
-      date: "7-16-2016",
+      date: "7-16-2020",
       ticket_link: "www.google.com",
       about: "This is the about section",
       )
