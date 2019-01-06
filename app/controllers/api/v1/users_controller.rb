@@ -6,21 +6,16 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     # get current user logged in
-    log_in User.current_user
+    # log_in User.current_user
     current_user = User.current_user
     all_users = []
 
     if current_user
-      #if current loggin user is admin, return all users
       if current_user.admin
         all_users = User.order(:first_name)
       else
-        # If current user is not admin, return non-admin users only
-        all_users = User.where(admin: false).where.not(id: UserBlock.blocked_users(current_user.id).pluck(:blocked_id) + UserBlock.blocker_users(current_user.id).pluck(:blocker_id) + [current_user.id])
+        all_users = User.where.not(id: UserBlock.blocked_users(current_user.id).pluck(:blocked_id) + UserBlock.blocker_users(current_user.id).pluck(:blocker_id) + [current_user.id])
       end
-      
-    else
-      all_users = User.all
     end
 
     users = []
@@ -63,11 +58,15 @@ class Api::V1::UsersController < ApplicationController
     user = User.find_by(id: id)
 
     meeting_options_hash = {}
-    user.meet_options.each do |option|
-      meeting_options_hash[option.name.to_sym] = true;
+    if user
+      user.meet_options.each do |option|
+        meeting_options_hash[option.name.to_sym] = true;
+      end
+  
+      render json: serialize_user(user)
+    else
+      render json: {}, status: 401
     end
-
-    render json: serialize_user(user)
   end
 
   def fetch_user_feed
