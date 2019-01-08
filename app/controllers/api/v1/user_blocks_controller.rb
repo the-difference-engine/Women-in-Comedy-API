@@ -5,7 +5,7 @@ def get_blocked_users
   id = request.headers['id'].to_i
   #query block request where blocker_id is equal to user Id and blocked_id is equal to User id.
   # block_ids = UserBlock.where(blocker_id: id).or(UserBlock.where(blocked_id: id))
-  block_ids = UserBlock.all().map { |UserBlock| UserBlock.map { |id| id == user_id ? nil : id}}.to_set
+  block_ids = UserBlock.all().map { |user_block| user_block.map { |id| id == user_id ? nil : id}}.to_set
   #declare an array for all the blocked users
   user_array = []
   #each through the blockers and push the user to the user_array
