@@ -1,2 +1,2 @@
-release: rake db:schema:load
+release: rails db:migrate
 web: bundle exec rails s
