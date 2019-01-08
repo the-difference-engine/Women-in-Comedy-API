@@ -103,6 +103,13 @@ ActiveRecord::Schema.define(version: 2018_11_02_000932) do
     t.integer "author_id"
   end
 
+  create_table "user_blocks", id: :serial, force: :cascade do |t|
+    t.integer "blocker_id"
+    t.integer "blocked_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -140,6 +147,8 @@ ActiveRecord::Schema.define(version: 2018_11_02_000932) do
     t.string "suspension_reason"
     t.boolean "suspended"
     t.boolean "superadmin", default: false
+    t.boolean "public_figure"
+    t.boolean "is_mentor"
     t.string "username"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

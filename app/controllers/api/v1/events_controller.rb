@@ -28,23 +28,25 @@ class Api::V1::EventsController < ApplicationController
 
 	def update
 		event = Event.find(params[:id])
-		event.update(
-			title: params[:title],
-			photo: params[:photo],
-			ticket_link: params[:ticket_link],
-			about: params[:about],
-			time: params[:time],
-			date: params[:date],
-			address: params[:address],
-			location: params[:location],
-			is_private: params[:is_private]
-		)
+		if current_user.admin || event.user_id == current_user
+			event.update(
+				title: params[:title],
+				photo: params[:photo],
+				ticket_link: params[:ticket_link],
+				about: params[:about],
+				time: params[:time],
+				date: params[:date],
+				address: params[:address],
+				location: params[:location],
+				is_private: params[:is_private]
+			)
+		else
+			halt(404)
+		end
 		render json: event[:id]
-
 	end
 
 	def create
-		
 		event = Event.create(
 			user_id: params[:userId],
 			title: params[:title],
