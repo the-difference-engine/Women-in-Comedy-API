@@ -1,4 +1,5 @@
 class Api::V1::EventsController < ApplicationController
+	
 	def index
 		if params[:admin_user] == "true"
 			events = Event.all
@@ -28,7 +29,9 @@ class Api::V1::EventsController < ApplicationController
 
 	def update
 		event = Event.find(params[:id])
-		if current_user.admin || event.user_id == current_user
+		current_user = User.current_user
+		puts current_user
+		if current_user.admin || event.user_id == current_user.id
 			event.update(
 				title: params[:title],
 				photo: params[:photo],
@@ -41,7 +44,7 @@ class Api::V1::EventsController < ApplicationController
 				is_private: params[:is_private]
 			)
 		else
-			halt(404)
+			render json: {}, status: 404
 		end
 		render json: event[:id]
 	end
