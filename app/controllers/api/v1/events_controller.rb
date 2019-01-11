@@ -23,7 +23,8 @@ class Api::V1::EventsController < ApplicationController
 	end
 
 	def my_events
-		events = Event.where(user_id: params[:user_id])
+		user = User.find(params[:user_id])
+		events = Event.includes(:guests).where(:guests => {user_id: user.id}).or(Event.includes(:guests).where(user_id: user.id))
 		render json: events
 	end
 
