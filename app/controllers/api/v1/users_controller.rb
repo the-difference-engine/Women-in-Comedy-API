@@ -6,7 +6,7 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     # get current user logged in
-    # log_in User.current_user
+    log_in User.current_user
     current_user = User.current_user
     all_users = []
 
